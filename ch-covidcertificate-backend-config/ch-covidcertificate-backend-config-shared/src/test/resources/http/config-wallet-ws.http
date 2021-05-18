@@ -1,0 +1,5 @@
+### config
+GET {{walletBaseUrl}}/v1/wallet/config?appversion={{appversion}}&osversion={{osversion}}&buildnr={{buildnr}}
+Accept: application/json
+
+###

@@ -14,10 +14,10 @@ public class FaqEntry {
 
     private String title;
     private String text;
-    private String iconAndroid = "";
-    private String iconIos = "";
 
     /* optional */
+    private String iconAndroid;
+    private String iconIos;
     private String linkTitle;
     private String linkUrl;
 

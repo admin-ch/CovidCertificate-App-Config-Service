@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 public abstract class VerifierWsBaseConfig {
 
     @Bean
-    public VerifierConfigController VerifierConfigController(Messages messages) {
+    public VerifierConfigController verifierConfigController(Messages messages) {
         return new VerifierConfigController(messages);
     }
 }

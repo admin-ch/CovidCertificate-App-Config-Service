@@ -12,6 +12,7 @@ package ch.admin.bag.covidcertificate.backend.config.shared.model;
 
 import ch.ubique.openapi.docannotations.Documentation;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Documentation(description = "ConfigResponse description")
@@ -22,14 +23,14 @@ public class ConfigResponse {
                     "Blocks the app and shows a link to the app-store. The user can only continue once he updated the app")
     private boolean forceUpdate = false;
 
-    @Documentation(description = "Holds a message translated in different languages")
-    private InfoBoxCollection infoBox = null;
+    @Documentation(description = "Holds an info box for every language")
+    private Map<Language, InfoBox> infoBox = null;
 
-    @Documentation(description = "Holds covid-certificate FAQ parameters")
-    private FaqCollection questions = null;
+    @Documentation(description = "Holds covid-certificate FAQ parameters by language")
+    private Map<Language, Faq> questions = null;
 
-    @Documentation(description = "Holds how-it-works FAQ parameters")
-    private FaqCollection works = null;
+    @Documentation(description = "Holds how-it-works FAQ parameters by language")
+    private Map<Language, Faq> works = null;
 
     public boolean isForceUpdate() {
         return forceUpdate;
@@ -39,27 +40,27 @@ public class ConfigResponse {
         this.forceUpdate = forceUpdate;
     }
 
-    public InfoBoxCollection getInfoBox() {
+    public Map<Language, InfoBox> getInfoBox() {
         return infoBox;
     }
 
-    public void setInfoBox(InfoBoxCollection infoBox) {
+    public void setInfoBox(Map<Language, InfoBox> infoBox) {
         this.infoBox = infoBox;
     }
 
-    public FaqCollection getQuestions() {
+    public Map<Language, Faq> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(FaqCollection questions) {
+    public void setQuestions(Map<Language, Faq> questions) {
         this.questions = questions;
     }
 
-    public FaqCollection getWorks() {
+    public Map<Language, Faq> getWorks() {
         return works;
     }
 
-    public void setWorks(FaqCollection works) {
+    public void setWorks(Map<Language, Faq> works) {
         this.works = works;
     }
 }

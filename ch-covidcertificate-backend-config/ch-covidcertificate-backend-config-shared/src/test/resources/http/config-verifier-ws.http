@@ -1,0 +1,5 @@
+### config
+GET {{verifierBaseUrl}}/v1/verifier/config?appversion={{appversion}}&osversion={{osversion}}&buildnr={{buildnr}}
+Accept: application/json
+
+###
