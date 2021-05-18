@@ -1,0 +1,1 @@
+# ch-covidcertificate-backend-config
