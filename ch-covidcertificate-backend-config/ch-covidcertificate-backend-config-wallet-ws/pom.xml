@@ -1,0 +1,114 @@
+<!--
+  ~ Copyright (c) 2021 Ubique Innovation AG <https://www.ubique.ch>
+  ~
+  ~ This Source Code Form is subject to the terms of the Mozilla Public
+  ~ License, v. 2.0. If a copy of the MPL was not distributed with this
+  ~ file, You can obtain one at https://mozilla.org/MPL/2.0/.
+  ~
+  ~ SPDX-License-Identifier: MPL-2.0
+  -->
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ch.admin.bag.covidcertificate</groupId>
+        <artifactId>ch-covidcertificate-backend-config</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>ch-covidcertificate-backend-config-wallet-ws</artifactId>
+    <name>CH Covidcertificate Config Backend Wallet WS</name>
+
+    <packaging>jar</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>ch.admin.bag.covidcertificate</groupId>
+            <artifactId>ch-covidcertificate-backend-config-shared</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <type>pom</type>
+                <version>${spring-boot-version}</version>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>http://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <build>
+        <finalName>
+            ch-covidcertificate-backend-config-wallet-ws
+        </finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-version}</version>
+                <configuration>
+                    <mainClass>ch.admin.bag.covidcertificate.backend.config.wallet.ws.Application
+                    </mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>ch.ubique.openapi</groupId>
+                <artifactId>springboot-swagger-3</artifactId>
+                <configuration>
+                    <apiVersion>1.0.0</apiVersion>
+                    <basePackages>
+                        ch.admin.bag.covidcertificate.backend.config
+                    </basePackages>
+                    <controllers>
+                        <controller>
+                            ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller.WalletConfigController
+                        </controller>
+                    </controllers>
+                    <description>CH Covidcertificate Wallet Config API</description>
+                    <apiUrls>
+                        <apiUrl>https://TODO</apiUrl>
+                    </apiUrls>
+                    <title>CH Covidcertificate Wallet Config API</title>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
