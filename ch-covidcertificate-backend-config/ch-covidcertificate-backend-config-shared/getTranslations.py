@@ -68,18 +68,9 @@ else:
 print('project_id: ' + project_id)
 print('api_token: ' + api_token)
 
-loadLanguage("sq", api_token, project_id)  # albanian
-loadLanguage("bs", api_token, project_id)  # bosnian
-loadLanguage("hr", api_token, project_id)  # croatian
 loadLanguage("en", api_token, project_id)  # english
 loadLanguage("fr", api_token, project_id)  # french
 loadLanguage("de", api_token, project_id)  # german
 loadLanguage("it", api_token, project_id)  # italian
-loadLanguage("pt", api_token, project_id)  # portuguese
-loadLanguage("rm", api_token, project_id)  # romansh
-loadLanguage("sr", api_token, project_id)  # serbian
-loadLanguage("es", api_token, project_id)  # spanish
-loadLanguage("ti", api_token, project_id)  # tigrinya
-loadLanguage("tr", api_token, project_id)  # turkish
 
 print('Successfully loaded terms')
