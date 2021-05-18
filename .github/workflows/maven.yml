@@ -1,0 +1,46 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+name: Java CI with Maven
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11.0.7
+        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        settings-path: ${{ github.workspace }} # location for the settings.xml file: :
+    - name: Build with Maven
+      run: mvn clean install --file ch-covidcertificate-backend-config/pom.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+    - name: Echo current ref
+      run: echo "${{ github.ref }}"
+    - name: shasum
+      run: shasum -a 256 ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-verifier-ws/target/ch-covidcertificate-backend-config-verifier-ws.jar > ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-verifier-ws/target/ch-covidcertificate-backend-config-verifier-ws.jar.sha256
+      shell: bash
+    - name: shasum
+      run: shasum -a 256 ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-wallet-ws/target/ch-covidcertificate-backend-config-wallet-ws.jar > ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-wallet-ws/target/ch-covidcertificate-backend-config-wallet-ws.jar.sha256
+      shell: bash
+    - name: Create Snapshot Release
+      uses: ncipollo/release-action@v1
+      if: github.ref == 'refs/heads/develop'
+      id: create_release
+      with:
+        name: Snapshot Release ${{ github.ref }}
+        tag: SNAPSHOT
+        artifacts: "ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-verifier-ws/target/ch-covidcertificate-backend-config-verifier-ws.jar,ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-verifier-ws/target/ch-covidcertificate-backend-config-verifier-ws.jar.sha256,ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-wallet-ws/target/ch-covidcertificate-backend-config-wallet-ws.jar,ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-wallet-ws/target/ch-covidcertificate-backend-config-wallet-ws.jar.sha256"
+        body: |
+            Changes in this Release
+            - Snapshot release
+        token: ${{ secrets.GITHUB_TOKEN }}
+        draft: false
+        prerelease: false
+        allowUpdates: true
