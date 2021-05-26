@@ -10,6 +10,7 @@
 
 package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller.WalletConfigController;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 public abstract class WalletWsBaseConfig {
 
     @Bean
-    public WalletConfigController walletConfigController(Messages messages) {
-        return new WalletConfigController(messages);
+    public WalletConfigController walletConfigController(Messages messages, FaqHelper faqHelper) {
+        return new WalletConfigController(messages, faqHelper);
     }
 }

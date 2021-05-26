@@ -10,6 +10,7 @@
 
 package ch.admin.bag.covidcertificate.backend.config.verifier.ws.config;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.verifier.ws.controller.VerifierConfigController;
 import org.springframework.context.annotation.Bean;
@@ -18,8 +19,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public abstract class VerifierWsBaseConfig {
 
-    @Bean
-    public VerifierConfigController verifierConfigController(Messages messages) {
-        return new VerifierConfigController(messages);
-    }
+	@Bean
+	public VerifierConfigController verifierConfigController(Messages messages, FaqHelper faqHelper) {
+		return new VerifierConfigController(messages, faqHelper);
+	}
 }

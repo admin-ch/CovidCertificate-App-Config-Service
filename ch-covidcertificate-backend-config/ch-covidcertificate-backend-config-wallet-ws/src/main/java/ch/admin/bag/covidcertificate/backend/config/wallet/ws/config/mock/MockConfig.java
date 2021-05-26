@@ -1,5 +1,6 @@
 package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config.mock;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.MockHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
@@ -16,14 +17,14 @@ public class MockConfig {
 
     @Bean
     @Primary
-    public WalletConfigController walletConfigController(Messages messages) {
-        return new MockConfigController(messages);
+    public WalletConfigController walletConfigController(Messages messages, FaqHelper faqHelper) {
+        return new MockConfigController(messages, faqHelper);
     }
 
     public class MockConfigController extends WalletConfigController {
 
-        public MockConfigController(Messages messages) {
-            super(messages);
+        public MockConfigController(Messages messages, FaqHelper faqHelper) {
+            super(messages, faqHelper);
         }
 
         @Override

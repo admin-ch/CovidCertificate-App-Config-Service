@@ -10,6 +10,7 @@
 
 package ch.admin.bag.covidcertificate.backend.config.verifier.ws.controller;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.ubique.openapi.docannotations.Documentation;
@@ -26,9 +27,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class VerifierConfigController {
 
     protected final Messages messages;
+	protected final FaqHelper faqHelper;
 
-    public VerifierConfigController(Messages messages) {
+    public VerifierConfigController(Messages messages, FaqHelper faqHelper) {
         this.messages = messages;
+        this.faqHelper = faqHelper;
     }
 
     @Documentation(
@@ -56,6 +59,7 @@ public class VerifierConfigController {
                     @RequestParam
                     String buildnr) {
         ConfigResponse configResponse = new ConfigResponse();
+        configResponse.setWorks(faqHelper.getVerifierFaqWorks());
         return ResponseEntity.ok(configResponse);
     }
 }
