@@ -40,3 +40,7 @@ hs_err_pid*
 **/generated
 
 secrets.py
+
+ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-verifier-ws/.sts4-cache/classpath-data.json
+
+ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-shared/.sts4-cache/classpath-data.json
