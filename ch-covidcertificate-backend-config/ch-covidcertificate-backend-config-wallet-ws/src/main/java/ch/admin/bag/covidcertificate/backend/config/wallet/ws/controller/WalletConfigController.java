@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/v1/wallet")
+@RequestMapping("/app/wallet/v1")
 public class WalletConfigController {
 
     protected final Messages messages;
