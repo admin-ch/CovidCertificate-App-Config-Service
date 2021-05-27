@@ -21,4 +21,25 @@
 
     <artifactId>ch-covidcertificate-backend-config-shared</artifactId>
     <name>CH Covidcertificate Config Backend Shared</name>
+
+    <build>
+        <finalName>
+            ch-covidcertificate-backend-config-shared
+        </finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>Jar Tests Package</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
