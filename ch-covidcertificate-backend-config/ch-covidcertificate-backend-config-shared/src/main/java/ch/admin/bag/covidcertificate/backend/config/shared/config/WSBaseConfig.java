@@ -27,40 +27,42 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public abstract class WSBaseConfig implements WebMvcConfigurer {
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Value("#{${ws.security.headers: {'X-Content-Type-Options':'nosniff', 'X-Frame-Options':'DENY','X-Xss-Protection':'1; mode=block'}}}")
-	Map<String, String> additionalHeaders;
+    @Value(
+            "#{${ws.security.headers: {'X-Content-Type-Options':'nosniff', 'X-Frame-Options':'DENY','X-Xss-Protection':'1; mode=block'}}}")
+    Map<String, String> additionalHeaders;
 
-	@Bean
-	public HeaderInjector securityHeaderInjector() {
-		return new HeaderInjector(additionalHeaders);
-	}
+    @Bean
+    public HeaderInjector securityHeaderInjector() {
+        return new HeaderInjector(additionalHeaders);
+    }
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(securityHeaderInjector());
-	}
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(securityHeaderInjector());
+    }
 
-	@Bean
-	public FaqHelper faqHelper(Messages messages) {
-		return new FaqHelper(messages);
-	}
+    @Bean
+    public FaqHelper faqHelper(Messages messages) {
+        return new FaqHelper(messages);
+    }
 
-	@Bean
-	public Messages messages(MessageSource messageSource) {
-		Messages messages = new Messages(messageSource);
-		return messages;
-	}
+    @Bean
+    public Messages messages(MessageSource messageSource) {
+        Messages messages = new Messages(messageSource);
+        return messages;
+    }
 
-	@Bean
-	public MessageSource messageSource() {
-		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource =
+                new ReloadableResourceBundleMessageSource();
 
-		messageSource.setBasename("classpath:i18n/messages");
-		messageSource.setDefaultEncoding("UTF-8");
-		messageSource.setFallbackToSystemLocale(false);
-		messageSource.setDefaultLocale(null);
-		return messageSource;
-	}
+        messageSource.setBasename("classpath:i18n/messages");
+        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setFallbackToSystemLocale(false);
+        messageSource.setDefaultLocale(null);
+        return messageSource;
+    }
 }

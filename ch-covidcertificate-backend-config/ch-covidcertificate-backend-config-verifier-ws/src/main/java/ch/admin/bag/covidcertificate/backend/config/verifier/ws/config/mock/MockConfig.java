@@ -17,7 +17,8 @@ public class MockConfig {
 
     @Bean
     @Primary
-    public VerifierConfigController verifierConfigController(Messages messages, FaqHelper faqHelper) {
+    public VerifierConfigController verifierConfigController(
+            Messages messages, FaqHelper faqHelper) {
         return new MockConfigController(messages, faqHelper);
     }
 

@@ -19,8 +19,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public abstract class VerifierWsBaseConfig {
 
-	@Bean
-	public VerifierConfigController verifierConfigController(Messages messages, FaqHelper faqHelper) {
-		return new VerifierConfigController(messages, faqHelper);
-	}
+    @Bean
+    public VerifierConfigController verifierConfigController(
+            Messages messages, FaqHelper faqHelper) {
+        return new VerifierConfigController(messages, faqHelper);
+    }
 }

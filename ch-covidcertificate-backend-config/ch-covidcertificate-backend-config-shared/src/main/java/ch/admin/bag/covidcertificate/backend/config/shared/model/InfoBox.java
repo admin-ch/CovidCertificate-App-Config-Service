@@ -16,63 +16,69 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class InfoBox {
 
-	@Documentation(description = "Title of the infobox", example = "Alert")
-	private String title;
-	@Documentation(description = "Message shown to the user", example = "Please restart your phone")
-	private String msg;
-	@Documentation(description = "If given, adds a url to the message", example = "https://dp-3t.github.io/")
-	private String url;
-	@Documentation(description = "Title to be shown for the URL", example = "DP3T page")
-	private String urlTitle;
-	@Documentation(description = "If true, the user can dismiss the message", example = "true")
-	private boolean isDismissible = false;
+    @Documentation(description = "Title of the infobox", example = "Alert")
+    private String title;
 
-	public String getInfoId() {
-		return Integer.toString(
-				((getTitle() != null) ? getTitle().hashCode() : 0)
-						+ ((getMsg() != null) ? getMsg().hashCode() : 0)
-						+ ((getUrl() != null) ? getUrl().hashCode() : 0)
-						+ ((getUrlTitle() != null) ? getUrlTitle().hashCode() : 0)
-						+ (Boolean.hashCode(getIsDismissible())));
-	}
+    @Documentation(description = "Message shown to the user", example = "Please restart your phone")
+    private String msg;
 
-	public String getTitle() {
-		return title;
-	}
+    @Documentation(
+            description = "If given, adds a url to the message",
+            example = "https://dp-3t.github.io/")
+    private String url;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    @Documentation(description = "Title to be shown for the URL", example = "DP3T page")
+    private String urlTitle;
 
-	public String getMsg() {
-		return msg;
-	}
+    @Documentation(description = "If true, the user can dismiss the message", example = "true")
+    private boolean isDismissible = false;
 
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
+    public String getInfoId() {
+        return Integer.toString(
+                ((getTitle() != null) ? getTitle().hashCode() : 0)
+                        + ((getMsg() != null) ? getMsg().hashCode() : 0)
+                        + ((getUrl() != null) ? getUrl().hashCode() : 0)
+                        + ((getUrlTitle() != null) ? getUrlTitle().hashCode() : 0)
+                        + (Boolean.hashCode(getIsDismissible())));
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getUrlTitle() {
-		return urlTitle;
-	}
+    public String getMsg() {
+        return msg;
+    }
 
-	public void setUrlTitle(String urlTitle) {
-		this.urlTitle = urlTitle;
-	}
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
-	public boolean getIsDismissible() {
-		return isDismissible;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public void setIsDismissible(boolean isDismissible) {
-		this.isDismissible = isDismissible;
-	}
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUrlTitle() {
+        return urlTitle;
+    }
+
+    public void setUrlTitle(String urlTitle) {
+        this.urlTitle = urlTitle;
+    }
+
+    public boolean getIsDismissible() {
+        return isDismissible;
+    }
+
+    public void setIsDismissible(boolean isDismissible) {
+        this.isDismissible = isDismissible;
+    }
 }

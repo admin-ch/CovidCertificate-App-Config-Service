@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class VerifierConfigController {
 
     protected final Messages messages;
-	protected final FaqHelper faqHelper;
+    protected final FaqHelper faqHelper;
 
     public VerifierConfigController(Messages messages, FaqHelper faqHelper) {
         this.messages = messages;
