@@ -182,7 +182,7 @@ public abstract class BaseControllerTest {
                         Language.IT,
                         "Come funziona \nl’app?",
                         Language.DE,
-                        "Wie funktioniert die\nApp?",
+                        "Wie funktioniert \ndie App?",
                         Language.FR,
                         "Comment l'app \nfonctionne-t-elle?");
 
