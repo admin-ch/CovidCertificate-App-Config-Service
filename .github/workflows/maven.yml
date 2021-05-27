@@ -33,8 +33,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_PROJECTKEY: ${{ secrets.SONAR_PROJECTKEY }}
-        SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
+        SONAR_PROJECTKEY: admin-ch_CovidCertificate-App-Config-Service
+        SONAR_ORGANIZATION: admin-ch
       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar --file ch-covidcertificate-backend-config/pom.xml
     - name: Echo current ref
       run: echo "${{ github.ref }}"
