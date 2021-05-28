@@ -1,8 +1,6 @@
 package ch.admin.bag.covidcertificate.backend.config.shared.poeditor;
 
 import java.util.Locale;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -10,7 +8,6 @@ import org.springframework.context.i18n.LocaleContextHolder;
 public class Messages {
 
     private MessageSource messageSource;
-    private static final Logger logger = LoggerFactory.getLogger(Messages.class);
 
     public Messages(MessageSource messageSource) {
         this.messageSource = messageSource;

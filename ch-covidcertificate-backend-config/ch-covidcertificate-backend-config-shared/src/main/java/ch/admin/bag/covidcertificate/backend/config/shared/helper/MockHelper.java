@@ -4,13 +4,16 @@ import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.FaqEntry;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.InfoBox;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 public class MockHelper {
+
+    private MockHelper() {}
+
     public static Map<Language, Faq> getWorksMock() {
-        Map<Language, Faq> works = new HashMap<>();
+        Map<Language, Faq> works = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
             Faq faq = new Faq();
             faq.setFaqTitle("Wie funktioniert die App?");
@@ -45,7 +48,7 @@ public class MockHelper {
     }
 
     public static Map<Language, Faq> getQuestionsMock() {
-        Map<Language, Faq> questions = new HashMap<>();
+        Map<Language, Faq> questions = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
             Faq faq = new Faq();
             faq.setFaqTitle("Was sind Covid-Zertifikate?");
@@ -125,7 +128,7 @@ public class MockHelper {
     }
 
     public static Map<Language, InfoBox> getInfoBoxMock() {
-        Map<Language, InfoBox> infoBoxes = new HashMap<>();
+        Map<Language, InfoBox> infoBoxes = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
             InfoBox infoBox = new InfoBox();
             infoBox.setTitle("Noch keinen Covidcode?");

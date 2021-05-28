@@ -5,7 +5,7 @@ import ch.admin.bag.covidcertificate.backend.config.shared.model.FaqEntry;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -44,7 +44,7 @@ public class FaqHelper {
     }
 
     private Map<Language, Faq> getFaq(String prefix, List<String> entries) {
-        Map<Language, Faq> result = new HashMap<Language, Faq>();
+        Map<Language, Faq> result = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
             Locale l = getLocaleForLanguage(language);
             Faq f = new Faq();

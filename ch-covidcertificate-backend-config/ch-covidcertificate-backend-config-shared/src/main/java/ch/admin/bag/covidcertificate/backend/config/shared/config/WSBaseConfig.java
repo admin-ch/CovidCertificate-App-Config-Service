@@ -50,8 +50,7 @@ public abstract class WSBaseConfig implements WebMvcConfigurer {
 
     @Bean
     public Messages messages(MessageSource messageSource) {
-        Messages messages = new Messages(messageSource);
-        return messages;
+        return new Messages(messageSource);
     }
 
     @Bean
