@@ -5,6 +5,14 @@ This project is released by the the Federal Office of Information Technology, Sy
 on behalf of the Federal Office of Public Health FOPH.
 The app design, UX and implementation was done by [Ubique](https://www.ubique.ch?app=github).
 
+# Services
+This backend is used by the apps to get their configuration for various parameters. Currently this includes:
+
+* Information boxes
+* FAQ entries
+* Force update
+
+
 ## Contribution Guide
 
 This project is truly open-source and we welcome any feedback on the code regarding both the implementation and security aspects.
