@@ -149,7 +149,7 @@ public abstract class BaseControllerTest {
                         Language.EN,
                         "How COVID certificates are checked",
                         Language.IT,
-                        "Come avviene il controllo dei certificati COVID?",
+                        "Come avviene la verifica dei certificati COVID?",
                         Language.DE,
                         "So werden Covid-Zertifikate geprüft",
                         Language.FR,

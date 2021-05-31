@@ -180,7 +180,7 @@ public abstract class BaseControllerTest {
                         Language.EN,
                         "How the app works",
                         Language.IT,
-                        "Come funziona \nl’app?",
+                        "Come funziona \nl’applicazione?",
                         Language.DE,
                         "Wie funktioniert \ndie App?",
                         Language.FR,
