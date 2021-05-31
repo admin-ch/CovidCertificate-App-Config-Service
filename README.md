@@ -12,6 +12,7 @@ This backend is used by the apps to get their configuration for various paramete
 * FAQ entries
 * Force update
 
+There are two services, one for each app: COVID Certificate App and COVID Certificate Check App.
 
 ## Contribution Guide
 
