@@ -10,10 +10,12 @@
 
 package ch.admin.bag.covidcertificate.backend.config.verifier.ws.controller;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.ubique.openapi.docannotations.Documentation;
+import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -60,6 +62,8 @@ public class VerifierConfigController {
                     String buildnr) {
         ConfigResponse configResponse = new ConfigResponse();
         configResponse.setWorks(faqHelper.getVerifierFaqWorks());
-        return ResponseEntity.ok(configResponse);
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.maxAge(CacheUtil.CONFIG_MAX_AGE))
+                .body(configResponse);
     }
 }

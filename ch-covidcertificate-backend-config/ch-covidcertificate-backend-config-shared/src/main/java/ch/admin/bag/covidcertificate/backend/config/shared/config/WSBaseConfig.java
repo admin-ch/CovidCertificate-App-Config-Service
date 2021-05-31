@@ -10,9 +10,11 @@
 
 package ch.admin.bag.covidcertificate.backend.config.shared.config;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.interceptor.HeaderInjector;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
+import java.time.Duration;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +34,11 @@ public abstract class WSBaseConfig implements WebMvcConfigurer {
     @Value(
             "#{${ws.security.headers: {'X-Content-Type-Options':'nosniff', 'X-Frame-Options':'DENY','X-Xss-Protection':'1; mode=block'}}}")
     Map<String, String> additionalHeaders;
+
+    @Value("${ws.config.max-age:PT1M}")
+    public void setConfigMaxAge(Duration configMaxAge) {
+        CacheUtil.CONFIG_MAX_AGE = configMaxAge;
+    }
 
     @Bean
     public HeaderInjector securityHeaderInjector() {
