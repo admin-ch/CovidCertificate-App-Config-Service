@@ -1,1 +1,1 @@
-# ch-covidcertificate-backend-config
+# CovidCertificate-App-Config-Service
