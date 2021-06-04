@@ -12,15 +12,28 @@ import java.util.Map;
 
 public class FaqHelper {
 
-    private static final String VERIFIER_KEY_PREFIX_WORKS = "verifier_faq_works_";
-
+    /** wallet prefixes and entries */
     private static final String WALLET_KEY_PREFIX_QUESTIONS = "wallet_faq_questions_";
+
     private static final String WALLET_KEY_PREFIX_WORKS = "wallet_faq_works_";
 
     private static final List<String> WALLET_FAQ_QUESTIONS_ENTRIES =
             List.of("1", "1_1", "2", "3", "4", "5");
     private static final List<String> WALLET_FAQ_WORKS_ENTRIES =
             List.of("1", "2", "3", "4", "5", "6");
+
+    private static final String WALLET_KEY_PREFIX_TRANSFER_QUESTIONS =
+            "wallet_transfer_code_faq_questions_";
+    private static final String WALLET_KEY_PREFIX_TRANSFER_WORKS =
+            "wallet_transfer_code_faq_works_";
+
+    private static final List<String> WALLET_TRANSFER_FAQ_QUESTIONS_ENTRIES =
+            List.of("1", "2", "3", "4", "5");
+    private static final List<String> WALLET_TRANSFER_FAQ_WORKS_ENTRIES =
+            List.of("1", "2", "3", "4", "5", "6");
+
+    /** verifier prefixes and entries */
+    private static final String VERIFIER_KEY_PREFIX_WORKS = "verifier_faq_works_";
 
     private static final List<String> VERIFIER_WORKS_FAQ_ENTRIES = List.of("1", "2", "3", "5", "6");
 
@@ -42,10 +55,18 @@ public class FaqHelper {
         return getFaq(WALLET_KEY_PREFIX_QUESTIONS, WALLET_FAQ_QUESTIONS_ENTRIES);
     }
 
+    public Map<Language, Faq> getWalletTransferFaqWorks() {
+        return getFaq(WALLET_KEY_PREFIX_TRANSFER_WORKS, WALLET_TRANSFER_FAQ_WORKS_ENTRIES);
+    }
+
+    public Map<Language, Faq> getWalletTransferFaqQuestions() {
+        return getFaq(WALLET_KEY_PREFIX_TRANSFER_QUESTIONS, WALLET_TRANSFER_FAQ_QUESTIONS_ENTRIES);
+    }
+
     private Map<Language, Faq> getFaq(String prefix, List<String> entries) {
         Map<Language, Faq> result = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
-            Locale l = getLocaleForLanguage(language);
+            Locale l = language.toLocale();
             Faq f = new Faq();
             f.setFaqTitle(msg.getMessage(prefix + "title", l));
             f.setFaqSubTitle(msg.getMessage(prefix + "subtitle", l));
@@ -64,9 +85,5 @@ public class FaqHelper {
             result.put(language, f);
         }
         return result;
-    }
-
-    private Locale getLocaleForLanguage(Language l) {
-        return Locale.forLanguageTag(l.getKey());
     }
 }

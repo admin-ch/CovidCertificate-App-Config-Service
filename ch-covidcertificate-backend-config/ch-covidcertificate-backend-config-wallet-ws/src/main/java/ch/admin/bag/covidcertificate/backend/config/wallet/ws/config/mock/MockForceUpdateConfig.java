@@ -1,9 +1,9 @@
 package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config.mock;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
-import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
+import ch.admin.bag.covidcertificate.backend.config.wallet.ws.config.model.WalletConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller.WalletConfigController;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -40,9 +40,9 @@ public class MockForceUpdateConfig {
         }
 
         @Override
-        public ResponseEntity<ConfigResponse> getConfig(
+        public ResponseEntity<WalletConfigResponse> getConfig(
                 String appversion, String osversion, String buildnr) {
-            ResponseEntity<ConfigResponse> response =
+            ResponseEntity<WalletConfigResponse> response =
                     super.getConfig(appversion, osversion, buildnr);
             Version version = new Version(appversion);
             if ((version.isIOS() && buildnr.equals(iosBuildNrForceUpdate))
