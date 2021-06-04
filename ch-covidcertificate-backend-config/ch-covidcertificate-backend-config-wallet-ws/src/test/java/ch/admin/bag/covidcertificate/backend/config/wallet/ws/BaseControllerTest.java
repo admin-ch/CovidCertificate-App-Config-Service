@@ -144,18 +144,19 @@ public abstract class BaseControllerTest {
                         Language.EN,
                         "What are COVID certificates?",
                         Language.IT,
-                        "Cos’è il certificato COVID?",
+                        "Cos'è il certificato COVID?",
                         Language.DE,
                         "Was sind Covid-Zertifikate?",
                         Language.FR,
                         "Le certificat COVID en bref");
 
-        final int faqEntryCount = 5;
+        final int faqEntryCount = 6;
 
         // test english faq entry titles. this also verifies the correct entry order
         List<String> expectedFaqEntryTitlesEn =
                 List.of(
                         "When and where can I get a COVID certificate?",
+                        "How do I get a COVID-19 certificate after I have recovered from COVID-19?",
                         "How can I present a COVID certificate?",
                         "Where is my data stored?",
                         "How are misuse and forgery prevented?",
@@ -163,7 +164,7 @@ public abstract class BaseControllerTest {
         assertEquals(faqEntryCount, expectedFaqEntryTitlesEn.size());
 
         // true for those faq entries where a link is set
-        List<Boolean> isLinkSetList = List.of(false, false, false, false, false);
+        List<Boolean> isLinkSetList = List.of(false, false, false, false, false, false);
         assertEquals(faqEntryCount, isLinkSetList.size());
 
         configAsserter.assertFaq(
@@ -180,7 +181,7 @@ public abstract class BaseControllerTest {
                         Language.EN,
                         "How the app works",
                         Language.IT,
-                        "Come funziona \nl’applicazione?",
+                        "Come funziona \nl'app?",
                         Language.DE,
                         "Wie funktioniert \ndie App?",
                         Language.FR,
@@ -196,7 +197,7 @@ public abstract class BaseControllerTest {
                         "How can I see if my COVID certificate is valid?",
                         "How is my data protected?",
                         "What data is contained in the QR code?",
-                        "What if I delete the COVID certificate or the app?");
+                        "What do I need to do if I delete the COVID certificate or the app?");
         assertEquals(faqEntryCount, expectedFaqEntryTitlesEn.size());
 
         // true for those faq entries where a link is set
