@@ -148,7 +148,9 @@ public abstract class BaseControllerTest {
                         Language.DE,
                         "Was sind Covid-Zertifikate?",
                         Language.FR,
-                        "Le certificat COVID en bref");
+                        "Le certificat COVID en bref",
+                        Language.RM,
+                        "Tge è il certificat COVID?");
 
         final int faqEntryCount = 6;
 
@@ -185,7 +187,9 @@ public abstract class BaseControllerTest {
                         Language.DE,
                         "Wie funktioniert \ndie App?",
                         Language.FR,
-                        "Comment l'app \nfonctionne-t-elle?");
+                        "Comment l'app \nfonctionne-t-elle?",
+                        Language.RM,
+                        "Co funcziuna \nl'app?");
 
         final int faqEntryCount = 6;
 

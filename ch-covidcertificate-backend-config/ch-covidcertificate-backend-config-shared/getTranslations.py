@@ -72,5 +72,6 @@ loadLanguage("en", api_token, project_id)  # english
 loadLanguage("fr", api_token, project_id)  # french
 loadLanguage("de", api_token, project_id)  # german
 loadLanguage("it", api_token, project_id)  # italian
+loadLanguage("rm", api_token, project_id)  # rumantsch
 
 print('Successfully loaded terms')

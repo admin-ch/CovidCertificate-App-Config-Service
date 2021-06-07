@@ -7,7 +7,8 @@ public enum Language {
     DE("de"),
     EN("en"),
     FR("fr"),
-    IT("it");
+    IT("it"),
+    RM("rm");
 
     private String key;
 
