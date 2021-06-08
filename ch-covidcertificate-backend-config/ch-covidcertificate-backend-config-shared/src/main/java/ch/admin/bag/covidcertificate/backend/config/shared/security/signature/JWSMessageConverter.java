@@ -2,8 +2,6 @@ package ch.admin.bag.covidcertificate.backend.config.shared.security.signature;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.InvalidKeyException;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
@@ -15,7 +13,6 @@ import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateEncodingException;
 import java.util.ArrayList;
 import java.util.Map;
-
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -25,14 +22,11 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.util.StreamUtils;
 
-
 /**
- * Implementation of {@link HttpMessageConverter} that can write any object as
- * JWS. <br>
+ * Implementation of {@link HttpMessageConverter} that can write any object as JWS. <br>
  * <b>Note:</b> Reading is not supported.
- * 
- * @author alig
  *
+ * @author alig
  */
 public class JWSMessageConverter extends AbstractGenericHttpMessageConverter<Object> {
 
@@ -44,14 +38,17 @@ public class JWSMessageConverter extends AbstractGenericHttpMessageConverter<Obj
     private final ArrayList<byte[]> certificateChain;
     private final Key privateKey;
 
-    public JWSMessageConverter(KeyStore keyStore, char[] password) throws KeyStoreException, CertificateEncodingException, UnrecoverableKeyException, NoSuchAlgorithmException {
+    public JWSMessageConverter(KeyStore keyStore, char[] password)
+            throws KeyStoreException, CertificateEncodingException, UnrecoverableKeyException,
+                    NoSuchAlgorithmException {
         super(JWS_MEDIA_TYPE);
         this.keyStore = keyStore;
         this.objectMapper = new ObjectMapper();
         this.alias = this.keyStore.aliases().nextElement();
         this.password = password;
-        this.certificateChain = new ArrayList<>(this.keyStore.getCertificateChain(this.alias).length);
-        for (var cert: this.keyStore.getCertificateChain(this.alias)) {
+        this.certificateChain =
+                new ArrayList<>(this.keyStore.getCertificateChain(this.alias).length);
+        for (var cert : this.keyStore.getCertificateChain(this.alias)) {
             this.certificateChain.add(cert.getEncoded());
         }
 
@@ -75,17 +72,20 @@ public class JWSMessageConverter extends AbstractGenericHttpMessageConverter<Obj
             throws IOException, HttpMessageNotReadableException {
         throw new UnsupportedOperationException("This converter does not support reading");
     }
+
     @Override
     protected void writeInternal(Object t, Type type, HttpOutputMessage outputMessage)
             throws IOException, HttpMessageNotWritableException {
         @SuppressWarnings("unchecked")
         Map<String, Object> claims = objectMapper.convertValue(t, Map.class);
         String signature;
-        signature = Jwts.builder().setHeaderParam("x5c", this.certificateChain).setClaims(claims)
-                .signWith(this.privateKey).compact();
-        
-    
+        signature =
+                Jwts.builder()
+                        .setHeaderParam("x5c", this.certificateChain)
+                        .setClaims(claims)
+                        .signWith(this.privateKey)
+                        .compact();
+
         StreamUtils.copy(signature, Charset.forName("UTF-8"), outputMessage.getBody());
     }
-
 }

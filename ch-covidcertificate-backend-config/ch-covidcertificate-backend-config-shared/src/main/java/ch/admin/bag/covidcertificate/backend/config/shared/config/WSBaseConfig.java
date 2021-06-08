@@ -15,8 +15,6 @@ import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.interceptor.HeaderInjector;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.security.signature.JWSMessageConverter;
-
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.KeyStore;
@@ -28,7 +26,6 @@ import java.time.Duration;
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,6 +53,7 @@ public abstract class WSBaseConfig implements WebMvcConfigurer {
 
     @Value("${ws.jws.p12:}")
     public String p12KeyStore;
+
     @Value("${ws.jws.password:}")
     public String p12KeyStorePassword;
 
@@ -92,7 +90,9 @@ public abstract class WSBaseConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public JWSMessageConverter jwsMessageConverter() throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException, UnrecoverableKeyException {
+    public JWSMessageConverter jwsMessageConverter()
+            throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException,
+                    UnrecoverableKeyException {
         return new JWSMessageConverter(jwsKeyStore(), p12KeyStorePassword.toCharArray());
     }
 
@@ -100,13 +100,18 @@ public abstract class WSBaseConfig implements WebMvcConfigurer {
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         try {
             converters.add(jwsMessageConverter());
-        } catch (KeyStoreException | NoSuchAlgorithmException | CertificateException | IOException | UnrecoverableKeyException e) {
+        } catch (KeyStoreException
+                | NoSuchAlgorithmException
+                | CertificateException
+                | IOException
+                | UnrecoverableKeyException e) {
             logger.error("Could not load key store", e);
             throw new RuntimeException("Could not add jws Converter");
         }
     }
 
-    public KeyStore jwsKeyStore() throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException {
+    public KeyStore jwsKeyStore()
+            throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException {
         var keyStore = KeyStore.getInstance("pkcs12");
         var bais = new ByteArrayInputStream(Base64.getDecoder().decode(p12KeyStore));
         keyStore.load(bais, p12KeyStorePassword.toCharArray());
