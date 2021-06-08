@@ -29,8 +29,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
@@ -38,6 +40,7 @@ import org.springframework.web.context.WebApplicationContext;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles({"cloud-dev"})
+@TestPropertySource("classpath:application-local.properties")
 public abstract class BaseControllerTest {
     @Autowired protected ObjectMapper objectMapper;
     protected MockMvc mockMvc;
@@ -53,7 +56,7 @@ public abstract class BaseControllerTest {
     @Test
     public void testHello() throws Exception {
         final MockHttpServletResponse response =
-                mockMvc.perform(get(BASE_URL + ""))
+                mockMvc.perform(get(BASE_URL).accept(MediaType.TEXT_PLAIN))
                         .andExpect(status().is2xxSuccessful())
                         .andReturn()
                         .getResponse();
@@ -65,10 +68,12 @@ public abstract class BaseControllerTest {
 
     @Test
     public void testGetConfig() throws Exception {
-        mockMvc.perform(get(BASE_URL + "/config")).andExpect(status().is4xxClientError());
+        mockMvc.perform(get(BASE_URL + "/config").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError());
         final MockHttpServletResponse result =
                 mockMvc.perform(
                                 get(BASE_URL + "/config")
+                                        .accept(MediaType.APPLICATION_JSON)
                                         .param("osversion", "ios12")
                                         .param("appversion", "1.0")
                                         .param("buildnr", "2020.0145asdfa34"))
@@ -80,7 +85,7 @@ public abstract class BaseControllerTest {
     @Test
     public void testSecurityHeaders() throws Exception {
         final MockHttpServletResponse response =
-                mockMvc.perform(get(BASE_URL + ""))
+                mockMvc.perform(get(BASE_URL).accept(MediaType.TEXT_PLAIN))
                         .andExpect(status().is2xxSuccessful())
                         .andReturn()
                         .getResponse();
@@ -95,6 +100,7 @@ public abstract class BaseControllerTest {
         MockHttpServletResponse result =
                 mockMvc.perform(
                                 get(BASE_URL + "/config")
+                                        .accept(MediaType.APPLICATION_JSON)
                                         .param("osversion", "ios12")
                                         .param("appversion", "ios-1.0.9")
                                         .param("buildnr", "ios-2020.0145asdfa34"))
@@ -109,6 +115,8 @@ public abstract class BaseControllerTest {
         MockHttpServletResponse result =
                 mockMvc.perform(
                                 get(BASE_URL + "/config")
+                                        .accept(MediaType.APPLICATION_JSON)
+                                        .header("accept", "application/json")
                                         .param("osversion", "ios14.0")
                                         .param("appversion", "ios-1.0.8")
                                         .param("buildnr", "ios-2020.0145asdfa34"))
@@ -123,6 +131,7 @@ public abstract class BaseControllerTest {
         MockHttpServletResponse result =
                 mockMvc.perform(
                                 get(BASE_URL + "/config")
+                                        .accept(MediaType.APPLICATION_JSON)
                                         .param("osversion", "ios12")
                                         .param("appversion", "ios-1.0.9")
                                         .param("buildnr", "ios-2020.0145asdfa34"))

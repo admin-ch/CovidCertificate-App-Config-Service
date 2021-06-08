@@ -64,7 +64,7 @@ public class JWSMessageConverter extends AbstractGenericHttpMessageConverter<Obj
     @Override
     public boolean canWrite(Class<?> clazz, MediaType mediaType) {
         // any clazz can be written
-        return true;
+        return JWS_MEDIA_TYPE.equalsTypeAndSubtype(mediaType) || mediaType == null;
     }
 
     @Override
