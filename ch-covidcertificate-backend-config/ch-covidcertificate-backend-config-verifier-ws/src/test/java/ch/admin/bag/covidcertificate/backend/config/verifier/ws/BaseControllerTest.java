@@ -19,11 +19,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.ConfigAsserter;
+import ch.admin.bag.covidcertificate.backend.config.shared.TestHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -43,12 +43,14 @@ import org.springframework.web.context.WebApplicationContext;
 @ActiveProfiles({"cloud-dev"})
 @TestPropertySource("classpath:application-local.properties")
 public abstract class BaseControllerTest {
+
     @Autowired protected ObjectMapper objectMapper;
     protected MockMvc mockMvc;
     @Autowired protected WebApplicationContext webApplicationContext;
-    protected ConfigAsserter configAsserter;
+    protected TestHelper testHelper;
+    protected MediaType acceptMediaType;
 
-    private static final String BASE_URL = "/app/verifier/v1";
+    protected static final String BASE_URL = "/app/verifier/v1";
 
     protected String json(Object o) throws IOException {
         return objectMapper.writeValueAsString(o);
@@ -68,22 +70,6 @@ public abstract class BaseControllerTest {
     }
 
     @Test
-    public void testGetConfig() throws Exception {
-        mockMvc.perform(get(BASE_URL + "/config").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError());
-        final MockHttpServletResponse result =
-                mockMvc.perform(
-                                get(BASE_URL + "/config")
-                                        .accept(MediaType.APPLICATION_JSON)
-                                        .param("osversion", "ios12")
-                                        .param("appversion", "1.0")
-                                        .param("buildnr", "2020.0145asdfa34"))
-                        .andExpect(status().is2xxSuccessful())
-                        .andReturn()
-                        .getResponse();
-    }
-
-    @Test
     public void testSecurityHeaders() throws Exception {
         final MockHttpServletResponse response =
                 mockMvc.perform(get(BASE_URL).accept(MediaType.TEXT_PLAIN))
@@ -97,18 +83,35 @@ public abstract class BaseControllerTest {
     }
 
     @Test
+    public void testGetConfig() throws Exception {
+        mockMvc.perform(get(BASE_URL + "/config").accept(acceptMediaType))
+                .andExpect(status().is4xxClientError());
+        mockMvc.perform(
+                        get(BASE_URL + "/config")
+                                .accept(acceptMediaType)
+                                .param("osversion", "ios12")
+                                .param("appversion", "1.0")
+                                .param("buildnr", "2020.0145asdfa34"))
+                .andExpect(status().is2xxSuccessful())
+                .andReturn()
+                .getResponse();
+    }
+
+    @Test
     public void testForUpdateNote() throws Exception {
         MockHttpServletResponse result =
                 mockMvc.perform(
                                 get(BASE_URL + "/config")
-                                        .accept(MediaType.APPLICATION_JSON)
+                                        .accept(acceptMediaType)
                                         .param("osversion", "ios12")
                                         .param("appversion", "ios-1.0.9")
                                         .param("buildnr", "ios-2020.0145asdfa34"))
                         .andExpect(status().is2xxSuccessful())
                         .andReturn()
                         .getResponse();
-        configAsserter.assertNoUpdate(result);
+        ConfigResponse resp =
+                testHelper.toConfigResponse(result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
+        ConfigAsserter.assertNoUpdate(resp);
     }
 
     @Test
@@ -116,14 +119,16 @@ public abstract class BaseControllerTest {
         MockHttpServletResponse result =
                 mockMvc.perform(
                                 get(BASE_URL + "/config")
-                                        .accept(MediaType.APPLICATION_JSON)
+                                        .accept(acceptMediaType)
                                         .param("osversion", "ios14.0")
                                         .param("appversion", "ios-1.0.8")
                                         .param("buildnr", "ios-2020.0145asdfa34"))
                         .andExpect(status().is2xxSuccessful())
                         .andReturn()
                         .getResponse();
-        configAsserter.assertIsNoForceUpdate(result);
+        ConfigResponse resp =
+                testHelper.toConfigResponse(result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
+        ConfigAsserter.assertIsNoForceUpdate(resp);
     }
 
     @Test
@@ -131,7 +136,7 @@ public abstract class BaseControllerTest {
         MockHttpServletResponse result =
                 mockMvc.perform(
                                 get(BASE_URL + "/config")
-                                        .accept(MediaType.APPLICATION_JSON)
+                                        .accept(acceptMediaType)
                                         .param("osversion", "ios12")
                                         .param("appversion", "ios-1.0.9")
                                         .param("buildnr", "ios-2020.0145asdfa34"))
@@ -140,8 +145,7 @@ public abstract class BaseControllerTest {
                         .getResponse();
 
         ConfigResponse resp =
-                objectMapper.readValue(
-                        result.getContentAsString(Charset.forName("utf-8")), ConfigResponse.class);
+                testHelper.toConfigResponse(result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
 
         assertQuestions(resp);
         assertWorks(resp);
@@ -179,7 +183,7 @@ public abstract class BaseControllerTest {
         List<Boolean> isLinkSetList = List.of(false, false, false, false, false);
         assertEquals(faqEntryCount, isLinkSetList.size());
 
-        configAsserter.assertFaq(
+        ConfigAsserter.assertFaq(
                 expectedFaqTitle,
                 faqEntryCount,
                 expectedFaqEntryTitlesEn,

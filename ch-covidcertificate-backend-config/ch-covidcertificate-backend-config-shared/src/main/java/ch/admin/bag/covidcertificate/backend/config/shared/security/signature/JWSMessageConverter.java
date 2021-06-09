@@ -30,7 +30,7 @@ import org.springframework.util.StreamUtils;
  */
 public class JWSMessageConverter extends AbstractGenericHttpMessageConverter<Object> {
 
-    private static final MediaType JWS_MEDIA_TYPE = new MediaType("application", "json+jws");
+    public static final MediaType JWS_MEDIA_TYPE = new MediaType("application", "json+jws");
     private final KeyStore keyStore;
     private final ObjectMapper objectMapper;
     private final String alias;
