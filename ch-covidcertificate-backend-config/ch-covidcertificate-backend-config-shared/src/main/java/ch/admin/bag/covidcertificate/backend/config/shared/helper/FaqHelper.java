@@ -22,8 +22,7 @@ public class FaqHelper {
     private static final List<String> WALLET_FAQ_WORKS_ENTRIES =
             List.of("1", "2", "3", "4", "5", "6");
 
-    private static final List<String> VERIFIER_WORKS_FAQ_ENTRIES =
-            List.of("1", "2", "3", "5", "6");
+    private static final List<String> VERIFIER_WORKS_FAQ_ENTRIES = List.of("1", "2", "3", "5", "6");
 
     private final Messages msg;
 

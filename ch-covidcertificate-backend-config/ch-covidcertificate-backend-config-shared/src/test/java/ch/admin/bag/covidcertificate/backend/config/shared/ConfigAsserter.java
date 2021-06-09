@@ -9,30 +9,15 @@ import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.FaqEntry;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
-import org.springframework.mock.web.MockHttpServletResponse;
 
 public class ConfigAsserter {
-    public final ObjectMapper objectMapper;
-
-    public ConfigAsserter(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
-
-    public void assertNoUpdate(MockHttpServletResponse result) throws Exception {
-        ConfigResponse resp =
-                objectMapper.readValue(
-                        result.getContentAsString(Charset.forName("utf-8")), ConfigResponse.class);
+    public static void assertNoUpdate(ConfigResponse resp) throws Exception {
         assertNull(resp.getInfoBox());
     }
 
-    public void assertNormalUpdate(MockHttpServletResponse result) throws Exception {
-        ConfigResponse resp =
-                objectMapper.readValue(
-                        result.getContentAsString(Charset.forName("utf-8")), ConfigResponse.class);
+    public static void assertNormalUpdate(ConfigResponse resp) throws Exception {
         assertNotNull(resp);
         assertNotNull(resp.getInfoBox());
         for (Language language : Language.values()) {
@@ -41,10 +26,7 @@ public class ConfigAsserter {
         assertEquals("App-Update verfügbar", resp.getInfoBox().get(Language.DE).getTitle());
     }
 
-    public void assertTestflightUpdate(MockHttpServletResponse result) throws Exception {
-        ConfigResponse resp =
-                objectMapper.readValue(
-                        result.getContentAsString(Charset.forName("utf-8")), ConfigResponse.class);
+    public static void assertTestflightUpdate(ConfigResponse resp) throws Exception {
         assertNotNull(resp);
         assertNotNull(resp.getInfoBox());
         for (Language language : Language.values()) {
@@ -53,23 +35,17 @@ public class ConfigAsserter {
         assertEquals("App-Update im App Store", resp.getInfoBox().get(Language.DE).getTitle());
     }
 
-    public void assertIsNoForceUpdate(MockHttpServletResponse result) throws Exception {
-        ConfigResponse resp =
-                objectMapper.readValue(
-                        result.getContentAsString(Charset.forName("utf-8")), ConfigResponse.class);
+    public static void assertIsNoForceUpdate(ConfigResponse resp) throws Exception {
         assertFalse(resp.isForceUpdate());
     }
 
-    public void assertInfoBox(MockHttpServletResponse result) throws Exception {
-        ConfigResponse resp =
-                objectMapper.readValue(
-                        result.getContentAsString(Charset.forName("utf-8")), ConfigResponse.class);
+    public static void assertInfoBox(ConfigResponse resp) throws Exception {
         for (Language language : Language.values()) {
             assertNotNull(resp.getInfoBox().get(language));
         }
     }
 
-    public void assertFaq(
+    public static void assertFaq(
             Map<Language, String> expectedFaqTitle,
             int faqEntryCount,
             List<String> expectedFaqEntryTitlesEn,
