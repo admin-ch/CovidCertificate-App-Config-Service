@@ -89,17 +89,10 @@ public abstract class WSBaseConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
-    @Bean
-    public JWSMessageConverter jwsMessageConverter()
-            throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException,
-                    UnrecoverableKeyException {
-        return new JWSMessageConverter(jwsKeyStore(), p12KeyStorePassword.toCharArray());
-    }
-
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         try {
-            converters.add(jwsMessageConverter());
+            converters.add(new JWSMessageConverter(jwsKeyStore(), p12KeyStorePassword.toCharArray()));
         } catch (KeyStoreException
                 | NoSuchAlgorithmException
                 | CertificateException
