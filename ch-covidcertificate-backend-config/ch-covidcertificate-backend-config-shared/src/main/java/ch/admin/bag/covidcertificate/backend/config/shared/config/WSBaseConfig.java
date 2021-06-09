@@ -92,7 +92,8 @@ public abstract class WSBaseConfig implements WebMvcConfigurer {
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         try {
-            converters.add(new JWSMessageConverter(jwsKeyStore(), p12KeyStorePassword.toCharArray()));
+            converters.add(
+                    new JWSMessageConverter(jwsKeyStore(), p12KeyStorePassword.toCharArray()));
         } catch (KeyStoreException
                 | NoSuchAlgorithmException
                 | CertificateException

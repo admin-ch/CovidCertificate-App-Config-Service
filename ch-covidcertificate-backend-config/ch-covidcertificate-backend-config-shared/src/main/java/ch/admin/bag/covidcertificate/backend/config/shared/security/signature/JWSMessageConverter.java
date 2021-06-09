@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -86,6 +86,6 @@ public class JWSMessageConverter extends AbstractGenericHttpMessageConverter<Obj
                         .signWith(this.privateKey)
                         .compact();
 
-        StreamUtils.copy(signature, Charset.forName("UTF-8"), outputMessage.getBody());
+        StreamUtils.copy(signature, StandardCharsets.UTF_8, outputMessage.getBody());
     }
 }

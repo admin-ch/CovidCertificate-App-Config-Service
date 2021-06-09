@@ -8,7 +8,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -35,7 +35,7 @@ public class TestHelper {
     public ConfigResponse toConfigResponse(
             MockHttpServletResponse result, MediaType mediaType, String pathToCaPem)
             throws JsonProcessingException, UnsupportedEncodingException {
-        String responseStr = result.getContentAsString(Charset.forName("utf-8"));
+        String responseStr = result.getContentAsString(StandardCharsets.UTF_8);
         if (MediaType.APPLICATION_JSON.equalsTypeAndSubtype(mediaType)) {
             return objectMapper.readValue(responseStr, ConfigResponse.class);
         } else if (JWSMessageConverter.JWS_MEDIA_TYPE.equalsTypeAndSubtype(mediaType)) {
