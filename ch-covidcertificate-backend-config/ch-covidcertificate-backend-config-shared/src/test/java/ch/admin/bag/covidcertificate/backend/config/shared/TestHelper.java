@@ -23,8 +23,8 @@ public class TestHelper {
                     "X-Xss-Protection",
                     "1; mode=block");
 
-    public static final String PATH_TO_CA_PEM = "classpath:certs/ca.pem";
-    public static final String PATH_TO_WRONG_CA_PEM = "classpath:certs/wrong.pem";
+    public static final String PATH_TO_CA_PEM = "classpath:certs/test_ca.pem";
+    public static final String PATH_TO_WRONG_CA_PEM = "classpath:certs/wrong_test_ca.pem";
 
     public final ObjectMapper objectMapper;
 
