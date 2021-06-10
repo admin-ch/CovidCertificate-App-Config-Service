@@ -44,18 +44,3 @@ jobs:
     - name: shasum
       run: shasum -a 256 ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-wallet-ws/target/ch-covidcertificate-backend-config-wallet-ws.jar > ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-wallet-ws/target/ch-covidcertificate-backend-config-wallet-ws.jar.sha256
       shell: bash
-    - name: Create Snapshot Release
-      uses: ncipollo/release-action@v1
-      if: github.ref == 'refs/heads/develop'
-      id: create_release
-      with:
-        name: Snapshot Release ${{ github.ref }}
-        tag: SNAPSHOT
-        artifacts: "ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-verifier-ws/target/ch-covidcertificate-backend-config-verifier-ws.jar,ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-verifier-ws/target/ch-covidcertificate-backend-config-verifier-ws.jar.sha256,ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-wallet-ws/target/ch-covidcertificate-backend-config-wallet-ws.jar,ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-wallet-ws/target/ch-covidcertificate-backend-config-wallet-ws.jar.sha256"
-        body: |
-            Changes in this Release
-            - Snapshot release
-        token: ${{ secrets.GITHUB_TOKEN }}
-        draft: false
-        prerelease: false
-        allowUpdates: true
