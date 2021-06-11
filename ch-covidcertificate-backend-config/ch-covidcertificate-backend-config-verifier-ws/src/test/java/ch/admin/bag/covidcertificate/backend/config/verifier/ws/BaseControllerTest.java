@@ -165,7 +165,9 @@ public abstract class BaseControllerTest {
                         Language.DE,
                         "So werden Covid-Zertifikate geprüft",
                         Language.FR,
-                        "Contrôle de certificats COVID");
+                        "Contrôle de certificats COVID",
+                        Language.RM,
+                        "Uschia vegnan verifitgads ils certificats COVID");
 
         final int faqEntryCount = 5;
 

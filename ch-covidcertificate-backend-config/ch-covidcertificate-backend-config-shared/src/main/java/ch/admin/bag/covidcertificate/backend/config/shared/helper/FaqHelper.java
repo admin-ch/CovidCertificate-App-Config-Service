@@ -45,7 +45,7 @@ public class FaqHelper {
     private Map<Language, Faq> getFaq(String prefix, List<String> entries) {
         Map<Language, Faq> result = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
-            Locale l = getLocaleForLanguage(language);
+            Locale l = language.toLocale();
             Faq f = new Faq();
             f.setFaqTitle(msg.getMessage(prefix + "title", l));
             f.setFaqSubTitle(msg.getMessage(prefix + "subtitle", l));
@@ -64,9 +64,5 @@ public class FaqHelper {
             result.put(language, f);
         }
         return result;
-    }
-
-    private Locale getLocaleForLanguage(Language l) {
-        return Locale.forLanguageTag(l.getKey());
     }
 }
