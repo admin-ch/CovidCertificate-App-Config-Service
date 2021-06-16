@@ -12,8 +12,8 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
-import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
+import ch.admin.bag.covidcertificate.backend.config.wallet.ws.model.WalletConfigResponse;
 import ch.ubique.openapi.docannotations.Documentation;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +51,7 @@ public class WalletConfigController {
             responses = {"200 => ConfigResponse structure with dynamic infos and forceupdate"})
     @CrossOrigin(origins = {"https://editor.swagger.io"})
     @GetMapping(value = "/config")
-    public @ResponseBody ResponseEntity<ConfigResponse> getConfig(
+    public @ResponseBody ResponseEntity<WalletConfigResponse> getConfig(
             @Documentation(description = "Version of the App installed", example = "ios-1.0.7")
                     @RequestParam
                     String appversion,
@@ -60,9 +60,11 @@ public class WalletConfigController {
             @Documentation(description = "Build number of the app", example = "ios-200619.2333.175")
                     @RequestParam
                     String buildnr) {
-        ConfigResponse configResponse = new ConfigResponse();
+        WalletConfigResponse configResponse = new WalletConfigResponse();
         configResponse.setQuestions(faqHelper.getWalletFaqQuestions());
         configResponse.setWorks(faqHelper.getWalletFaqWorks());
+        configResponse.setTransferQuestions(faqHelper.getWalletTransferFaqQuestions());
+        configResponse.setTransferWorks(faqHelper.getWalletTransferFaqWorks());
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(CacheUtil.CONFIG_MAX_AGE))
                 .body(configResponse);
