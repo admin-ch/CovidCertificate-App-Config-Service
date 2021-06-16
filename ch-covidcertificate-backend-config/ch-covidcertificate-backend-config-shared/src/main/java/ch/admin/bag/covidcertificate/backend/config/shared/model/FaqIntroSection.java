@@ -12,32 +12,11 @@ package ch.admin.bag.covidcertificate.backend.config.shared.model;
 
 import javax.validation.constraints.NotNull;
 
-public class FaqEntry {
+public class FaqIntroSection {
 
-    @NotNull private String title;
+    @NotNull private String iconAndroid;
+    @NotNull private String iconIos;
     @NotNull private String text;
-
-    /* optional */
-    private String iconAndroid;
-    private String iconIos;
-    private String linkTitle;
-    private String linkUrl;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
 
     public String getIconAndroid() {
         return iconAndroid;
@@ -55,19 +34,11 @@ public class FaqEntry {
         this.iconIos = iconIos;
     }
 
-    public String getLinkTitle() {
-        return linkTitle;
+    public String getText() {
+        return text;
     }
 
-    public void setLinkTitle(String linkTitle) {
-        this.linkTitle = linkTitle;
-    }
-
-    public String getLinkUrl() {
-        return linkUrl;
-    }
-
-    public void setLinkUrl(String linkUrl) {
-        this.linkUrl = linkUrl;
+    public void setText(String text) {
+        this.text = text;
     }
 }
