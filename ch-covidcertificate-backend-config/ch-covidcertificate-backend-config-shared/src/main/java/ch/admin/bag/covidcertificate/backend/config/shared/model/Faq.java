@@ -18,6 +18,7 @@ public class Faq {
 
     private String faqTitle;
     private String faqSubTitle;
+    private List<FaqIntroSection> faqIntroSections;
     private String faqIconIos;
     private String faqIconAndroid;
 
@@ -37,6 +38,14 @@ public class Faq {
 
     public void setFaqSubTitle(String faqSubTitle) {
         this.faqSubTitle = faqSubTitle;
+    }
+
+    public List<FaqIntroSection> getFaqIntroSections() {
+        return faqIntroSections;
+    }
+
+    public void setFaqIntroSections(List<FaqIntroSection> faqIntroSections) {
+        this.faqIntroSections = faqIntroSections;
     }
 
     public String getFaqIconIos() {
