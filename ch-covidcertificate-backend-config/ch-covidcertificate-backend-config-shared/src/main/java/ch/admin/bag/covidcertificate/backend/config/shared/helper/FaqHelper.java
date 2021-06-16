@@ -88,6 +88,14 @@ public class FaqHelper {
         Map<Language, Faq> result = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
             String prefix = faqConfig.getKeyPrefix();
+            if (List.of(
+                            walletTransferWorksFaqConfig.getKeyPrefix(),
+                            walletTransferQuestionsFaqConfig.getKeyPrefix())
+                    .contains(prefix)) {
+                if (!Language.DE.equals(language)) {
+                    continue; // missing translations. skip other languages
+                }
+            }
             Locale l = language.toLocale();
             Faq f = new Faq();
             f.setFaqTitle(msg.getMessage(prefix + "title", l));
