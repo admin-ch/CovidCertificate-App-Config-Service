@@ -18,11 +18,11 @@ public class FaqHelper {
     private static final String WALLET_KEY_PREFIX_WORKS = "wallet_faq_works_";
 
     private static final List<String> WALLET_FAQ_QUESTIONS_ENTRIES =
-            List.of("1", "1_1", "2", "3", "4", "5");
+            List.of("1", "1_1", "2", "2_1", "3", "4", "5");
     private static final List<String> WALLET_FAQ_WORKS_ENTRIES =
-            List.of("1", "2", "3", "4", "5", "6");
+            List.of("1", "2", "3", "3_1", "4", "5", "6");
 
-    private static final List<String> VERIFIER_WORKS_FAQ_ENTRIES = List.of("1", "2", "3", "5", "6");
+    private static final List<String> VERIFIER_WORKS_FAQ_ENTRIES = List.of("1", "2", "2_1", "3", "5", "6");
 
     private final Messages msg;
 
