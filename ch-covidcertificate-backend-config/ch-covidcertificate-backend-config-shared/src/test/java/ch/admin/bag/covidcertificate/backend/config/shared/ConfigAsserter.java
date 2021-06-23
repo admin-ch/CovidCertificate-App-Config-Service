@@ -55,7 +55,7 @@ public class ConfigAsserter {
             Faq faq = faqByLanguage.get(language);
             assertEquals(expectedFaqTitle.get(language), faq.getFaqTitle());
             assertNotNull(faq.getFaqSubTitle());
-            assertEquals(faqEntryCount, faq.getFaqEntries().size());
+            assertEquals(faqEntryCount, faq.getFaqEntries().size(), "language: " + language.name());
 
             for (int i = 0; i < faqEntryCount; i++) {
                 FaqEntry faqEntry = faq.getFaqEntries().get(i);
