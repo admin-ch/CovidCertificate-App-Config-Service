@@ -34,6 +34,9 @@ public class WalletConfigController {
 
     private static final Version FORCE_UPDATE_BELOW_1_2_0 = new Version("1.2.0");
 
+    private static final long ANDROID_TRANSFER_CHECK_INTERVAL_MS = 2 * 60 * 60 * 1000l;
+    private static final long ANDROID_TRANSFER_CHECK_BACKOFF_MS = 30 * 1000l;
+
     public WalletConfigController(Messages messages, FaqHelper faqHelper) {
         this.messages = messages;
         this.faqHelper = faqHelper;
@@ -66,6 +69,8 @@ public class WalletConfigController {
         ConfigResponse configResponse = new ConfigResponse();
         configResponse.setQuestions(faqHelper.getWalletFaqQuestions());
         configResponse.setWorks(faqHelper.getWalletFaqWorks());
+        configResponse.setAndroidTransferCheckBackoffMs(ANDROID_TRANSFER_CHECK_BACKOFF_MS);
+        configResponse.setAndroidTransferCheckIntervalMs(ANDROID_TRANSFER_CHECK_INTERVAL_MS);
 
         Version clientAppVersion = new Version(appversion);
         if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)) {

@@ -32,6 +32,12 @@ public class ConfigResponse {
     @Documentation(description = "Holds how-it-works FAQ parameters by language")
     private Map<Language, Faq> works = null;
 
+    @Documentation(description = "transfer check interval for android in ms")
+    private long androidTransferCheckIntervalMs;
+
+    @Documentation(description = "transfer check backoff for android in ms")
+    private long androidTransferCheckBackoffMs;
+
     public boolean isForceUpdate() {
         return forceUpdate;
     }
@@ -62,5 +68,21 @@ public class ConfigResponse {
 
     public void setWorks(Map<Language, Faq> works) {
         this.works = works;
+    }
+
+    public long getAndroidTransferCheckIntervalMs() {
+        return androidTransferCheckIntervalMs;
+    }
+
+    public void setAndroidTransferCheckIntervalMs(long androidTransferCheckIntervalMs) {
+        this.androidTransferCheckIntervalMs = androidTransferCheckIntervalMs;
+    }
+
+    public long getAndroidTransferCheckBackoffMs() {
+        return androidTransferCheckBackoffMs;
+    }
+
+    public void setAndroidTransferCheckBackoffMs(long androidTransferCheckBackoffMs) {
+        this.androidTransferCheckBackoffMs = androidTransferCheckBackoffMs;
     }
 }
