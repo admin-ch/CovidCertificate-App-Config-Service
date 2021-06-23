@@ -18,11 +18,11 @@ public class FaqHelper {
     private static final String WALLET_KEY_PREFIX_WORKS = "wallet_faq_works_";
 
     private static final List<String> WALLET_FAQ_QUESTIONS_ENTRIES =
-            List.of("1", "1_1", "2", "3", "4", "5");
+            List.of("1", "1_1", "2", "2_1", "3", "4", "5");
     private static final List<String> WALLET_FAQ_WORKS_ENTRIES =
-            List.of("1", "2", "3", "4", "5", "6");
+            List.of("1", "2", "3", "3_1", "4", "5", "6");
 
-    private static final List<String> VERIFIER_WORKS_FAQ_ENTRIES = List.of("1", "2", "3", "5", "6");
+    private static final List<String> VERIFIER_WORKS_FAQ_ENTRIES = List.of("1", "2", "2_1", "3", "5", "6", "7");
 
     private final Messages msg;
 
@@ -56,7 +56,7 @@ public class FaqHelper {
                 FaqEntry e = new FaqEntry();
                 e.setTitle(msg.getMessage(prefix + "question_" + entry, l));
                 e.setText(msg.getMessage(prefix + "answer_" + entry, l));
-                e.setLinkTitle(msg.getNullableMessage(prefix + "linktitle_" + entry, l));
+                e.setLinkTitle(msg.getNullableMessage(prefix + "linktext_" + entry, l));
                 e.setLinkUrl(msg.getNullableMessage(prefix + "linkurl_" + entry, l));
                 faqEntries.add(e);
             }
