@@ -120,7 +120,7 @@ public abstract class BaseControllerTest {
                                         .accept(acceptMediaType)
                                         .header("accept", "application/json")
                                         .param("osversion", "ios14.0")
-                                        .param("appversion", "ios-1.0.8")
+                                        .param("appversion", "ios-1.2.0")
                                         .param("buildnr", "ios-2020.0145asdfa34"))
                         .andExpect(status().is2xxSuccessful())
                         .andReturn()

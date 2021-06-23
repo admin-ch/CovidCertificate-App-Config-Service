@@ -32,7 +32,7 @@ public class VerifierConfigController {
     protected final Messages messages;
     protected final FaqHelper faqHelper;
 
-    private static final Version FORCE_UPDATE_1_0_0 = new Version("1.0.0");
+    private static final Version FORCE_UPDATE_BELOW_1_2_0 = new Version("1.2.0");
 
     public VerifierConfigController(Messages messages, FaqHelper faqHelper) {
         this.messages = messages;
@@ -67,7 +67,7 @@ public class VerifierConfigController {
         configResponse.setWorks(faqHelper.getVerifierFaqWorks());
 
         Version clientAppVersion = new Version(appversion);
-        if (clientAppVersion.isSameVersionAs(FORCE_UPDATE_1_0_0)) {
+        if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)) {
             configResponse.setForceUpdate(true);
         }
 
