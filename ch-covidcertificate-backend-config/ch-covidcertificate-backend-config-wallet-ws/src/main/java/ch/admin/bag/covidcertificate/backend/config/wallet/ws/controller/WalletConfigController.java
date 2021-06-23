@@ -14,6 +14,7 @@ import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
+import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
 import ch.ubique.openapi.docannotations.Documentation;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,8 @@ public class WalletConfigController {
 
     protected final Messages messages;
     protected final FaqHelper faqHelper;
+
+    private static final Version FORCE_UPDATE_1_0_0 = new Version("1.0.0");
 
     public WalletConfigController(Messages messages, FaqHelper faqHelper) {
         this.messages = messages;
@@ -63,6 +66,12 @@ public class WalletConfigController {
         ConfigResponse configResponse = new ConfigResponse();
         configResponse.setQuestions(faqHelper.getWalletFaqQuestions());
         configResponse.setWorks(faqHelper.getWalletFaqWorks());
+
+        Version clientAppVersion = new Version(appversion);
+        if (clientAppVersion.isSameVersionAs(FORCE_UPDATE_1_0_0)) {
+            configResponse.setForceUpdate(true);
+        }
+
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(CacheUtil.CONFIG_MAX_AGE))
                 .body(configResponse);
