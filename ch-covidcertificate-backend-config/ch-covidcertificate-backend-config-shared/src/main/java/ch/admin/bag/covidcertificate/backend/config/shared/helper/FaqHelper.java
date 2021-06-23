@@ -56,7 +56,7 @@ public class FaqHelper {
                 FaqEntry e = new FaqEntry();
                 e.setTitle(msg.getMessage(prefix + "question_" + entry, l));
                 e.setText(msg.getMessage(prefix + "answer_" + entry, l));
-                e.setLinkTitle(msg.getNullableMessage(prefix + "linktitle_" + entry, l));
+                e.setLinkTitle(msg.getNullableMessage(prefix + "linktext_" + entry, l));
                 e.setLinkUrl(msg.getNullableMessage(prefix + "linkurl_" + entry, l));
                 faqEntries.add(e);
             }
