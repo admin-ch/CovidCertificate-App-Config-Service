@@ -29,6 +29,8 @@ public class FaqHelper {
         List.of("1", "2", "2_1", "3", "5", "6", "7");
     private static final List<String> TRANSFER_WORKS_FAQ_ENTRIES =
         List.of("1", "2", "3");
+    private static final List<String> TRANSFER_QUESTIONS_FAQ_ENTRIES =
+        List.of("1", "2", "3", "4");
 
     public FaqHelper(Messages msg) {
         this.msg = msg;
@@ -46,7 +48,7 @@ public class FaqHelper {
         walletTransferQuestionsFaqConfig.setKeyPrefix("wallet_transfer_code_faq_questions_");
         walletTransferQuestionsFaqConfig.setIosIcon("illu-faq-transfer-code");
         walletTransferQuestionsFaqConfig.setAndroidIcon("illu_faq_transfer_code");
-        walletTransferQuestionsFaqConfig.setFaqEntries(List.of("1", "2", "3", "4"));
+        walletTransferQuestionsFaqConfig.setFaqEntries(TRANSFER_QUESTIONS_FAQ_ENTRIES);
 
         walletTransferWorksFaqConfig.setKeyPrefix("wallet_transfer_code_faq_works_");
         walletTransferWorksFaqConfig.setIosIcon(null);
