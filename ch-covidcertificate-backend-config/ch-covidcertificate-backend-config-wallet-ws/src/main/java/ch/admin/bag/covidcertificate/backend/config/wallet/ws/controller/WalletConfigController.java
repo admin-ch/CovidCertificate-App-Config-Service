@@ -73,7 +73,8 @@ public class WalletConfigController {
         configResponse.setAndroidTransferCheckIntervalMs(ANDROID_TRANSFER_CHECK_INTERVAL_MS);
 
         Version clientAppVersion = new Version(appversion);
-        if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)) {
+        if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0) && clientAppVersion
+            .isIOS()) {
             configResponse.setForceUpdate(true);
         }
 
