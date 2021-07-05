@@ -36,10 +36,18 @@ public class WalletConfigController {
 
     private static final long ANDROID_TRANSFER_CHECK_INTERVAL_MS = 2 * 60 * 60 * 1000l;
     private static final long ANDROID_TRANSFER_CHECK_BACKOFF_MS = 30 * 1000l;
+    private final boolean lightCertificateActive;
+    private final boolean pdfGenerationActive;
 
-    public WalletConfigController(Messages messages, FaqHelper faqHelper) {
+    public WalletConfigController(
+            Messages messages,
+            FaqHelper faqHelper,
+            boolean lightCertificateActive,
+            boolean pdfGenerationActive) {
         this.messages = messages;
         this.faqHelper = faqHelper;
+        this.lightCertificateActive = lightCertificateActive;
+        this.pdfGenerationActive = pdfGenerationActive;
     }
 
     @Documentation(
@@ -73,8 +81,8 @@ public class WalletConfigController {
         configResponse.setTransferWorks(faqHelper.getWalletTransferFaqWorks());
         configResponse.setAndroidTransferCheckBackoffMs(ANDROID_TRANSFER_CHECK_BACKOFF_MS);
         configResponse.setAndroidTransferCheckIntervalMs(ANDROID_TRANSFER_CHECK_INTERVAL_MS);
-        configResponse.setLightCertificateActive(false);
-        configResponse.setPdfGenerationActive(false);
+        configResponse.setLightCertificateActive(lightCertificateActive);
+        configResponse.setPdfGenerationActive(pdfGenerationActive);
 
         Version clientAppVersion = new Version(appversion);
         if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)
