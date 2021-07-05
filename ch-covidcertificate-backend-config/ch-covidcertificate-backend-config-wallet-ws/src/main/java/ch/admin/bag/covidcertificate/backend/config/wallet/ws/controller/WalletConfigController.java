@@ -73,10 +73,12 @@ public class WalletConfigController {
         configResponse.setTransferWorks(faqHelper.getWalletTransferFaqWorks());
         configResponse.setAndroidTransferCheckBackoffMs(ANDROID_TRANSFER_CHECK_BACKOFF_MS);
         configResponse.setAndroidTransferCheckIntervalMs(ANDROID_TRANSFER_CHECK_INTERVAL_MS);
+        configResponse.setLightCertificateActive(false);
+        configResponse.setPdfGenerationActive(false);
 
         Version clientAppVersion = new Version(appversion);
-        if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0) && clientAppVersion
-            .isIOS()) {
+        if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)
+                && clientAppVersion.isIOS()) {
             configResponse.setForceUpdate(true);
         }
 
