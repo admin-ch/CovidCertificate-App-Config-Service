@@ -13,6 +13,7 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller.WalletConfigController;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,7 +21,12 @@ import org.springframework.context.annotation.Configuration;
 public abstract class WalletWsBaseConfig {
 
     @Bean
-    public WalletConfigController walletConfigController(Messages messages, FaqHelper faqHelper) {
-        return new WalletConfigController(messages, faqHelper);
+    public WalletConfigController walletConfigController(
+            Messages messages,
+            FaqHelper faqHelper,
+            @Value("${ws.wallet.light-certificate.active:false}") boolean lightCertificateActive,
+            @Value("${ws.wallet.pdf-generation.active:false}") boolean pdfGenerationActive) {
+        return new WalletConfigController(
+                messages, faqHelper, lightCertificateActive, pdfGenerationActive);
     }
 }
