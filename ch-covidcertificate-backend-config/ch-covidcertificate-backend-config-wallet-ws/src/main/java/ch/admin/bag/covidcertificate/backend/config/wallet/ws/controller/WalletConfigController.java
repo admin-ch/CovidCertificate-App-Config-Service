@@ -85,8 +85,7 @@ public class WalletConfigController {
         configResponse.setPdfGenerationActive(pdfGenerationActive);
 
         Version clientAppVersion = new Version(appversion);
-        if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)
-                && clientAppVersion.isIOS()) {
+        if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)) {
             configResponse.setForceUpdate(true);
         }
 
