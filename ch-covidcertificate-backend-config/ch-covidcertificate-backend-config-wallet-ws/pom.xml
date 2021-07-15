@@ -101,7 +101,7 @@
                 <groupId>ch.ubique.openapi</groupId>
                 <artifactId>springboot-swagger-3</artifactId>
                 <configuration>
-                    <apiVersion>1.1.0</apiVersion>
+                    <apiVersion>2.1.0</apiVersion>
                     <basePackages>
                         ch.admin.bag.covidcertificate.backend.config
                     </basePackages>
