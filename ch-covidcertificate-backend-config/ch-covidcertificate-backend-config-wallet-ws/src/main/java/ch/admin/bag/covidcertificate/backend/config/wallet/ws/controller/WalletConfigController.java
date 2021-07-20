@@ -33,6 +33,7 @@ public class WalletConfigController {
     protected final FaqHelper faqHelper;
 
     private static final Version FORCE_UPDATE_BELOW_1_2_0 = new Version("1.2.0");
+    private static final Version DEACTIVATE_PDF_BELOW_2_2_0 = new Version("2.2.0");
 
     private static final long ANDROID_TRANSFER_CHECK_INTERVAL_MS = 2 * 60 * 60 * 1000l;
     private static final long ANDROID_TRANSFER_CHECK_BACKOFF_MS = 30 * 1000l;
@@ -74,6 +75,8 @@ public class WalletConfigController {
             @Documentation(description = "Build number of the app", example = "ios-200619.2333.175")
                     @RequestParam
                     String buildnr) {
+        Version clientAppVersion = new Version(appversion);
+
         WalletConfigResponse configResponse = new WalletConfigResponse();
         configResponse.setQuestions(faqHelper.getWalletFaqQuestions());
         configResponse.setWorks(faqHelper.getWalletFaqWorks());
@@ -82,9 +85,13 @@ public class WalletConfigController {
         configResponse.setAndroidTransferCheckBackoffMs(ANDROID_TRANSFER_CHECK_BACKOFF_MS);
         configResponse.setAndroidTransferCheckIntervalMs(ANDROID_TRANSFER_CHECK_INTERVAL_MS);
         configResponse.setLightCertificateActive(lightCertificateActive);
-        configResponse.setPdfGenerationActive(pdfGenerationActive);
 
-        Version clientAppVersion = new Version(appversion);
+        if (clientAppVersion.isSmallerVersionThan(DEACTIVATE_PDF_BELOW_2_2_0)) {
+            configResponse.setPdfGenerationActive(false);
+        } else {
+            configResponse.setPdfGenerationActive(pdfGenerationActive);
+        }
+
         if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)
                 && clientAppVersion.isIOS()) {
             configResponse.setForceUpdate(true);
