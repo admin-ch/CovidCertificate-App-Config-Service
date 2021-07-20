@@ -14,7 +14,7 @@ import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
-import ch.admin.bag.covidcertificate.backend.config.wallet.ws.model.WalletConfigResponse;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import ch.ubique.openapi.docannotations.Documentation;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;

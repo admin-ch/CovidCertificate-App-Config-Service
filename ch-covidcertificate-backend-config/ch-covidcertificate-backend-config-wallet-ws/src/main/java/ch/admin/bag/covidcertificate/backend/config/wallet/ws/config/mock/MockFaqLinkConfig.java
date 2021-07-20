@@ -6,7 +6,7 @@ import ch.admin.bag.covidcertificate.backend.config.shared.model.FaqEntry;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller.WalletConfigController;
-import ch.admin.bag.covidcertificate.backend.config.wallet.ws.model.WalletConfigResponse;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
