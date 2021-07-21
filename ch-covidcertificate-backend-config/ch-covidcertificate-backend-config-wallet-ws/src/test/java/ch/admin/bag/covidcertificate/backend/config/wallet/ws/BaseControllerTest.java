@@ -266,13 +266,14 @@ public abstract class BaseControllerTest {
                         Language.RM,
                         "Co funcziuna \nl'app?");
 
-        final int faqEntryCount = 7;
+        final int faqEntryCount = 8;
 
         // test english faq entry titles. this also verifies the correct entry order
         List<String> expectedFaqEntryTitlesEn =
                 List.of(
                         "How can I add a COVID certificate to the app?",
                         "Can several COVID certificates be added?",
+                        "What is a transfer code?",
                         "How can I see if my COVID certificate is valid?",
                         "Can I use the app offline?",
                         "How is my data protected?",
@@ -281,7 +282,8 @@ public abstract class BaseControllerTest {
         assertEquals(faqEntryCount, expectedFaqEntryTitlesEn.size());
 
         // true for those faq entries where a link is set
-        List<Boolean> isLinkSetList = List.of(false, false, false, false, false, false, false);
+        List<Boolean> isLinkSetList =
+                List.of(false, false, false, false, false, false, false, false);
         assertEquals(faqEntryCount, isLinkSetList.size());
 
         ConfigAsserter.assertFaq(
