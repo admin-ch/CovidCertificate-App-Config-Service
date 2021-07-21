@@ -39,8 +39,8 @@ public class FaqHelper {
         walletQuestionsFaqConfig.setFaqEntries(WALLET_FAQ_QUESTIONS_ENTRIES);
 
         walletWorksFaqConfig.setKeyPrefix("wallet_faq_works_");
-        walletWorksFaqConfig.setIosIcon("ic-faq-image");
-        walletWorksFaqConfig.setAndroidIcon("ic_faq_image");
+        walletWorksFaqConfig.setIosIcon("ic-how-it-works-image");
+        walletWorksFaqConfig.setAndroidIcon("illu_how_it_works");
         walletWorksFaqConfig.setFaqEntries(WALLET_FAQ_WORKS_ENTRIES);
 
         walletTransferQuestionsFaqConfig.setKeyPrefix("wallet_transfer_code_faq_questions_");
