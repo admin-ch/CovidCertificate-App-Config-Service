@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
@@ -37,6 +38,10 @@ public class ConfigAsserter {
 
     public static void assertIsNoForceUpdate(ConfigResponse resp) throws Exception {
         assertFalse(resp.isForceUpdate());
+    }
+
+    public static void assertIsForceUpdate(ConfigResponse resp) throws Exception {
+        assertTrue(resp.isForceUpdate());
     }
 
     public static void assertInfoBox(ConfigResponse resp) throws Exception {

@@ -12,6 +12,7 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws;
 
 import static ch.admin.bag.covidcertificate.backend.config.shared.TestHelper.SECURITY_HEADERS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -21,6 +22,7 @@ import ch.admin.bag.covidcertificate.backend.config.shared.ConfigAsserter;
 import ch.admin.bag.covidcertificate.backend.config.shared.TestHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
@@ -113,6 +115,46 @@ public abstract class BaseControllerTest {
     }
 
     @Test
+    public void testFeatureFlagsSet() throws Exception {
+        MockHttpServletResponse result =
+                mockMvc.perform(
+                                get(BASE_URL + "/config")
+                                        .accept(acceptMediaType)
+                                        .header("accept", "application/json")
+                                        .param("osversion", "android9")
+                                        .param("appversion", "android-2.2.0")
+                                        .param("buildnr", "1622464850983"))
+                        .andExpect(status().is2xxSuccessful())
+                        .andReturn()
+                        .getResponse();
+        WalletConfigResponse resp =
+                testHelper.toWalletConfigResponse(
+                        result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
+        assertTrue(resp.getLightCertificateActive());
+        assertTrue(resp.getPdfGenerationActive());
+    }
+
+    @Test
+    public void testPdfFeatureDisabled() throws Exception {
+        MockHttpServletResponse result =
+                mockMvc.perform(
+                                get(BASE_URL + "/config")
+                                        .accept(acceptMediaType)
+                                        .header("accept", "application/json")
+                                        .param("osversion", "android9")
+                                        .param("appversion", "android-2.1.0")
+                                        .param("buildnr", "1622464850983"))
+                        .andExpect(status().is2xxSuccessful())
+                        .andReturn()
+                        .getResponse();
+        WalletConfigResponse resp =
+                testHelper.toWalletConfigResponse(
+                        result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
+        assertTrue(resp.getLightCertificateActive());
+        assertFalse(resp.getPdfGenerationActive());
+    }
+
+    @Test
     public void testNoForceUpdate() throws Exception {
         MockHttpServletResponse result =
                 mockMvc.perform(
@@ -128,6 +170,24 @@ public abstract class BaseControllerTest {
         ConfigResponse resp =
                 testHelper.toConfigResponse(result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
         ConfigAsserter.assertIsNoForceUpdate(resp);
+    }
+
+    @Test
+    public void testForceUpdate() throws Exception {
+        MockHttpServletResponse result =
+                mockMvc.perform(
+                                get(BASE_URL + "/config")
+                                        .accept(acceptMediaType)
+                                        .header("accept", "application/json")
+                                        .param("osversion", "ios14.0")
+                                        .param("appversion", "ios-1.1.0")
+                                        .param("buildnr", "ios-2020.0145asdfa34"))
+                        .andExpect(status().is2xxSuccessful())
+                        .andReturn()
+                        .getResponse();
+        ConfigResponse resp =
+                testHelper.toConfigResponse(result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
+        ConfigAsserter.assertIsForceUpdate(resp);
     }
 
     @Test
@@ -180,7 +240,8 @@ public abstract class BaseControllerTest {
         assertEquals(faqEntryCount, expectedFaqEntryTitlesEn.size());
 
         // true for those faq entries where a link is set
-        List<Boolean> isLinkSetList = List.of(false, false, false, true, false, false, false, false);
+        List<Boolean> isLinkSetList =
+                List.of(false, false, false, true, false, false, false, false);
         assertEquals(faqEntryCount, isLinkSetList.size());
 
         ConfigAsserter.assertFaq(

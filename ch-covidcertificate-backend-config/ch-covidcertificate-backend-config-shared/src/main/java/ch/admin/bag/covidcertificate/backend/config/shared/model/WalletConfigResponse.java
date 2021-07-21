@@ -1,8 +1,5 @@
-package ch.admin.bag.covidcertificate.backend.config.wallet.ws.model;
+package ch.admin.bag.covidcertificate.backend.config.shared.model;
 
-import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
-import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
-import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
 import ch.ubique.openapi.docannotations.Documentation;
 import java.util.Map;
 

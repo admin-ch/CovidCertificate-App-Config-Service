@@ -1,6 +1,7 @@
 package ch.admin.bag.covidcertificate.backend.config.shared;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.security.signature.JWSMessageConverter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,12 +33,15 @@ public class TestHelper {
         this.objectMapper = objectMapper;
     }
 
-    public ConfigResponse toConfigResponse(
-            MockHttpServletResponse result, MediaType mediaType, String pathToCaPem)
+    public ConfigResponse internalToConfigResponse(
+            MockHttpServletResponse result,
+            MediaType mediaType,
+            String pathToCaPem,
+            Class<? extends ConfigResponse> clazz)
             throws JsonProcessingException, UnsupportedEncodingException {
         String responseStr = result.getContentAsString(StandardCharsets.UTF_8);
         if (MediaType.APPLICATION_JSON.equalsTypeAndSubtype(mediaType)) {
-            return objectMapper.readValue(responseStr, ConfigResponse.class);
+            return objectMapper.readValue(responseStr, clazz);
         } else if (JWSMessageConverter.JWS_MEDIA_TYPE.equalsTypeAndSubtype(mediaType)) {
             // verify cert chain
             Jws<Claims> claimsJws =
@@ -45,9 +49,23 @@ public class TestHelper {
                             .setSigningKeyResolver(new JwsKeyResolver(pathToCaPem))
                             .build()
                             .parseClaimsJws(responseStr);
-            return objectMapper.convertValue(claimsJws.getBody(), ConfigResponse.class);
+            return objectMapper.convertValue(claimsJws.getBody(), clazz);
         } else {
             throw new RuntimeException("unexpected media type: " + mediaType);
         }
+    }
+
+    public ConfigResponse toConfigResponse(
+            MockHttpServletResponse result, MediaType mediaType, String pathToCaPem)
+            throws JsonProcessingException, UnsupportedEncodingException {
+        return internalToConfigResponse(result, mediaType, pathToCaPem, ConfigResponse.class);
+    }
+
+    public WalletConfigResponse toWalletConfigResponse(
+            MockHttpServletResponse result, MediaType mediaType, String pathToCaPem)
+            throws JsonProcessingException, UnsupportedEncodingException {
+        return (WalletConfigResponse)
+                internalToConfigResponse(
+                        result, mediaType, pathToCaPem, WalletConfigResponse.class);
     }
 }

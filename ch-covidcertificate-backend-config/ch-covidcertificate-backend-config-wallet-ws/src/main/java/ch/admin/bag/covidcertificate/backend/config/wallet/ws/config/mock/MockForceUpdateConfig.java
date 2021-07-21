@@ -4,7 +4,7 @@ import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
 import ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller.WalletConfigController;
-import ch.admin.bag.covidcertificate.backend.config.wallet.ws.model.WalletConfigResponse;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
