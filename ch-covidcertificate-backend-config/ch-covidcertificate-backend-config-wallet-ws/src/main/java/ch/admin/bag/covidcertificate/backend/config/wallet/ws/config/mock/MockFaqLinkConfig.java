@@ -1,12 +1,13 @@
 package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config.mock;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.FaqEntry;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller.WalletConfigController;
-import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -24,10 +25,11 @@ public class MockFaqLinkConfig {
     public WalletConfigController walletConfigController(
             Messages messages,
             FaqHelper faqHelper,
+            InfoBoxHelper infoBoxHelper,
             @Value("${ws.wallet.light-certificate.active:false}") boolean lightCertificateActive,
             @Value("${ws.wallet.pdf-generation.active:false}") boolean pdfGenerationActive) {
         return new MockConfigController(
-                messages, faqHelper, lightCertificateActive, pdfGenerationActive);
+                messages, faqHelper, infoBoxHelper, lightCertificateActive, pdfGenerationActive);
     }
 
     public class MockConfigController extends WalletConfigController {
@@ -35,9 +37,10 @@ public class MockFaqLinkConfig {
         public MockConfigController(
                 Messages messages,
                 FaqHelper faqHelper,
+                InfoBoxHelper infoBoxHelper,
                 boolean lightCertificateActive,
                 boolean pdfGenerationActive) {
-            super(messages, faqHelper, lightCertificateActive, pdfGenerationActive);
+            super(messages, faqHelper, infoBoxHelper, lightCertificateActive, pdfGenerationActive);
         }
 
         @Override

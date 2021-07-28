@@ -12,9 +12,10 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
-import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import ch.ubique.openapi.docannotations.Documentation;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +32,11 @@ public class WalletConfigController {
 
     protected final Messages messages;
     protected final FaqHelper faqHelper;
+    private final InfoBoxHelper infoBoxHelper;
 
     private static final Version FORCE_UPDATE_BELOW_1_2_0 = new Version("1.2.0");
     private static final Version DEACTIVATE_PDF_BELOW_2_2_0 = new Version("2.2.0");
+    private static final Version UPDATE_INFO_BOX_ANDROID_BELOW_2_0_0 = new Version("2.0.0");
 
     private static final long ANDROID_TRANSFER_CHECK_INTERVAL_MS = 2 * 60 * 60 * 1000l;
     private static final long ANDROID_TRANSFER_CHECK_BACKOFF_MS = 30 * 1000l;
@@ -43,10 +46,12 @@ public class WalletConfigController {
     public WalletConfigController(
             Messages messages,
             FaqHelper faqHelper,
+            InfoBoxHelper infoBoxHelper,
             boolean lightCertificateActive,
             boolean pdfGenerationActive) {
         this.messages = messages;
         this.faqHelper = faqHelper;
+        this.infoBoxHelper = infoBoxHelper;
         this.lightCertificateActive = lightCertificateActive;
         this.pdfGenerationActive = pdfGenerationActive;
     }
@@ -95,6 +100,12 @@ public class WalletConfigController {
         if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)
                 && clientAppVersion.isIOS()) {
             configResponse.setForceUpdate(true);
+        }
+
+        if (clientAppVersion.isSmallerVersionThan(UPDATE_INFO_BOX_ANDROID_BELOW_2_0_0)
+                && clientAppVersion.isAndroid()
+                && !configResponse.isForceUpdate()) {
+            configResponse.setInfoBox(infoBoxHelper.getUpdateInfoBox(clientAppVersion.isAndroid()));
         }
 
         return ResponseEntity.ok()
