@@ -36,7 +36,7 @@ public class WalletConfigController {
 
     private static final Version FORCE_UPDATE_BELOW_1_2_0 = new Version("1.2.0");
     private static final Version DEACTIVATE_PDF_BELOW_2_2_0 = new Version("2.2.0");
-    private static final Version UPDATE_INFO_BOX_ANDROID_BELOW_2_0_0 = new Version("2.0.0");
+    private static final Version UPDATE_INFO_BOX_ANDROID_BELOW_2_2_0 = new Version("2.2.0");
 
     private static final long ANDROID_TRANSFER_CHECK_INTERVAL_MS = 2 * 60 * 60 * 1000l;
     private static final long ANDROID_TRANSFER_CHECK_BACKOFF_MS = 30 * 1000l;
@@ -102,7 +102,7 @@ public class WalletConfigController {
             configResponse.setForceUpdate(true);
         }
 
-        if (clientAppVersion.isSmallerVersionThan(UPDATE_INFO_BOX_ANDROID_BELOW_2_0_0)
+        if (clientAppVersion.isSmallerVersionThan(UPDATE_INFO_BOX_ANDROID_BELOW_2_2_0)
                 && clientAppVersion.isAndroid()
                 && !configResponse.isForceUpdate()) {
             configResponse.setInfoBox(infoBoxHelper.getUpdateInfoBox(clientAppVersion.isAndroid()));
