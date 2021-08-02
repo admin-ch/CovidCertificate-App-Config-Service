@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.FaqEntry;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.InfoBox;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
 import java.util.List;
 import java.util.Map;
@@ -18,13 +19,23 @@ public class ConfigAsserter {
         assertNull(resp.getInfoBox());
     }
 
-    public static void assertNormalUpdate(ConfigResponse resp) throws Exception {
+    public static void assertNormalUpdate(ConfigResponse resp, boolean isAndroid) throws Exception {
         assertNotNull(resp);
         assertNotNull(resp.getInfoBox());
         for (Language language : Language.values()) {
             assertNotNull(resp.getInfoBox().get(language));
         }
-        assertEquals("App-Update verfügbar", resp.getInfoBox().get(Language.DE).getTitle());
+        InfoBox deInfoBox = resp.getInfoBox().get(Language.DE);
+        assertEquals("Update benötigt", deInfoBox.getTitle());
+        assertEquals("Laden Sie die neue Version der App.", deInfoBox.getMsg());
+        if (isAndroid) {
+            assertEquals(
+                    "market://details?id=ch.admin.bag.covidcertificate.wallet", deInfoBox.getUrl());
+        } else { // iOS
+            assertEquals("http://itunes.apple.com/app/id1565917320", deInfoBox.getUrl());
+        }
+        assertEquals("Aktualisieren", deInfoBox.getUrlTitle());
+        assertFalse(deInfoBox.getIsDismissible());
     }
 
     public static void assertTestflightUpdate(ConfigResponse resp) throws Exception {

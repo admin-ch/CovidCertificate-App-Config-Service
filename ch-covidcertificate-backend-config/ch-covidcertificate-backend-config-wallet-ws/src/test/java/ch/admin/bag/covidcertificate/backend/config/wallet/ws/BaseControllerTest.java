@@ -99,6 +99,7 @@ public abstract class BaseControllerTest {
 
     @Test
     public void testForUpdateNote() throws Exception {
+        // no update info box
         MockHttpServletResponse result =
                 mockMvc.perform(
                                 get(BASE_URL + "/config")
@@ -112,6 +113,20 @@ public abstract class BaseControllerTest {
         ConfigResponse resp =
                 testHelper.toConfigResponse(result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
         ConfigAsserter.assertNoUpdate(resp);
+
+        // update info box (android version <2.0)
+        result =
+                mockMvc.perform(
+                                get(BASE_URL + "/config")
+                                        .accept(acceptMediaType)
+                                        .param("osversion", "android9")
+                                        .param("appversion", "android-1.1.0")
+                                        .param("buildnr", "1622464850983"))
+                        .andExpect(status().is2xxSuccessful())
+                        .andReturn()
+                        .getResponse();
+        resp = testHelper.toConfigResponse(result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
+        ConfigAsserter.assertNormalUpdate(resp, true);
     }
 
     @Test
