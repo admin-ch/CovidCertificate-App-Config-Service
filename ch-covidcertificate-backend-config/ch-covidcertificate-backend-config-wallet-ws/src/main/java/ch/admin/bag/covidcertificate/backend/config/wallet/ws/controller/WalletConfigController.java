@@ -17,6 +17,8 @@ import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigRes
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
 import ch.ubique.openapi.docannotations.Documentation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -43,6 +45,8 @@ public class WalletConfigController {
     private final boolean lightCertificateActive;
     private final boolean pdfGenerationActive;
 
+    private static final Logger logger = LoggerFactory.getLogger(WalletConfigController.class);
+
     public WalletConfigController(
             Messages messages,
             FaqHelper faqHelper,
@@ -62,6 +66,7 @@ public class WalletConfigController {
     @CrossOrigin(origins = {"https://editor.swagger.io"})
     @GetMapping(value = "")
     public @ResponseBody String hello() {
+        logger.info("Hello from CH Covidcertificate Config Wallet WS");
         return "Hello from CH Covidcertificate Config Wallet WS";
     }
 
