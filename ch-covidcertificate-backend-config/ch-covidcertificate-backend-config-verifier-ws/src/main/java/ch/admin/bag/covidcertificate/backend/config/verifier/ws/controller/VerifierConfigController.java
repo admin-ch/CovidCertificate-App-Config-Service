@@ -16,6 +16,8 @@ import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
 import ch.ubique.openapi.docannotations.Documentation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,8 @@ public class VerifierConfigController {
 
     private static final Version FORCE_UPDATE_BELOW_1_2_0 = new Version("1.2.0");
 
+    private static final Logger logger = LoggerFactory.getLogger(VerifierConfigController.class);
+
     public VerifierConfigController(Messages messages, FaqHelper faqHelper) {
         this.messages = messages;
         this.faqHelper = faqHelper;
@@ -45,6 +49,7 @@ public class VerifierConfigController {
     @CrossOrigin(origins = {"https://editor.swagger.io"})
     @GetMapping(value = "")
     public @ResponseBody String hello() {
+        logger.info("Hello from CH Covidcertificate Config Verifier WS");
         return "Hello from CH Covidcertificate Config Verifier WS";
     }
 
