@@ -13,6 +13,10 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan(basePackages = {"ch.admin.bag.covidcertificate.backend.config.wallet.ws.config"})
+@ComponentScan(basePackages = {"ch.admin.bag.covidcertificate.backend.config.wallet.ws.config",
+    "ch.admin.bag.covidcertificate.log",
+    "ch.admin.bag.covidcertificate.rest"})
 @SpringBootApplication
-public class TestApplication {}
+public class TestApplication {
+
+}
