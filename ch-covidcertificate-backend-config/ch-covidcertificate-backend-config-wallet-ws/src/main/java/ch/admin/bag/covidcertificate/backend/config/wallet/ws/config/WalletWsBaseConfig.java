@@ -12,6 +12,7 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller.WalletConfigController;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,8 +28,23 @@ public abstract class WalletWsBaseConfig {
             FaqHelper faqHelper,
             InfoBoxHelper infoBoxHelper,
             @Value("${ws.wallet.light-certificate.active:false}") boolean lightCertificateActive,
-            @Value("${ws.wallet.pdf-generation.active:false}") boolean pdfGenerationActive) {
+            @Value("${ws.wallet.pdf-generation.active:false}") boolean pdfGenerationActive,
+            VaccinationHintHelper vaccinationHintHelper,
+            @Value("${ws.wallet.vaccination-hints.homescreen.show:false}")
+                    boolean showVaccinationHintHomescreen,
+            @Value("${ws.wallet.vaccination-hints.detail.show:false}")
+                    boolean showVaccinationHintDetail,
+            @Value("${ws.wallet.vaccination-hints.transfer.show:false}")
+                    boolean showVaccinationHintTransfer) {
         return new WalletConfigController(
-                messages, faqHelper, infoBoxHelper, lightCertificateActive, pdfGenerationActive);
+                messages,
+                faqHelper,
+                infoBoxHelper,
+                lightCertificateActive,
+                pdfGenerationActive,
+                vaccinationHintHelper,
+                showVaccinationHintHomescreen,
+                showVaccinationHintDetail,
+                showVaccinationHintTransfer);
     }
 }

@@ -1,6 +1,7 @@
 package ch.admin.bag.covidcertificate.backend.config.shared.model;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.List;
 import java.util.Locale;
 
 public enum Language {
@@ -23,5 +24,13 @@ public enum Language {
 
     public Locale toLocale() {
         return Locale.forLanguageTag(this.getKey());
+    }
+
+    /**
+     * for use during development when missing translations
+     * @return
+     */
+    public static List<Language> deOnly() {
+        return List.of(Language.DE);
     }
 }
