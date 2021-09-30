@@ -20,13 +20,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import ch.admin.bag.covidcertificate.backend.config.shared.ConfigAsserter;
 import ch.admin.bag.covidcertificate.backend.config.shared.TestHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.Canton;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.VaccinationBookingCanton;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.VaccinationBookingInfo;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.VaccinationHint;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import javax.validation.Validator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +50,7 @@ import org.springframework.web.context.WebApplicationContext;
 @ActiveProfiles({"cloud-dev"})
 @TestPropertySource("classpath:application-local.properties")
 public abstract class BaseControllerTest {
+    @Autowired protected Validator validator;
     @Autowired protected ObjectMapper objectMapper;
     protected MockMvc mockMvc;
     @Autowired protected WebApplicationContext webApplicationContext;
@@ -308,5 +315,68 @@ public abstract class BaseControllerTest {
                 expectedFaqEntryTitlesEn,
                 isLinkSetList,
                 resp.getWorks());
+    }
+
+    @Test
+    public void testVaccinationHints() throws Exception {
+        MockHttpServletResponse result =
+                mockMvc.perform(
+                                get(BASE_URL + "/config")
+                                        .accept(acceptMediaType)
+                                        .header("accept", "application/json")
+                                        .param("osversion", "ios14.0")
+                                        .param("appversion", "ios-1.1.0")
+                                        .param("buildnr", "ios-2020.0145asdfa34"))
+                        .andExpect(status().is2xxSuccessful())
+                        .andReturn()
+                        .getResponse();
+        WalletConfigResponse resp =
+                testHelper.toWalletConfigResponse(
+                        result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
+
+        assertFalse(resp.getShowVaccinationHintDetail());
+        assertTrue(resp.getShowVaccinationHintHomescreen());
+        assertFalse(resp.getShowVaccinationHintTransfer());
+
+        validateVaccinationBookingCantons(resp);
+        validateVaccinationBookingInfo(resp);
+        validateVaccionationHints(resp);
+    }
+
+    private void validateVaccionationHints(WalletConfigResponse resp) {
+        Map<Language, List<VaccinationHint>> byLanguage = resp.getVaccinationHints();
+        assertNotNull(byLanguage);
+        assertEquals(Language.values().length, byLanguage.size());
+        for (Entry<Language, List<VaccinationHint>> forLanguage : byLanguage.entrySet()) {
+            List<VaccinationHint> hints = forLanguage.getValue();
+            assertEquals(9, hints.size());
+            for (VaccinationHint hint : hints) {
+                assertTrue(validator.validate(hint).isEmpty());
+            }
+        }
+    }
+
+    private void validateVaccinationBookingInfo(WalletConfigResponse resp) {
+        Map<Language, VaccinationBookingInfo> byLanguage = resp.getVaccinationBookingInfo();
+        assertNotNull(byLanguage);
+        assertEquals(Language.values().length, byLanguage.size());
+        for (Entry<Language, VaccinationBookingInfo> forLanguage : byLanguage.entrySet()) {
+            VaccinationBookingInfo info = forLanguage.getValue();
+            assertTrue(validator.validate(info).isEmpty());
+        }
+    }
+
+    private void validateVaccinationBookingCantons(WalletConfigResponse resp) {
+        Map<Language, List<VaccinationBookingCanton>> byLanguage =
+                resp.getVaccinationBookingCantons();
+        assertNotNull(byLanguage);
+        assertEquals(Language.values().length, byLanguage.size());
+        for (Entry<Language, List<VaccinationBookingCanton>> forLanguage : byLanguage.entrySet()) {
+            List<VaccinationBookingCanton> vaccinationBookingCantons = forLanguage.getValue();
+            assertEquals(Canton.values().length, vaccinationBookingCantons.size());
+            for (VaccinationBookingCanton vaccinationBookingCanton : vaccinationBookingCantons) {
+                assertTrue(validator.validate(vaccinationBookingCanton).isEmpty());
+            }
+        }
     }
 }

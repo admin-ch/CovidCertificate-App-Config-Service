@@ -13,6 +13,7 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
@@ -45,6 +46,11 @@ public class WalletConfigController {
     private final boolean lightCertificateActive;
     private final boolean pdfGenerationActive;
 
+    private final VaccinationHintHelper vaccinationHintHelper;
+    private final boolean showVaccinationHintHomescreen;
+    private final boolean showVaccinationHintDetail;
+    private final boolean showVaccinationHintTransfer;
+
     private static final Logger logger = LoggerFactory.getLogger(WalletConfigController.class);
 
     public WalletConfigController(
@@ -52,12 +58,20 @@ public class WalletConfigController {
             FaqHelper faqHelper,
             InfoBoxHelper infoBoxHelper,
             boolean lightCertificateActive,
-            boolean pdfGenerationActive) {
+            boolean pdfGenerationActive,
+            VaccinationHintHelper vaccinationHintHelper,
+            boolean showVaccinationHintHomescreen,
+            boolean showVaccinationHintDetail,
+            boolean showVaccinationHintTransfer) {
         this.messages = messages;
         this.faqHelper = faqHelper;
         this.infoBoxHelper = infoBoxHelper;
         this.lightCertificateActive = lightCertificateActive;
         this.pdfGenerationActive = pdfGenerationActive;
+        this.vaccinationHintHelper = vaccinationHintHelper;
+        this.showVaccinationHintHomescreen = showVaccinationHintHomescreen;
+        this.showVaccinationHintDetail = showVaccinationHintDetail;
+        this.showVaccinationHintTransfer = showVaccinationHintTransfer;
     }
 
     @Documentation(
@@ -95,6 +109,13 @@ public class WalletConfigController {
         configResponse.setAndroidTransferCheckBackoffMs(ANDROID_TRANSFER_CHECK_BACKOFF_MS);
         configResponse.setAndroidTransferCheckIntervalMs(ANDROID_TRANSFER_CHECK_INTERVAL_MS);
         configResponse.setLightCertificateActive(lightCertificateActive);
+        configResponse.setVaccinationHints(vaccinationHintHelper.getVaccinationHints());
+        configResponse.setVaccinationBookingCantons(
+                vaccinationHintHelper.getVaccinationBookingCantons());
+        configResponse.setVaccinationBookingInfo(vaccinationHintHelper.getVaccinationBookingInfo());
+        configResponse.setShowVaccinationHintHomescreen(showVaccinationHintHomescreen);
+        configResponse.setShowVaccinationHintDetail(showVaccinationHintDetail);
+        configResponse.setShowVaccinationHintTransfer(showVaccinationHintTransfer);
 
         if (clientAppVersion.isSmallerVersionThan(DEACTIVATE_PDF_BELOW_2_2_0)) {
             configResponse.setPdfGenerationActive(false);

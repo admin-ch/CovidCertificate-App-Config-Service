@@ -3,6 +3,7 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config.mock;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.MockHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller.WalletConfigController;
@@ -24,9 +25,24 @@ public class MockInfoBoxConfig {
             FaqHelper faqHelper,
             InfoBoxHelper infoBoxHelper,
             @Value("${ws.wallet.light-certificate.active:false}") boolean lightCertificateActive,
-            @Value("${ws.wallet.pdf-generation.active:false}") boolean pdfGenerationActive) {
+            @Value("${ws.wallet.pdf-generation.active:false}") boolean pdfGenerationActive,
+            VaccinationHintHelper vaccinationHintHelper,
+            @Value("${ws.wallet.vaccination-hints.homescreen.show:false}")
+                    boolean showVaccinationHintHomescreen,
+            @Value("${ws.wallet.vaccination-hints.detail.show:false}")
+                    boolean showVaccinationHintDetail,
+            @Value("${ws.wallet.vaccination-hints.transfer.show:false}")
+                    boolean showVaccinationHintTransfer) {
         return new MockConfigController(
-                messages, faqHelper, infoBoxHelper, lightCertificateActive, pdfGenerationActive);
+                messages,
+                faqHelper,
+                infoBoxHelper,
+                lightCertificateActive,
+                pdfGenerationActive,
+                vaccinationHintHelper,
+                showVaccinationHintHomescreen,
+                showVaccinationHintDetail,
+                showVaccinationHintTransfer);
     }
 
     public class MockConfigController extends WalletConfigController {
@@ -36,8 +52,21 @@ public class MockInfoBoxConfig {
                 FaqHelper faqHelper,
                 InfoBoxHelper infoBoxHelper,
                 boolean lightCertificateActive,
-                boolean pdfGenerationActive) {
-            super(messages, faqHelper, infoBoxHelper, lightCertificateActive, pdfGenerationActive);
+                boolean pdfGenerationActive,
+                VaccinationHintHelper vaccinationHintHelper,
+                boolean showVaccinationHintHomescreen,
+                boolean showVaccinationHintDetail,
+                boolean showVaccinationHintTransfer) {
+            super(
+                    messages,
+                    faqHelper,
+                    infoBoxHelper,
+                    lightCertificateActive,
+                    pdfGenerationActive,
+                    vaccinationHintHelper,
+                    showVaccinationHintHomescreen,
+                    showVaccinationHintDetail,
+                    showVaccinationHintTransfer);
         }
 
         @Override
