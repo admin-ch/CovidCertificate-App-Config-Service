@@ -40,6 +40,7 @@ public class WalletConfigController {
     private static final Version FORCE_UPDATE_BELOW_1_2_0 = new Version("1.2.0");
     private static final Version DEACTIVATE_PDF_BELOW_2_2_0 = new Version("2.2.0");
     private static final Version UPDATE_INFO_BOX_ANDROID_BELOW_2_2_0 = new Version("2.2.0");
+    private static final Version TRANSFER_CODE_VALIDITY_30_DAYS_2_7_0 = new Version("2.7.0");
 
     private static final long ANDROID_TRANSFER_CHECK_INTERVAL_MS = 2 * 60 * 60 * 1000l;
     private static final long ANDROID_TRANSFER_CHECK_BACKOFF_MS = 30 * 1000l;
@@ -132,6 +133,17 @@ public class WalletConfigController {
                 && clientAppVersion.isAndroid()
                 && !configResponse.isForceUpdate()) {
             configResponse.setInfoBox(infoBoxHelper.getUpdateInfoBox(clientAppVersion.isAndroid()));
+        }
+
+        String transferCodeValidity;
+        if (clientAppVersion.isSmallerVersionThan(TRANSFER_CODE_VALIDITY_30_DAYS_2_7_0)){
+            transferCodeValidity = "7";
+        }else{
+            transferCodeValidity = "30";
+        }
+        for (var faqs: configResponse.getTransferWorks().values()) {
+            faqs.getFaqIntroSections().forEach(
+                entry -> entry.setText(entry.getText().replaceAll("<transferCodeValidity>", transferCodeValidity)));
         }
 
         return ResponseEntity.ok()
