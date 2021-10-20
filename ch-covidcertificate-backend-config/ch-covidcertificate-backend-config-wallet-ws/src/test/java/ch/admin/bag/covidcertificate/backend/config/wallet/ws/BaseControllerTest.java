@@ -232,9 +232,6 @@ public abstract class BaseControllerTest {
         assertWorks(resp);
     }
 
-
-
-
     private void assertQuestions(ConfigResponse resp) {
         Map<Language, String> expectedFaqTitle =
                 Map.of(
