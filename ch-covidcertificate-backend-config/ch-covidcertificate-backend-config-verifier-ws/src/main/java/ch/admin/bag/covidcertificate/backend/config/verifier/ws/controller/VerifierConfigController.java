@@ -70,6 +70,7 @@ public class VerifierConfigController {
                     String buildnr) {
         ConfigResponse configResponse = new ConfigResponse();
         configResponse.setWorks(faqHelper.getVerifierFaqWorks());
+        configResponse.setTimeshiftDetectionEnabled(false);
 
         Version clientAppVersion = new Version(appversion);
         if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0) && clientAppVersion

@@ -117,6 +117,7 @@ public class WalletConfigController {
         configResponse.setShowVaccinationHintHomescreen(showVaccinationHintHomescreen);
         configResponse.setShowVaccinationHintDetail(showVaccinationHintDetail);
         configResponse.setShowVaccinationHintTransfer(showVaccinationHintTransfer);
+        configResponse.setTimeshiftDetectionEnabled(true);
 
         if (clientAppVersion.isSmallerVersionThan(DEACTIVATE_PDF_BELOW_2_2_0)) {
             configResponse.setPdfGenerationActive(false);

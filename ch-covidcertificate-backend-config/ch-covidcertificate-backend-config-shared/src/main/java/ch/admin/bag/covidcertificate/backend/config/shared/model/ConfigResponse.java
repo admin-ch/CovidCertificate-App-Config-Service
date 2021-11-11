@@ -38,6 +38,9 @@ public class ConfigResponse {
     @Documentation(description = "transfer check backoff for android in ms")
     private long androidTransferCheckBackoffMs;
 
+    @Documentation(description = "Whether time shift between app and server should be detected")
+    private boolean timeshiftDetectionEnabled;
+
     public boolean isForceUpdate() {
         return forceUpdate;
     }
@@ -84,5 +87,13 @@ public class ConfigResponse {
 
     public void setAndroidTransferCheckBackoffMs(long androidTransferCheckBackoffMs) {
         this.androidTransferCheckBackoffMs = androidTransferCheckBackoffMs;
+    }
+
+    public boolean isTimeshiftDetectionEnabled() {
+        return timeshiftDetectionEnabled;
+    }
+
+    public void setTimeshiftDetectionEnabled(boolean timeshiftDetectionEnabled) {
+        this.timeshiftDetectionEnabled = timeshiftDetectionEnabled;
     }
 }
