@@ -35,7 +35,9 @@ public abstract class WalletWsBaseConfig {
             @Value("${ws.wallet.vaccination-hints.detail.show:false}")
                     boolean showVaccinationHintDetail,
             @Value("${ws.wallet.vaccination-hints.transfer.show:false}")
-                    boolean showVaccinationHintTransfer) {
+                    boolean showVaccinationHintTransfer,
+            @Value("${ws.wallet.timeshiftDetection.enabled:true}")
+            boolean timeshiftDetectionEnabled) {
         return new WalletConfigController(
                 messages,
                 faqHelper,
@@ -45,6 +47,9 @@ public abstract class WalletWsBaseConfig {
                 vaccinationHintHelper,
                 showVaccinationHintHomescreen,
                 showVaccinationHintDetail,
-                showVaccinationHintTransfer);
+                showVaccinationHintTransfer,
+                timeshiftDetectionEnabled);
     }
+
+
 }

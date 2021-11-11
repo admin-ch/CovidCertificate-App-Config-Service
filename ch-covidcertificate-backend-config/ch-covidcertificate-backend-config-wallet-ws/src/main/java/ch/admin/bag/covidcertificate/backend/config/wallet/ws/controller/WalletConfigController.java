@@ -52,6 +52,8 @@ public class WalletConfigController {
     private final boolean showVaccinationHintDetail;
     private final boolean showVaccinationHintTransfer;
 
+    private final boolean timeShiftDetectionEnabled;
+
     private static final Logger logger = LoggerFactory.getLogger(WalletConfigController.class);
 
     public WalletConfigController(
@@ -63,7 +65,8 @@ public class WalletConfigController {
             VaccinationHintHelper vaccinationHintHelper,
             boolean showVaccinationHintHomescreen,
             boolean showVaccinationHintDetail,
-            boolean showVaccinationHintTransfer) {
+            boolean showVaccinationHintTransfer,
+            boolean timeShiftDetectionEnabled) {
         this.messages = messages;
         this.faqHelper = faqHelper;
         this.infoBoxHelper = infoBoxHelper;
@@ -73,6 +76,7 @@ public class WalletConfigController {
         this.showVaccinationHintHomescreen = showVaccinationHintHomescreen;
         this.showVaccinationHintDetail = showVaccinationHintDetail;
         this.showVaccinationHintTransfer = showVaccinationHintTransfer;
+        this.timeShiftDetectionEnabled = timeShiftDetectionEnabled;
     }
 
     @Documentation(
@@ -117,7 +121,7 @@ public class WalletConfigController {
         configResponse.setShowVaccinationHintHomescreen(showVaccinationHintHomescreen);
         configResponse.setShowVaccinationHintDetail(showVaccinationHintDetail);
         configResponse.setShowVaccinationHintTransfer(showVaccinationHintTransfer);
-        configResponse.setTimeshiftDetectionEnabled(true);
+        configResponse.setTimeshiftDetectionEnabled(timeShiftDetectionEnabled);
 
         if (clientAppVersion.isSmallerVersionThan(DEACTIVATE_PDF_BELOW_2_2_0)) {
             configResponse.setPdfGenerationActive(false);
