@@ -8,6 +8,7 @@ import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.verifier.ws.controller.VerifierConfigController;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -21,14 +22,18 @@ public class MockFaqLinkConfig {
     @Bean
     @Primary
     public VerifierConfigController verifierConfigController(
-            Messages messages, FaqHelper faqHelper) {
-        return new MockConfigController(messages, faqHelper);
+            Messages messages,
+            FaqHelper faqHelper,
+            @Value("${ws.verifier.timeshiftDetection.enabled:false}")
+                    boolean timeshiftDetectionEnabled) {
+        return new MockConfigController(messages, faqHelper, timeshiftDetectionEnabled);
     }
 
     public class MockConfigController extends VerifierConfigController {
 
-        public MockConfigController(Messages messages, FaqHelper faqHelper) {
-            super(messages, faqHelper);
+        public MockConfigController(
+                Messages messages, FaqHelper faqHelper, boolean timeShiftDetectionEnabled) {
+            super(messages, faqHelper, timeShiftDetectionEnabled);
         }
 
         @Override

@@ -38,9 +38,12 @@ public class VerifierConfigController {
 
     private static final Logger logger = LoggerFactory.getLogger(VerifierConfigController.class);
 
-    public VerifierConfigController(Messages messages, FaqHelper faqHelper) {
+    private final boolean timeshiftDetectionEnabled;
+
+    public VerifierConfigController(Messages messages, FaqHelper faqHelper, boolean timeshiftDetectionEnabled) {
         this.messages = messages;
         this.faqHelper = faqHelper;
+        this.timeshiftDetectionEnabled = timeshiftDetectionEnabled;
     }
 
     @Documentation(
@@ -70,7 +73,7 @@ public class VerifierConfigController {
                     String buildnr) {
         ConfigResponse configResponse = new ConfigResponse();
         configResponse.setWorks(faqHelper.getVerifierFaqWorks());
-        configResponse.setTimeshiftDetectionEnabled(false);
+        configResponse.setTimeshiftDetectionEnabled(timeshiftDetectionEnabled);
 
         Version clientAppVersion = new Version(appversion);
         if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0) && clientAppVersion
