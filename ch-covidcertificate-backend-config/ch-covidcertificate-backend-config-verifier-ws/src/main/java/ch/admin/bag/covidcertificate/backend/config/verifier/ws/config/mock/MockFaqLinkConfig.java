@@ -22,7 +22,8 @@ public class MockFaqLinkConfig {
     @Bean
     @Primary
     public VerifierConfigController verifierConfigController(
-            Messages messages, FaqHelper faqHelper,
+            Messages messages,
+            FaqHelper faqHelper,
             @Value("${ws.verifier.timeshiftDetection.enabled:false}")
                     boolean timeshiftDetectionEnabled) {
         return new MockConfigController(messages, faqHelper, timeshiftDetectionEnabled);
@@ -30,7 +31,8 @@ public class MockFaqLinkConfig {
 
     public class MockConfigController extends VerifierConfigController {
 
-        public MockConfigController(Messages messages, FaqHelper faqHelper, boolean timeShiftDetectionEnabled) {
+        public MockConfigController(
+                Messages messages, FaqHelper faqHelper, boolean timeShiftDetectionEnabled) {
             super(messages, faqHelper, timeShiftDetectionEnabled);
         }
 

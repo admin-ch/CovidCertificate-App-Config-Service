@@ -37,8 +37,7 @@ public class MockFaqLinkConfig {
             @Value("${ws.wallet.vaccination-hints.transfer.show:false}")
                     boolean showVaccinationHintTransfer,
             @Value("${ws.wallet.timeshiftDetection.enabled:true}")
-                    boolean timeShiftDetectionEnabled
-    ) {
+                    boolean timeShiftDetectionEnabled) {
         return new MockConfigController(
                 messages,
                 faqHelper,

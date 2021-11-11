@@ -39,8 +39,7 @@ public class MockForceUpdateConfig {
                     boolean showVaccinationHintDetail,
             @Value("${ws.wallet.vaccination-hints.transfer.show:false}")
                     boolean showVaccinationHintTransfer,
-            @Value("${ws.wallet.timeshiftDetection.enabled:true}")
-                    boolean timeshiftDetectionFlag) {
+            @Value("${ws.wallet.timeshiftDetection.enabled:true}") boolean timeshiftDetectionFlag) {
         return new MockConfigController(
                 messages,
                 faqHelper,
