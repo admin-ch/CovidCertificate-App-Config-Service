@@ -37,9 +37,8 @@ public class WalletConfigController {
     protected final FaqHelper faqHelper;
     private final InfoBoxHelper infoBoxHelper;
 
-    private static final Version FORCE_UPDATE_BELOW_1_2_0 = new Version("1.2.0");
+    private static final Version FORCE_UPDATE_BELOW_2_5_0 = new Version("2.5.0");
     private static final Version DEACTIVATE_PDF_BELOW_2_2_0 = new Version("2.2.0");
-    private static final Version UPDATE_INFO_BOX_ANDROID_BELOW_2_2_0 = new Version("2.2.0");
     private static final Version TRANSFER_CODE_VALIDITY_30_DAYS_2_7_0 = new Version("2.7.0");
 
     private static final long ANDROID_TRANSFER_CHECK_INTERVAL_MS = 2 * 60 * 60 * 1000l;
@@ -129,15 +128,8 @@ public class WalletConfigController {
             configResponse.setPdfGenerationActive(pdfGenerationActive);
         }
 
-        if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)
-                && clientAppVersion.isIOS()) {
+        if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_2_5_0)) {
             configResponse.setForceUpdate(true);
-        }
-
-        if (clientAppVersion.isSmallerVersionThan(UPDATE_INFO_BOX_ANDROID_BELOW_2_2_0)
-                && clientAppVersion.isAndroid()
-                && !configResponse.isForceUpdate()) {
-            configResponse.setInfoBox(infoBoxHelper.getUpdateInfoBox(clientAppVersion.isAndroid()));
         }
 
         String transferCodeValidity;
