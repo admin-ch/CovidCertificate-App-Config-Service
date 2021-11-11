@@ -39,7 +39,6 @@ public class WalletConfigController {
 
     private static final Version FORCE_UPDATE_BELOW_2_5_0 = new Version("2.5.0");
     private static final Version DEACTIVATE_PDF_BELOW_2_2_0 = new Version("2.2.0");
-    private static final Version UPDATE_INFO_BOX_ANDROID_BELOW_2_2_0 = new Version("2.2.0");
     private static final Version TRANSFER_CODE_VALIDITY_30_DAYS_2_7_0 = new Version("2.7.0");
 
     private static final long ANDROID_TRANSFER_CHECK_INTERVAL_MS = 2 * 60 * 60 * 1000l;
