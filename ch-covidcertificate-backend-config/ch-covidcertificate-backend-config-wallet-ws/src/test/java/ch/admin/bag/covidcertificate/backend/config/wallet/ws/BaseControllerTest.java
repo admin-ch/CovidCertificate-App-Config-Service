@@ -191,7 +191,7 @@ public abstract class BaseControllerTest {
                         .getResponse();
         ConfigResponse resp =
                 testHelper.toConfigResponse(result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
-        ConfigAsserter.assertIsForceUpdate(resp);
+        ConfigAsserter.assertIsNoForceUpdate(resp);
     }
 
     @Test
