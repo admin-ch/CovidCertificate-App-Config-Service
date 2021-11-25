@@ -76,8 +76,7 @@ public class VerifierConfigController {
         configResponse.setTimeshiftDetectionEnabled(timeshiftDetectionEnabled);
 
         Version clientAppVersion = new Version(appversion);
-        if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0) && clientAppVersion
-            .isIOS()) {
+        if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)) {
             configResponse.setForceUpdate(true);
         }
 
