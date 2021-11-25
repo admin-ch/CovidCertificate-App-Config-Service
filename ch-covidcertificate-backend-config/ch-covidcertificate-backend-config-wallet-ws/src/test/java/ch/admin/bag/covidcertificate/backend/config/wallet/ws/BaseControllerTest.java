@@ -112,7 +112,7 @@ public abstract class BaseControllerTest {
                                 get(BASE_URL + "/config")
                                         .accept(acceptMediaType)
                                         .param("osversion", "ios12")
-                                        .param("appversion", "ios-1.0.9")
+                                        .param("appversion", "ios-2.7.0")
                                         .param("buildnr", "ios-2020.0145asdfa34"))
                         .andExpect(status().is2xxSuccessful())
                         .andReturn()
@@ -121,19 +121,19 @@ public abstract class BaseControllerTest {
                 testHelper.toConfigResponse(result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
         ConfigAsserter.assertNoUpdate(resp);
 
-        // update info box (android version <2.0)
+        // update info box (<2.7.0)
         result =
                 mockMvc.perform(
                                 get(BASE_URL + "/config")
                                         .accept(acceptMediaType)
                                         .param("osversion", "android9")
-                                        .param("appversion", "android-1.1.0")
+                                        .param("appversion", "android-2.6.0")
                                         .param("buildnr", "1622464850983"))
                         .andExpect(status().is2xxSuccessful())
                         .andReturn()
                         .getResponse();
         resp = testHelper.toConfigResponse(result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
-        ConfigAsserter.assertIsForceUpdate(resp);
+        ConfigAsserter.assertInfoBox(resp);
     }
 
     @Test
@@ -191,7 +191,7 @@ public abstract class BaseControllerTest {
                         .getResponse();
         ConfigResponse resp =
                 testHelper.toConfigResponse(result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
-        ConfigAsserter.assertIsForceUpdate(resp);
+        ConfigAsserter.assertIsNoForceUpdate(resp);
     }
 
     @Test
