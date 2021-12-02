@@ -145,7 +145,7 @@ public class WalletConfigController {
         }
         for (var faqs: configResponse.getTransferWorks().values()) {
             faqs.getFaqIntroSections().forEach(
-                entry -> entry.setText(entry.getText().replaceAll("<transferCodeValidity>", transferCodeValidity)));
+                entry -> entry.setText(entry.getText().replace("{TRANSFER_CODE_VALIDITY}", transferCodeValidity)));
         }
 
         return ResponseEntity.ok()
