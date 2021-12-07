@@ -187,7 +187,7 @@ public abstract class BaseControllerTest {
 
         // true for those faq entries where a link is set
         List<Boolean> isLinkSetList =
-                List.of(false, false, true, false, false, false, false, false, false);
+                List.of(true, false, true, false, false, false, false, false, false);
         assertEquals(faqEntryCount, isLinkSetList.size());
 
         ConfigAsserter.assertFaq(
