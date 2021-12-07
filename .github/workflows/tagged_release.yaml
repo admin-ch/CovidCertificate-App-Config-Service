@@ -35,7 +35,7 @@ jobs:
       uses: marvinpinto/action-automatic-releases@919008cf3f741b179569b7a6fb4d8860689ab7f0
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        prerelease: false
+        prerelease: ${{ contains(github.ref, 'prerelease') }}
         files: |
           ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-verifier-ws/target/ch-covidcertificate-backend-config-verifier-ws.jar
           ch-covidcertificate-backend-config/ch-covidcertificate-backend-config-verifier-ws/target/ch-covidcertificate-backend-config-verifier-ws.jar.sha256
