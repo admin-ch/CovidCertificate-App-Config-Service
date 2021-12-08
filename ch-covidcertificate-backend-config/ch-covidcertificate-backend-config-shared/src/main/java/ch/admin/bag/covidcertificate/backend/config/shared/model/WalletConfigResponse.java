@@ -33,6 +33,11 @@ public class WalletConfigResponse extends ConfigResponse {
     private Map<Language, WalletModesInfo> checkModesInfo = null;
 
     @Documentation(
+            description = "describes after how many hours the check mode has to be reselected",
+            example = "48")
+    private Integer lightCertDurationInHours;
+
+    @Documentation(
             description =
                     "feature flag. when set to true the vaccination hints should be displayed on the homescreen")
     private Boolean showVaccinationHintHomescreen;
@@ -135,5 +140,13 @@ public class WalletConfigResponse extends ConfigResponse {
 
     public void setCheckModesInfo(Map<Language, WalletModesInfo> checkModesInfo) {
         this.checkModesInfo = checkModesInfo;
+    }
+
+    public Integer getLightCertDurationInHours() {
+        return lightCertDurationInHours;
+    }
+
+    public void setLightCertDurationInHours(Integer lightCertDurationInHours) {
+        this.lightCertDurationInHours = lightCertDurationInHours;
     }
 }

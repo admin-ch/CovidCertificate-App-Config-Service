@@ -13,6 +13,7 @@ package ch.admin.bag.covidcertificate.backend.config.verifier.ws.controller;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.VerifierConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
@@ -89,8 +90,25 @@ public class VerifierConfigController {
             configResponse.setForceUpdate(true);
         }
 
+        replacePoeditorPlaceHolders(configResponse);
+
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(CacheUtil.CONFIG_MAX_AGE))
                 .body(configResponse);
+    }
+
+    private void replacePoeditorPlaceHolders(VerifierConfigResponse configResponse) {
+        replaceLightCertValidityPlaceHolder(configResponse);
+    }
+
+    private void replaceLightCertValidityPlaceHolder(VerifierConfigResponse configResponse) {
+        for (Faq faq : configResponse.getWorks().values()) {
+            faq.getFaqEntries()
+                    .forEach(
+                            entry ->
+                                    entry.setText(
+                                            entry.getText()
+                                                    .replace("{LIGHT_CERT_VALIDITY_IN_H}", "24")));
+        }
     }
 }
