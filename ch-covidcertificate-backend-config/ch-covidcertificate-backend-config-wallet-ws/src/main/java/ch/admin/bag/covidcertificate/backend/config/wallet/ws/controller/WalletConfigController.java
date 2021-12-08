@@ -11,6 +11,7 @@
 package ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
@@ -34,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WalletConfigController {
 
     protected final Messages messages;
+    private final CheckModeInfoHelper checkModeInfoHelper;
     protected final FaqHelper faqHelper;
     private final InfoBoxHelper infoBoxHelper;
 
@@ -58,6 +60,7 @@ public class WalletConfigController {
 
     public WalletConfigController(
             Messages messages,
+            CheckModeInfoHelper checkModeInfoHelper,
             FaqHelper faqHelper,
             InfoBoxHelper infoBoxHelper,
             boolean lightCertificateActive,
@@ -68,6 +71,7 @@ public class WalletConfigController {
             boolean showVaccinationHintTransfer,
             boolean timeShiftDetectionEnabled) {
         this.messages = messages;
+        this.checkModeInfoHelper = checkModeInfoHelper;
         this.faqHelper = faqHelper;
         this.infoBoxHelper = infoBoxHelper;
         this.lightCertificateActive = lightCertificateActive;
@@ -122,6 +126,7 @@ public class WalletConfigController {
         configResponse.setShowVaccinationHintDetail(showVaccinationHintDetail);
         configResponse.setShowVaccinationHintTransfer(showVaccinationHintTransfer);
         configResponse.setTimeshiftDetectionEnabled(timeShiftDetectionEnabled);
+        configResponse.setCheckModesInfo(checkModeInfoHelper.getWalletCheckModesInfo());
 
         if (clientAppVersion.isSmallerVersionThan(DEACTIVATE_PDF_BELOW_2_2_0)) {
             configResponse.setPdfGenerationActive(false);
@@ -138,14 +143,20 @@ public class WalletConfigController {
         }
 
         String transferCodeValidity;
-        if (clientAppVersion.isSmallerVersionThan(TRANSFER_CODE_VALIDITY_30_DAYS_2_7_0)){
+        if (clientAppVersion.isSmallerVersionThan(TRANSFER_CODE_VALIDITY_30_DAYS_2_7_0)) {
             transferCodeValidity = "7";
-        }else{
+        } else {
             transferCodeValidity = "30";
         }
-        for (var faqs: configResponse.getTransferWorks().values()) {
-            faqs.getFaqIntroSections().forEach(
-                entry -> entry.setText(entry.getText().replace("{TRANSFER_CODE_VALIDITY}", transferCodeValidity)));
+        for (var faqs : configResponse.getTransferWorks().values()) {
+            faqs.getFaqIntroSections()
+                    .forEach(
+                            entry ->
+                                    entry.setText(
+                                            entry.getText()
+                                                    .replace(
+                                                            "{TRANSFER_CODE_VALIDITY}",
+                                                            transferCodeValidity)));
         }
 
         return ResponseEntity.ok()

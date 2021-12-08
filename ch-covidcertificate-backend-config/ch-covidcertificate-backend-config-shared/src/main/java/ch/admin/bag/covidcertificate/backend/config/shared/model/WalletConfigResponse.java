@@ -29,6 +29,9 @@ public class WalletConfigResponse extends ConfigResponse {
     @Documentation(description = "Holds general vaccination booking info by language")
     private Map<Language, VaccinationBookingInfo> vaccinationBookingInfo = null;
 
+    @Documentation(description = "Holds info texts and icons for check modes by language")
+    private Map<Language, WalletModesInfo> checkModesInfo = null;
+
     @Documentation(
             description =
                     "feature flag. when set to true the vaccination hints should be displayed on the homescreen")
@@ -124,5 +127,13 @@ public class WalletConfigResponse extends ConfigResponse {
 
     public void setShowVaccinationHintTransfer(Boolean showVaccinationHintTransfer) {
         this.showVaccinationHintTransfer = showVaccinationHintTransfer;
+    }
+
+    public Map<Language, WalletModesInfo> getCheckModesInfo() {
+        return checkModesInfo;
+    }
+
+    public void setCheckModesInfo(Map<Language, WalletModesInfo> checkModesInfo) {
+        this.checkModesInfo = checkModesInfo;
     }
 }

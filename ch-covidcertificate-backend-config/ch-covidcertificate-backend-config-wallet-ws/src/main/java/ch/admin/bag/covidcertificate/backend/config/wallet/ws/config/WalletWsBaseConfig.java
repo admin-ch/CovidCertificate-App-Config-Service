@@ -10,6 +10,7 @@
 
 package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
@@ -25,6 +26,7 @@ public abstract class WalletWsBaseConfig {
     @Bean
     public WalletConfigController walletConfigController(
             Messages messages,
+            CheckModeInfoHelper checkModeInfoHelper,
             FaqHelper faqHelper,
             InfoBoxHelper infoBoxHelper,
             @Value("${ws.wallet.light-certificate.active:false}") boolean lightCertificateActive,
@@ -37,9 +39,10 @@ public abstract class WalletWsBaseConfig {
             @Value("${ws.wallet.vaccination-hints.transfer.show:false}")
                     boolean showVaccinationHintTransfer,
             @Value("${ws.wallet.timeshiftDetection.enabled:true}")
-            boolean timeshiftDetectionEnabled) {
+                    boolean timeshiftDetectionEnabled) {
         return new WalletConfigController(
                 messages,
+                checkModeInfoHelper,
                 faqHelper,
                 infoBoxHelper,
                 lightCertificateActive,
@@ -50,6 +53,4 @@ public abstract class WalletWsBaseConfig {
                 showVaccinationHintTransfer,
                 timeshiftDetectionEnabled);
     }
-
-
 }

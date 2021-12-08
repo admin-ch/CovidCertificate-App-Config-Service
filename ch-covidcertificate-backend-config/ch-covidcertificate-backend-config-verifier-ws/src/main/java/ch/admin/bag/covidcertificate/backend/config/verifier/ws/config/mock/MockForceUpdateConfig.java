@@ -1,7 +1,8 @@
 package ch.admin.bag.covidcertificate.backend.config.verifier.ws.config.mock;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
-import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.VerifierConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
 import ch.admin.bag.covidcertificate.backend.config.verifier.ws.controller.VerifierConfigController;
@@ -25,16 +26,23 @@ public class MockForceUpdateConfig {
     @Bean
     @Primary
     public VerifierConfigController verifierConfigController(
-            Messages messages, FaqHelper faqHelper,
+            Messages messages,
+            CheckModeInfoHelper checkModeInfoHelper,
+            FaqHelper faqHelper,
             @Value("${ws.verifier.timeshiftDetection.enabled:false}")
                     boolean timeshiftDetectionEnabled) {
-        return new MockConfigController(messages, faqHelper, timeshiftDetectionEnabled);
+        return new MockConfigController(
+                messages, checkModeInfoHelper, faqHelper, timeshiftDetectionEnabled);
     }
 
     public class MockConfigController extends VerifierConfigController {
 
-        public MockConfigController(Messages messages, FaqHelper faqHelper, boolean timeShiftDetectionEnabled) {
-            super(messages, faqHelper, timeShiftDetectionEnabled);
+        public MockConfigController(
+                Messages messages,
+                CheckModeInfoHelper checkModeInfoHelper,
+                FaqHelper faqHelper,
+                boolean timeShiftDetectionEnabled) {
+            super(messages, checkModeInfoHelper, faqHelper, timeShiftDetectionEnabled);
         }
 
         @Override
@@ -43,10 +51,9 @@ public class MockForceUpdateConfig {
         }
 
         @Override
-        public ResponseEntity<ConfigResponse> getConfig(
+        public ResponseEntity<VerifierConfigResponse> getConfig(
                 String appversion, String osversion, String buildnr) {
-            ResponseEntity<ConfigResponse> response =
-                    super.getConfig(appversion, osversion, buildnr);
+            var response = super.getConfig(appversion, osversion, buildnr);
             Version version = new Version(appversion);
             if ((version.isIOS() && buildnr.equals(iosBuildNrForceUpdate))
                     || (version.isAndroid() && buildnr.equals(androidBuildNrForceUpdate))) {
