@@ -1,10 +1,11 @@
 package ch.admin.bag.covidcertificate.backend.config.verifier.ws.config.mock;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
-import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.FaqEntry;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.VerifierConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.verifier.ws.controller.VerifierConfigController;
 import java.util.Map;
@@ -23,17 +24,22 @@ public class MockFaqLinkConfig {
     @Primary
     public VerifierConfigController verifierConfigController(
             Messages messages,
+            CheckModeInfoHelper checkModeInfoHelper,
             FaqHelper faqHelper,
             @Value("${ws.verifier.timeshiftDetection.enabled:false}")
                     boolean timeshiftDetectionEnabled) {
-        return new MockConfigController(messages, faqHelper, timeshiftDetectionEnabled);
+        return new MockConfigController(
+                messages, checkModeInfoHelper, faqHelper, timeshiftDetectionEnabled);
     }
 
     public class MockConfigController extends VerifierConfigController {
 
         public MockConfigController(
-                Messages messages, FaqHelper faqHelper, boolean timeShiftDetectionEnabled) {
-            super(messages, faqHelper, timeShiftDetectionEnabled);
+                Messages messages,
+                CheckModeInfoHelper checkModeInfoHelper,
+                FaqHelper faqHelper,
+                boolean timeShiftDetectionEnabled) {
+            super(messages, checkModeInfoHelper, faqHelper, timeShiftDetectionEnabled);
         }
 
         @Override
@@ -42,10 +48,9 @@ public class MockFaqLinkConfig {
         }
 
         @Override
-        public ResponseEntity<ConfigResponse> getConfig(
+        public ResponseEntity<VerifierConfigResponse> getConfig(
                 String appversion, String osversion, String buildnr) {
-            ResponseEntity<ConfigResponse> response =
-                    super.getConfig(appversion, osversion, buildnr);
+            var response = super.getConfig(appversion, osversion, buildnr);
             Map<Language, Faq> works = response.getBody().getWorks();
             for (Faq faq : works.values()) {
                 FaqEntry faqEntry = faq.getFaqEntries().get(0);

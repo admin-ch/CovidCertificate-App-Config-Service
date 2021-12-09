@@ -13,9 +13,9 @@ public class MockHelper {
         Map<Language, InfoBox> infoBoxes = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
             InfoBox infoBox = new InfoBox();
-            infoBox.setTitle("Noch keinen Covidcode? (" + language.getKey() + ")");
+            infoBox.setTitle("Mock InfoBox Titel (" + language.getKey() + ")");
             infoBox.setMsg(
-                    "Sie wurden positiv getestet (PCR-Test oder Antigen-Schnelltest) und haben nach 4h noch keinen Covidcode erhalten?\nDann kontaktieren Sie die Infoline Coronavirus:");
+                    "Ein Mock Text mit mehreren Zeilen.\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
             infoBox.setUrl("tel:+41583877780");
             infoBox.setUrlTitle("+41 58 387 77 80");
             infoBox.setIsDismissible(false);

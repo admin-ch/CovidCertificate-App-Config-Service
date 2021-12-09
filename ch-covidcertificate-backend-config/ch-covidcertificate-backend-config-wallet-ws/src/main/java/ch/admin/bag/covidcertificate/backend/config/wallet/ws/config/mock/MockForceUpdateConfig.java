@@ -1,5 +1,6 @@
 package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config.mock;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
@@ -28,6 +29,7 @@ public class MockForceUpdateConfig {
     @Primary
     public WalletConfigController walletConfigController(
             Messages messages,
+            CheckModeInfoHelper checkModeInfoHelper,
             FaqHelper faqHelper,
             InfoBoxHelper infoBoxHelper,
             @Value("${ws.wallet.light-certificate.active:false}") boolean lightCertificateActive,
@@ -42,6 +44,7 @@ public class MockForceUpdateConfig {
             @Value("${ws.wallet.timeshiftDetection.enabled:true}") boolean timeshiftDetectionFlag) {
         return new MockConfigController(
                 messages,
+                checkModeInfoHelper,
                 faqHelper,
                 infoBoxHelper,
                 lightCertificateActive,
@@ -57,6 +60,7 @@ public class MockForceUpdateConfig {
 
         public MockConfigController(
                 Messages messages,
+                CheckModeInfoHelper checkModeInfoHelper,
                 FaqHelper faqHelper,
                 InfoBoxHelper infoBoxHelper,
                 boolean lightCertificateActive,
@@ -68,6 +72,7 @@ public class MockForceUpdateConfig {
                 boolean timeshiftDetectionFlag) {
             super(
                     messages,
+                    checkModeInfoHelper,
                     faqHelper,
                     infoBoxHelper,
                     lightCertificateActive,

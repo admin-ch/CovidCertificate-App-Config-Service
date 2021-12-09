@@ -1,6 +1,7 @@
 package ch.admin.bag.covidcertificate.backend.config.shared;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.VerifierConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.security.signature.JWSMessageConverter;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -67,5 +68,13 @@ public class TestHelper {
         return (WalletConfigResponse)
                 internalToConfigResponse(
                         result, mediaType, pathToCaPem, WalletConfigResponse.class);
+    }
+
+    public VerifierConfigResponse toVerifierConfigResponse(
+            MockHttpServletResponse result, MediaType mediaType, String pathToCaPem)
+            throws JsonProcessingException, UnsupportedEncodingException {
+        return (VerifierConfigResponse)
+                internalToConfigResponse(
+                        result, mediaType, pathToCaPem, VerifierConfigResponse.class);
     }
 }

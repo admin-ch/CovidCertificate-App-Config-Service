@@ -1,5 +1,6 @@
 package ch.admin.bag.covidcertificate.backend.config.shared.helper;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.model.EntryIconConfig;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.FaqEntry;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.FaqIntroSection;
@@ -54,9 +55,9 @@ public class FaqHelper {
         walletTransferWorksFaqConfig.setFaqEntries(TRANSFER_WORKS_FAQ_ENTRIES);
         walletTransferWorksFaqConfig.setIntroEntries(
                 List.of(
-                        new FaqIntroEntryConfig("1", "ic-one", "ic_one"),
-                        new FaqIntroEntryConfig("2", "ic-two", "ic_two"),
-                        new FaqIntroEntryConfig("3", "ic-three", "ic_three")));
+                        new EntryIconConfig("1", "ic-one", "ic_one"),
+                        new EntryIconConfig("2", "ic-two", "ic_two"),
+                        new EntryIconConfig("3", "ic-three", "ic_three")));
 
         verifierWorksFaqConfig.setKeyPrefix("verifier_faq_works_");
         verifierWorksFaqConfig.setIosIcon("ic-faq-image");
@@ -116,13 +117,13 @@ public class FaqHelper {
     private List<FaqIntroSection> getFaqIntroSections(FaqConfig faqConfig, Locale l) {
         List<FaqIntroSection> faqIntroSections = new ArrayList<>();
 
-        for (FaqIntroEntryConfig introEntry : faqConfig.getIntroEntries()) {
+        for (EntryIconConfig introEntry : faqConfig.getIntroEntries()) {
             FaqIntroSection faqIntroSection = new FaqIntroSection();
-            faqIntroSection.setIconIos(introEntry.getIosIcon());
-            faqIntroSection.setIconAndroid(introEntry.getAndroidIcon());
+            faqIntroSection.setIconIos(introEntry.getIconIos());
+            faqIntroSection.setIconAndroid(introEntry.getIconAndroid());
             faqIntroSection.setText(
                     msg.getMessage(
-                            faqConfig.getKeyPrefix() + "intro_" + introEntry.getIntroEntry(), l));
+                            faqConfig.getKeyPrefix() + "intro_" + introEntry.getEntryId(), l));
             faqIntroSections.add(faqIntroSection);
         }
         return faqIntroSections;
@@ -134,7 +135,7 @@ public class FaqHelper {
         private String iosIcon;
         private String androidIcon;
         private List<String> faqEntries;
-        private List<FaqIntroEntryConfig> introEntries;
+        private List<EntryIconConfig> introEntries;
 
         public String getKeyPrefix() {
             return keyPrefix;
@@ -168,48 +169,12 @@ public class FaqHelper {
             this.faqEntries = faqEntries;
         }
 
-        public List<FaqIntroEntryConfig> getIntroEntries() {
+        public List<EntryIconConfig> getIntroEntries() {
             return introEntries;
         }
 
-        public void setIntroEntries(List<FaqIntroEntryConfig> introEntries) {
+        public void setIntroEntries(List<EntryIconConfig> introEntries) {
             this.introEntries = introEntries;
-        }
-    }
-
-    private class FaqIntroEntryConfig {
-        private String introEntry;
-        private String iosIcon;
-        private String androidIcon;
-
-        public FaqIntroEntryConfig(String introEntry, String iosIcon, String androidIcon) {
-            this.introEntry = introEntry;
-            this.iosIcon = iosIcon;
-            this.androidIcon = androidIcon;
-        }
-
-        public String getIntroEntry() {
-            return introEntry;
-        }
-
-        public void setIntroEntry(String introEntry) {
-            this.introEntry = introEntry;
-        }
-
-        public String getIosIcon() {
-            return iosIcon;
-        }
-
-        public void setIosIcon(String iosIcon) {
-            this.iosIcon = iosIcon;
-        }
-
-        public String getAndroidIcon() {
-            return androidIcon;
-        }
-
-        public void setAndroidIcon(String androidIcon) {
-            this.androidIcon = androidIcon;
         }
     }
 }

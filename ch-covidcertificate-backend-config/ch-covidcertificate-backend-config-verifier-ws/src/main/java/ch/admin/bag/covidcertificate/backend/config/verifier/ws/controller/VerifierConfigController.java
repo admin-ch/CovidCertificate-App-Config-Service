@@ -11,8 +11,10 @@
 package ch.admin.bag.covidcertificate.backend.config.verifier.ws.controller;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
-import ch.admin.bag.covidcertificate.backend.config.shared.model.ConfigResponse;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.VerifierConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
 import ch.ubique.openapi.docannotations.Documentation;
@@ -33,6 +35,7 @@ public class VerifierConfigController {
 
     protected final Messages messages;
     protected final FaqHelper faqHelper;
+    protected final CheckModeInfoHelper checkModeInfoHelper;
 
     private static final Version FORCE_UPDATE_BELOW_1_2_0 = new Version("1.2.0");
 
@@ -40,8 +43,13 @@ public class VerifierConfigController {
 
     private final boolean timeshiftDetectionEnabled;
 
-    public VerifierConfigController(Messages messages, FaqHelper faqHelper, boolean timeshiftDetectionEnabled) {
+    public VerifierConfigController(
+            Messages messages,
+            CheckModeInfoHelper checkModeInfoHelper,
+            FaqHelper faqHelper,
+            boolean timeshiftDetectionEnabled) {
         this.messages = messages;
+        this.checkModeInfoHelper = checkModeInfoHelper;
         this.faqHelper = faqHelper;
         this.timeshiftDetectionEnabled = timeshiftDetectionEnabled;
     }
@@ -62,7 +70,7 @@ public class VerifierConfigController {
             responses = {"200 => ConfigResponse structure with dynamic infos and forceupdate"})
     @CrossOrigin(origins = {"https://editor.swagger.io"})
     @GetMapping(value = "/config")
-    public @ResponseBody ResponseEntity<ConfigResponse> getConfig(
+    public @ResponseBody ResponseEntity<VerifierConfigResponse> getConfig(
             @Documentation(description = "Version of the App installed", example = "ios-1.0.7")
                     @RequestParam
                     String appversion,
@@ -71,8 +79,10 @@ public class VerifierConfigController {
             @Documentation(description = "Build number of the app", example = "ios-200619.2333.175")
                     @RequestParam
                     String buildnr) {
-        ConfigResponse configResponse = new ConfigResponse();
+        var configResponse = new VerifierConfigResponse();
         configResponse.setWorks(faqHelper.getVerifierFaqWorks());
+        configResponse.setCheckModesInfos(checkModeInfoHelper.getVerifierCheckModesInfos());
+        configResponse.setCheckModeReselectAfterHours(48);
         configResponse.setTimeshiftDetectionEnabled(timeshiftDetectionEnabled);
 
         Version clientAppVersion = new Version(appversion);
@@ -80,8 +90,25 @@ public class VerifierConfigController {
             configResponse.setForceUpdate(true);
         }
 
+        replacePoeditorPlaceHolders(configResponse);
+
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(CacheUtil.CONFIG_MAX_AGE))
                 .body(configResponse);
+    }
+
+    private void replacePoeditorPlaceHolders(VerifierConfigResponse configResponse) {
+        replaceLightCertValidityPlaceHolder(configResponse);
+    }
+
+    private void replaceLightCertValidityPlaceHolder(VerifierConfigResponse configResponse) {
+        for (Faq faq : configResponse.getWorks().values()) {
+            faq.getFaqEntries()
+                    .forEach(
+                            entry ->
+                                    entry.setText(
+                                            entry.getText()
+                                                    .replace("{LIGHT_CERT_VALIDITY_IN_H}", "24")));
+        }
     }
 }
