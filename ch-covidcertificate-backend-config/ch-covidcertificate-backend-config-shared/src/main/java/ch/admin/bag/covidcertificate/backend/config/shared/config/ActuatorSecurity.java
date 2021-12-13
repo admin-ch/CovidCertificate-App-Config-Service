@@ -66,7 +66,6 @@ public class ActuatorSecurity extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/actuator/loggers/**");
     }
 
-    @Autowired
     protected void configureGlobal(
             AuthenticationManagerBuilder auth, ActuatorSecurityConfig securityConfig)
             throws Exception {
