@@ -53,7 +53,7 @@ public class CheckModeInfoHelper {
 
             final EnumMap<CheckMode, VerifierModeInfos> modeToInfos =
                     new EnumMap<>(CheckMode.class);
-            for (CheckMode checkMode : CheckMode.values()) {
+            for (CheckMode checkMode : CheckMode.getVerifierModes()) {
                 final VerifierModeInfos modeInfos = new VerifierModeInfos();
                 modeToInfos.put(checkMode, modeInfos);
                 modeInfos.setTitle(
@@ -94,7 +94,7 @@ public class CheckModeInfoHelper {
 
             final EnumMap<CheckMode, WalletCheckModeInfo> modes = new EnumMap<>(CheckMode.class);
             walletModesInfo.setModes(modes);
-            for (CheckMode checkMode : CheckMode.values()) {
+            for (CheckMode checkMode : CheckMode.getWalletModes()) {
                 var modeInfo = new WalletCheckModeInfo();
                 modes.put(checkMode, modeInfo);
 

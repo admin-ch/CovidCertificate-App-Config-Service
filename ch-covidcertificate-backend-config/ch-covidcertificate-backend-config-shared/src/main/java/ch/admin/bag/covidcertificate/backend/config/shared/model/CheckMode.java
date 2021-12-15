@@ -1,6 +1,8 @@
 package ch.admin.bag.covidcertificate.backend.config.shared.model;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum CheckMode {
     THREE_G(
@@ -22,7 +24,19 @@ public enum CheckMode {
                     new EntryIconConfig("1", "ic-expire-i", "ic_expire_i"),
                     new EntryIconConfig("2", "ic_2g", "ic_2g"),
                     new EntryIconConfig(
-                            "3", "ic-qr-certificate-light-no", "ic_qr_certificate_light_no")));
+                            "3", "ic-qr-certificate-light-no", "ic_qr_certificate_light_no"))),
+    TWO_G_PLUS(
+            "#e6ad8e",
+            "2g_plus",
+            "ic-2-g-plus",
+            // striked icon is for wallet app only. 2G+ is not supported for wallet app at this time
+            null,
+            List.of(
+                    new EntryIconConfig("1", "ic-expire-i", "ic_expire_i"),
+                    new EntryIconConfig("2", "ic-2-g-plus", "ic_2g_plus"),
+                    new EntryIconConfig("3", "ic-info-alert", "ic_info_alert"),
+                    new EntryIconConfig(
+                            "4", "ic-qr-certificate-light-no", "ic_qr_certificate_light_no")));
 
     private String color;
     private String poeditorIdentifier;
@@ -61,5 +75,15 @@ public enum CheckMode {
 
     public List<EntryIconConfig> getVerifierInfoEntries() {
         return verifierInfoEntries;
+    }
+
+    public static List<CheckMode> getVerifierModes() {
+        return Arrays.stream(CheckMode.values()).collect(Collectors.toList());
+    }
+
+    public static List<CheckMode> getWalletModes() {
+        return Arrays.stream(CheckMode.values())
+                .filter(m -> !m.equals(CheckMode.TWO_G_PLUS))
+                .collect(Collectors.toList());
     }
 }
