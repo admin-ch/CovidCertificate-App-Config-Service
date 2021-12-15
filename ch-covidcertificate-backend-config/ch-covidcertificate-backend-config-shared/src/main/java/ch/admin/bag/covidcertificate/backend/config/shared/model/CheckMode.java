@@ -8,47 +8,55 @@ public enum CheckMode {
     THREE_G(
             "#86c5d9",
             "3g",
-            "ic_3g",
-            "ic_no3g",
+            Icon.THREE_G,
+            Icon.THREE_G_STRIKED,
             List.of(
-                    new EntryIconConfig("1", "ic-expire-i", "ic_expire_i"),
-                    new EntryIconConfig("2", "ic_3g", "ic_3g"),
-                    new EntryIconConfig(
-                            "3", "ic-qr-certificate-light", "ic_qr_certificate_light"))),
+                    new EntryIconConfig("1", Icon.INFO),
+                    new EntryIconConfig("2", Icon.THREE_G),
+                    new EntryIconConfig("3", Icon.CERT_LIGHT_YES))),
     TWO_G(
             "#c2d076",
             "2g",
-            "ic_2g",
-            "ic_no2g",
+            Icon.TWO_G,
+            Icon.TWO_G_STRIKED,
             List.of(
-                    new EntryIconConfig("1", "ic-expire-i", "ic_expire_i"),
-                    new EntryIconConfig("2", "ic_2g", "ic_2g"),
-                    new EntryIconConfig(
-                            "3", "ic-qr-certificate-light-no", "ic_qr_certificate_light_no"))),
+                    new EntryIconConfig("1", Icon.INFO),
+                    new EntryIconConfig("2", Icon.TWO_G),
+                    new EntryIconConfig("3", Icon.CERT_LIGHT_NO))),
     TWO_G_PLUS(
             "#e6ad8e",
             "2g_plus",
-            "ic-2-g-plus",
+            Icon.TWO_G_PLUS,
             // striked icon is for wallet app only. 2G+ is not supported for wallet app at this time
             null,
             List.of(
-                    new EntryIconConfig("1", "ic-expire-i", "ic_expire_i"),
-                    new EntryIconConfig("2", "ic-2-g-plus", "ic_2g_plus"),
-                    new EntryIconConfig("3", "ic-info-alert", "ic_info_alert"),
-                    new EntryIconConfig(
-                            "4", "ic-qr-certificate-light-no", "ic_qr_certificate_light_no")));
+                    new EntryIconConfig("1", Icon.INFO),
+                    new EntryIconConfig("2", Icon.TWO_G_PLUS),
+                    new EntryIconConfig("3", Icon.ALERT),
+                    new EntryIconConfig("4", Icon.CERT_LIGHT_NO))),
+    TEST_CERT(
+            "#facafa",
+            "test_cert",
+            Icon.TEST_CERT,
+            // striked icon is for wallet app only. `t` mode is not supported for wallet app at this
+            // time
+            null,
+            List.of(
+                    new EntryIconConfig("1", Icon.INFO),
+                    new EntryIconConfig("2", Icon.TWO_G_PLUS),
+                    new EntryIconConfig("3", Icon.CERT_LIGHT_NO)));
 
     private String color;
     private String poeditorIdentifier;
-    private String icon;
-    private String strikedIcon;
+    private Icon icon;
+    private Icon strikedIcon;
     private List<EntryIconConfig> verifierInfoEntries;
 
     CheckMode(
             String color,
             String poeditorIdentifier,
-            String icon,
-            String strikedIcon,
+            Icon icon,
+            Icon strikedIcon,
             List<EntryIconConfig> verifierInfoEntries) {
         this.color = color;
         this.icon = icon;
@@ -65,12 +73,20 @@ public enum CheckMode {
         return poeditorIdentifier;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getIconAndroid() {
+        return icon.getAndroid();
     }
 
-    public String getStrikedIcon() {
-        return strikedIcon;
+    public String getIconIos() {
+        return icon.getIos();
+    }
+
+    public String getStrikedIconAndroid() {
+        return strikedIcon.getAndroid();
+    }
+
+    public String getStrikedIconIos() {
+        return strikedIcon.getIos();
     }
 
     public List<EntryIconConfig> getVerifierInfoEntries() {
@@ -83,7 +99,7 @@ public enum CheckMode {
 
     public static List<CheckMode> getWalletModes() {
         return Arrays.stream(CheckMode.values())
-                .filter(m -> !m.equals(CheckMode.TWO_G_PLUS))
+                .filter(m -> !List.of(CheckMode.TWO_G_PLUS, CheckMode.TEST_CERT).contains(m))
                 .collect(Collectors.toList());
     }
 }

@@ -4,6 +4,7 @@ import ch.admin.bag.covidcertificate.backend.config.shared.model.EntryIconConfig
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.FaqEntry;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.FaqIntroSection;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.Icon;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import java.util.ArrayList;
@@ -55,9 +56,9 @@ public class FaqHelper {
         walletTransferWorksFaqConfig.setFaqEntries(TRANSFER_WORKS_FAQ_ENTRIES);
         walletTransferWorksFaqConfig.setIntroEntries(
                 List.of(
-                        new EntryIconConfig("1", "ic-one", "ic_one"),
-                        new EntryIconConfig("2", "ic-two", "ic_two"),
-                        new EntryIconConfig("3", "ic-three", "ic_three")));
+                        new EntryIconConfig("1", Icon.ONE),
+                        new EntryIconConfig("2", Icon.TWO),
+                        new EntryIconConfig("3", Icon.THREE)));
 
         verifierWorksFaqConfig.setKeyPrefix("verifier_faq_works_");
         verifierWorksFaqConfig.setIosIcon("ic-faq-image");

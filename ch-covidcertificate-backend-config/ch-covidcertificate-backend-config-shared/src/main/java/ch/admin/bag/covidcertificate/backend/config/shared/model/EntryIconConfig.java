@@ -2,13 +2,11 @@ package ch.admin.bag.covidcertificate.backend.config.shared.model;
 
 public class EntryIconConfig {
     private String entryId;
-    private String iconIos;
-    private String iconAndroid;
+    private Icon icon;
 
-    public EntryIconConfig(String entryId, String iconIos, String iconAndroid) {
+    public EntryIconConfig(String entryId, Icon icon) {
         this.entryId = entryId;
-        this.iconIos = iconIos;
-        this.iconAndroid = iconAndroid;
+        this.icon = icon;
     }
 
     public String getEntryId() {
@@ -16,10 +14,10 @@ public class EntryIconConfig {
     }
 
     public String getIconIos() {
-        return iconIos;
+        return icon.getIos();
     }
 
     public String getIconAndroid() {
-        return iconAndroid;
+        return icon.getAndroid();
     }
 }

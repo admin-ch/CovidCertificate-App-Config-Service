@@ -2,6 +2,7 @@ package ch.admin.bag.covidcertificate.backend.config.shared.helper;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.model.CheckMode;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.EntryIconConfig;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.Icon;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Language;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.VerifierModeInfoEntries;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.VerifierModeInfoEntry;
@@ -20,9 +21,7 @@ public class CheckModeInfoHelper {
 
     private static final String VERIFIER_CHECK_MODE_INFO_PREFIX = "verifier_check_mode_info_";
     private static final List<EntryIconConfig> VERIFIER_CHECK_MODE_INFO_UNSELECTED_ENTRIES =
-            List.of(
-                    new EntryIconConfig("1", "ic-expire-i", "ic_expire_i"),
-                    new EntryIconConfig("2", "ic-settings", "ic_settings"));
+            List.of(new EntryIconConfig("1", Icon.INFO), new EntryIconConfig("2", Icon.SETTINGS));
 
     private static final String WALLET_CHECK_MODE_INFO_PREFIX = "wallet_check_mode_info_";
 
@@ -105,8 +104,8 @@ public class CheckModeInfoHelper {
                                         + checkMode.getPoeditorIdentifier()
                                         + "_ok_text",
                                 l));
-                ok.setIconIos(checkMode.getIcon());
-                ok.setIconAndroid(checkMode.getIcon());
+                ok.setIconIos(checkMode.getIconIos());
+                ok.setIconAndroid(checkMode.getIconAndroid());
                 modeInfo.setOk(ok);
 
                 var notOk = new WalletModesInfoEntry();
@@ -116,8 +115,8 @@ public class CheckModeInfoHelper {
                                         + checkMode.getPoeditorIdentifier()
                                         + "_not_ok_text",
                                 l));
-                notOk.setIconIos(checkMode.getStrikedIcon());
-                notOk.setIconAndroid(checkMode.getStrikedIcon());
+                notOk.setIconIos(checkMode.getStrikedIconIos());
+                notOk.setIconAndroid(checkMode.getStrikedIconAndroid());
                 modeInfo.setNotOk(notOk);
             }
         }
