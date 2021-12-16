@@ -43,7 +43,7 @@ public enum CheckMode {
             null,
             List.of(
                     new EntryIconConfig("1", Icon.INFO),
-                    new EntryIconConfig("2", Icon.TWO_G_PLUS),
+                    new EntryIconConfig("2", Icon.TEST_CERT),
                     new EntryIconConfig("3", Icon.CERT_LIGHT_NO)));
 
     private String color;
