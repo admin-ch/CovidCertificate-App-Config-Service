@@ -56,6 +56,7 @@ public class WalletConfigController {
     private final boolean showVaccinationHintHomescreen;
     private final boolean showVaccinationHintDetail;
     private final boolean showVaccinationHintTransfer;
+    private final boolean refreshButtonDisabled;
 
     private final boolean timeShiftDetectionEnabled;
 
@@ -72,7 +73,8 @@ public class WalletConfigController {
             boolean showVaccinationHintHomescreen,
             boolean showVaccinationHintDetail,
             boolean showVaccinationHintTransfer,
-            boolean timeShiftDetectionEnabled) {
+            boolean timeShiftDetectionEnabled,
+            boolean refreshButtonDisabled) {
         this.messages = messages;
         this.checkModeInfoHelper = checkModeInfoHelper;
         this.faqHelper = faqHelper;
@@ -84,6 +86,7 @@ public class WalletConfigController {
         this.showVaccinationHintDetail = showVaccinationHintDetail;
         this.showVaccinationHintTransfer = showVaccinationHintTransfer;
         this.timeShiftDetectionEnabled = timeShiftDetectionEnabled;
+        this.refreshButtonDisabled = refreshButtonDisabled;
     }
 
     @Documentation(
@@ -131,6 +134,7 @@ public class WalletConfigController {
         configResponse.setTimeshiftDetectionEnabled(timeShiftDetectionEnabled);
         configResponse.setCheckModesInfo(checkModeInfoHelper.getWalletCheckModesInfo());
         configResponse.setLightCertDurationInHours(LIGHT_CERT_DURATION_IN_HOURS);
+        configResponse.setRefreshButtonDisabled(refreshButtonDisabled);
 
         if (clientAppVersion.isSmallerVersionThan(DEACTIVATE_PDF_BELOW_2_2_0)) {
             configResponse.setPdfGenerationActive(false);
@@ -166,7 +170,10 @@ public class WalletConfigController {
                             entry ->
                                     entry.setText(
                                             entry.getText()
-                                                    .replace("{LIGHT_CERT_VALIDITY_IN_H}", LIGHT_CERT_DURATION_IN_HOURS.toString())));
+                                                    .replace(
+                                                            "{LIGHT_CERT_VALIDITY_IN_H}",
+                                                            LIGHT_CERT_DURATION_IN_HOURS
+                                                                    .toString())));
         }
     }
 

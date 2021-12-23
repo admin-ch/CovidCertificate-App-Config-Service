@@ -105,6 +105,24 @@ public abstract class BaseControllerTest {
     }
 
     @Test
+    public void testRefreshButtonDisabled() throws Exception {
+        MockHttpServletResponse result =
+                mockMvc.perform(
+                                get(BASE_URL + "/config")
+                                        .accept(acceptMediaType)
+                                        .param("osversion", "ios12")
+                                        .param("appversion", "ios-2.7.0")
+                                        .param("buildnr", "ios-2020.0145asdfa34"))
+                        .andExpect(status().is2xxSuccessful())
+                        .andReturn()
+                        .getResponse();
+        WalletConfigResponse resp =
+                testHelper.toWalletConfigResponse(
+                        result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
+        assertFalse(resp.getRefreshButtonDisabled());
+    }
+
+    @Test
     public void testForUpdateNote() throws Exception {
         // no update info box
         MockHttpServletResponse result =

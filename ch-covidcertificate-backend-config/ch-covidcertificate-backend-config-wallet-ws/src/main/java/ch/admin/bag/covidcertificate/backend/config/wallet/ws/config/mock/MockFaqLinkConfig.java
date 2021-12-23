@@ -39,7 +39,8 @@ public class MockFaqLinkConfig {
             @Value("${ws.wallet.vaccination-hints.transfer.show:false}")
                     boolean showVaccinationHintTransfer,
             @Value("${ws.wallet.timeshiftDetection.enabled:true}")
-                    boolean timeShiftDetectionEnabled) {
+                    boolean timeShiftDetectionEnabled,
+            @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled) {
         return new MockConfigController(
                 messages,
                 checkModeInfoHelper,
@@ -51,7 +52,8 @@ public class MockFaqLinkConfig {
                 showVaccinationHintHomescreen,
                 showVaccinationHintDetail,
                 showVaccinationHintTransfer,
-                timeShiftDetectionEnabled);
+                timeShiftDetectionEnabled,
+                refreshButtonDisabled);
     }
 
     public class MockConfigController extends WalletConfigController {
@@ -67,7 +69,8 @@ public class MockFaqLinkConfig {
                 boolean showVaccinationHintHomescreen,
                 boolean showVaccinationHintDetail,
                 boolean showVaccinationHintTransfer,
-                boolean timeShiftDetectionEnabled) {
+                boolean timeShiftDetectionEnabled,
+                boolean refreshButtonDisabled) {
             super(
                     messages,
                     checkModeInfoHelper,
@@ -79,7 +82,8 @@ public class MockFaqLinkConfig {
                     showVaccinationHintHomescreen,
                     showVaccinationHintDetail,
                     showVaccinationHintTransfer,
-                    timeShiftDetectionEnabled);
+                    timeShiftDetectionEnabled,
+                    refreshButtonDisabled);
         }
 
         @Override

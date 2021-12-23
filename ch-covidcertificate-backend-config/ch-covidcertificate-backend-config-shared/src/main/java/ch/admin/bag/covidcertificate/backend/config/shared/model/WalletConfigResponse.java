@@ -52,6 +52,9 @@ public class WalletConfigResponse extends ConfigResponse {
                     "feature flag. when set to true the vaccination hints should be displayed in the transfer code view")
     private Boolean showVaccinationHintTransfer;
 
+    @Documentation(description = "feature flag. when set to true the refresh button is disabled")
+    private Boolean refreshButtonDisabled;
+
     public Map<Language, Faq> getTransferQuestions() {
         return transferQuestions;
     }
@@ -148,5 +151,13 @@ public class WalletConfigResponse extends ConfigResponse {
 
     public void setLightCertDurationInHours(Integer lightCertDurationInHours) {
         this.lightCertDurationInHours = lightCertDurationInHours;
+    }
+
+    public Boolean getRefreshButtonDisabled() {
+        return refreshButtonDisabled;
+    }
+
+    public void setRefreshButtonDisabled(Boolean refreshButtonDisabled) {
+        this.refreshButtonDisabled = refreshButtonDisabled;
     }
 }
