@@ -1,12 +1,23 @@
 package ch.admin.bag.covidcertificate.backend.config.shared.model;
 
+import javax.validation.constraints.NotNull;
+
 public class RefreshButtonInfo {
-    private String text1;
-    private String text2;
-    private String fatTitle;
-    private String text3;
-    private String linkText;
-    private String linkUrl;
+    @NotNull private String title;
+    @NotNull private String text1;
+    @NotNull private String text2;
+    @NotNull private String fatTitle;
+    @NotNull private String text3;
+    @NotNull private String linkText;
+    @NotNull private String linkUrl;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getText1() {
         return text1;

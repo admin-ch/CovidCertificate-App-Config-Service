@@ -22,9 +22,10 @@ public class RefreshButtonInfoHelper {
         for (Language language : Language.values()) {
             Locale l = language.toLocale();
             final RefreshButtonInfo info = new RefreshButtonInfo();
+            info.setTitle(msg.getMessage(WALLET_REFRESH_BUTTON_INFO_PREFIX + "title", l));
             info.setText1(msg.getMessage(WALLET_REFRESH_BUTTON_INFO_PREFIX + "text_1", l));
             info.setText2(msg.getMessage(WALLET_REFRESH_BUTTON_INFO_PREFIX + "text_2", l));
-            info.setFatTitle(msg.getMessage(WALLET_REFRESH_BUTTON_INFO_PREFIX + "fat_title", l));
+            info.setFatTitle(msg.getMessage(WALLET_REFRESH_BUTTON_INFO_PREFIX + "fat_title_3", l));
             info.setText3(msg.getMessage(WALLET_REFRESH_BUTTON_INFO_PREFIX + "text_3", l));
             info.setLinkText(msg.getMessage(WALLET_REFRESH_BUTTON_INFO_PREFIX + "link_text", l));
             info.setLinkUrl(msg.getMessage(WALLET_REFRESH_BUTTON_INFO_PREFIX + "link_url", l));
