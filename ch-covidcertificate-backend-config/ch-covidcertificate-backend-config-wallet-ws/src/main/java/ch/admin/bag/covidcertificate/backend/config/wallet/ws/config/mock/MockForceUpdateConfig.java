@@ -3,6 +3,7 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config.mock;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
@@ -42,7 +43,8 @@ public class MockForceUpdateConfig {
             @Value("${ws.wallet.vaccination-hints.transfer.show:false}")
                     boolean showVaccinationHintTransfer,
             @Value("${ws.wallet.timeshiftDetection.enabled:true}") boolean timeshiftDetectionFlag,
-            @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled) {
+            @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
+            RefreshButtonInfoHelper refreshButtonInfoHelper) {
         return new MockConfigController(
                 messages,
                 checkModeInfoHelper,
@@ -55,7 +57,8 @@ public class MockForceUpdateConfig {
                 showVaccinationHintDetail,
                 showVaccinationHintTransfer,
                 timeshiftDetectionFlag,
-                refreshButtonDisabled);
+                refreshButtonDisabled,
+                refreshButtonInfoHelper);
     }
 
     public class MockConfigController extends WalletConfigController {
@@ -72,7 +75,8 @@ public class MockForceUpdateConfig {
                 boolean showVaccinationHintDetail,
                 boolean showVaccinationHintTransfer,
                 boolean timeshiftDetectionFlag,
-                boolean refreshButtonDisabled) {
+                boolean refreshButtonDisabled,
+                RefreshButtonInfoHelper refreshButtonInfoHelper) {
             super(
                     messages,
                     checkModeInfoHelper,
@@ -85,7 +89,8 @@ public class MockForceUpdateConfig {
                     showVaccinationHintDetail,
                     showVaccinationHintTransfer,
                     timeshiftDetectionFlag,
-                    refreshButtonDisabled);
+                    refreshButtonDisabled,
+                    refreshButtonInfoHelper);
         }
 
         @Override

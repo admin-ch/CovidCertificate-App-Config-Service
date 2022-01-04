@@ -55,6 +55,9 @@ public class WalletConfigResponse extends ConfigResponse {
     @Documentation(description = "feature flag. when set to true the refresh button is disabled")
     private Boolean refreshButtonDisabled;
 
+    @Documentation(description = "Holds info texts for refresh button disable by language")
+    private Map<Language, RefreshButtonInfo> refreshButtonInfo = null;
+
     public Map<Language, Faq> getTransferQuestions() {
         return transferQuestions;
     }
@@ -159,5 +162,13 @@ public class WalletConfigResponse extends ConfigResponse {
 
     public void setRefreshButtonDisabled(Boolean refreshButtonDisabled) {
         this.refreshButtonDisabled = refreshButtonDisabled;
+    }
+
+    public Map<Language, RefreshButtonInfo> getRefreshButtonInfo() {
+        return refreshButtonInfo;
+    }
+
+    public void setRefreshButtonInfo(Map<Language, RefreshButtonInfo> refreshButtonInfo) {
+        this.refreshButtonInfo = refreshButtonInfo;
     }
 }
