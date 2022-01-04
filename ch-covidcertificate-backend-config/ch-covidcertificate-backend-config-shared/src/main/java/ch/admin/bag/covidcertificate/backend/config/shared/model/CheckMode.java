@@ -9,7 +9,7 @@ public enum CheckMode {
             "#86c5d9",
             "3g",
             Icon.THREE_G,
-            Icon.THREE_G_STRIKED,
+            Icon.THREE_G_NOK,
             List.of(
                     new EntryIconConfig("1", Icon.INFO),
                     new EntryIconConfig("2", Icon.THREE_G),
@@ -18,7 +18,7 @@ public enum CheckMode {
             "#c2d076",
             "2g",
             Icon.TWO_G,
-            Icon.TWO_G_STRIKED,
+            Icon.TWO_G_NOK,
             List.of(
                     new EntryIconConfig("1", Icon.INFO),
                     new EntryIconConfig("2", Icon.TWO_G),
@@ -27,8 +27,7 @@ public enum CheckMode {
             "#e6ad8e",
             "2g_plus",
             Icon.TWO_G_PLUS,
-            // striked icon is for wallet app only. 2G+ is not supported for wallet app at this time
-            null,
+            Icon.TWO_G_PLUS_NOK,
             List.of(
                     new EntryIconConfig("1", Icon.INFO),
                     new EntryIconConfig("2", Icon.TWO_G_PLUS),
@@ -38,7 +37,7 @@ public enum CheckMode {
             "#facafa",
             "test_cert",
             Icon.TEST_CERT,
-            // striked icon is for wallet app only. `t` mode is not supported for wallet app at this
+            // nok icon is for wallet app only. `t` mode is not supported for wallet app at this
             // time
             null,
             List.of(
@@ -49,18 +48,18 @@ public enum CheckMode {
     private String color;
     private String poeditorIdentifier;
     private Icon icon;
-    private Icon strikedIcon;
+    private Icon nokIcon;
     private List<EntryIconConfig> verifierInfoEntries;
 
     CheckMode(
             String color,
             String poeditorIdentifier,
             Icon icon,
-            Icon strikedIcon,
+            Icon nokIcon,
             List<EntryIconConfig> verifierInfoEntries) {
         this.color = color;
         this.icon = icon;
-        this.strikedIcon = strikedIcon;
+        this.nokIcon = nokIcon;
         this.poeditorIdentifier = poeditorIdentifier;
         this.verifierInfoEntries = verifierInfoEntries;
     }
@@ -81,12 +80,12 @@ public enum CheckMode {
         return icon.getIos();
     }
 
-    public String getStrikedIconAndroid() {
-        return strikedIcon.getAndroid();
+    public String getNokIconAndroid() {
+        return nokIcon.getAndroid();
     }
 
-    public String getStrikedIconIos() {
-        return strikedIcon.getIos();
+    public String getNokIconIos() {
+        return nokIcon.getIos();
     }
 
     public List<EntryIconConfig> getVerifierInfoEntries() {
@@ -99,7 +98,7 @@ public enum CheckMode {
 
     public static List<CheckMode> getWalletModes() {
         return Arrays.stream(CheckMode.values())
-                .filter(m -> !List.of(CheckMode.TWO_G_PLUS, CheckMode.TEST_CERT).contains(m))
+                .filter(m -> !List.of(CheckMode.TEST_CERT).contains(m))
                 .collect(Collectors.toList());
     }
 }
