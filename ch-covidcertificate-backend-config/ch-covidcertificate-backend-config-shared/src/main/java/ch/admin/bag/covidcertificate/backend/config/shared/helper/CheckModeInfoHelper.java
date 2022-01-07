@@ -115,8 +115,8 @@ public class CheckModeInfoHelper {
                                         + checkMode.getPoeditorIdentifier()
                                         + "_not_ok_text",
                                 l));
-                notOk.setIconIos(checkMode.getStrikedIconIos());
-                notOk.setIconAndroid(checkMode.getStrikedIconAndroid());
+                notOk.setIconIos(checkMode.getNokIconIos());
+                notOk.setIconAndroid(checkMode.getNokIconAndroid());
                 modeInfo.setNotOk(notOk);
             }
         }

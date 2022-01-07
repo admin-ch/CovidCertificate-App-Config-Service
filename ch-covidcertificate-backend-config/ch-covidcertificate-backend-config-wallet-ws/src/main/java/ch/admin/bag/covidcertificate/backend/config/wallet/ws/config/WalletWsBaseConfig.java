@@ -13,6 +13,7 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller.WalletConfigController;
@@ -39,7 +40,9 @@ public abstract class WalletWsBaseConfig {
             @Value("${ws.wallet.vaccination-hints.transfer.show:false}")
                     boolean showVaccinationHintTransfer,
             @Value("${ws.wallet.timeshiftDetection.enabled:true}")
-                    boolean timeshiftDetectionEnabled) {
+                    boolean timeshiftDetectionEnabled,
+            @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
+            RefreshButtonInfoHelper refreshButtonInfoHelper) {
         return new WalletConfigController(
                 messages,
                 checkModeInfoHelper,
@@ -51,6 +54,8 @@ public abstract class WalletWsBaseConfig {
                 showVaccinationHintHomescreen,
                 showVaccinationHintDetail,
                 showVaccinationHintTransfer,
-                timeshiftDetectionEnabled);
+                timeshiftDetectionEnabled,
+                refreshButtonDisabled,
+                refreshButtonInfoHelper);
     }
 }

@@ -11,10 +11,11 @@ public enum Icon {
     ALERT("ic-info-alert", "ic_info_alert"),
 
     THREE_G("ic_3g", "ic_3g"),
-    THREE_G_STRIKED("ic_no3g", "ic_no3g"),
+    THREE_G_NOK("ic_no3g", "ic_no3g"),
     TWO_G("ic_2g", "ic_2g"),
-    TWO_G_STRIKED("ic_no2g", "ic_no2g"),
+    TWO_G_NOK("ic_no2g", "ic_no2g"),
     TWO_G_PLUS("ic-2-g-plus", "ic_2g_plus"),
+    TWO_G_PLUS_NOK("ic-no-2-g-plus-height", "ic_no_2_g_plus_height"),
     TEST_CERT("ic-t", "ic_t"),
 
     CERT_LIGHT_YES("ic-qr-certificate-light", "ic_qr_certificate_light"),

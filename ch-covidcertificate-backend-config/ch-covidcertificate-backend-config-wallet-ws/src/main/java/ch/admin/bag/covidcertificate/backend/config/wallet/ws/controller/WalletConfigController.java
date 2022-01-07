@@ -14,6 +14,7 @@ import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
@@ -41,6 +42,7 @@ public class WalletConfigController {
     private final CheckModeInfoHelper checkModeInfoHelper;
     protected final FaqHelper faqHelper;
     private final InfoBoxHelper infoBoxHelper;
+    private final RefreshButtonInfoHelper refreshButtonInfoHelper;
 
     private static final Version FORCE_UPDATE_BELOW_1_2_0 = new Version("1.2.0");
     private static final Version INFOBOX_BELOW_2_7_0 = new Version("2.7.0");
@@ -56,6 +58,7 @@ public class WalletConfigController {
     private final boolean showVaccinationHintHomescreen;
     private final boolean showVaccinationHintDetail;
     private final boolean showVaccinationHintTransfer;
+    private final boolean refreshButtonDisabled;
 
     private final boolean timeShiftDetectionEnabled;
 
@@ -72,7 +75,9 @@ public class WalletConfigController {
             boolean showVaccinationHintHomescreen,
             boolean showVaccinationHintDetail,
             boolean showVaccinationHintTransfer,
-            boolean timeShiftDetectionEnabled) {
+            boolean timeShiftDetectionEnabled,
+            boolean refreshButtonDisabled,
+            RefreshButtonInfoHelper refreshButtonInfoHelper) {
         this.messages = messages;
         this.checkModeInfoHelper = checkModeInfoHelper;
         this.faqHelper = faqHelper;
@@ -84,6 +89,8 @@ public class WalletConfigController {
         this.showVaccinationHintDetail = showVaccinationHintDetail;
         this.showVaccinationHintTransfer = showVaccinationHintTransfer;
         this.timeShiftDetectionEnabled = timeShiftDetectionEnabled;
+        this.refreshButtonDisabled = refreshButtonDisabled;
+        this.refreshButtonInfoHelper = refreshButtonInfoHelper;
     }
 
     @Documentation(
@@ -131,6 +138,8 @@ public class WalletConfigController {
         configResponse.setTimeshiftDetectionEnabled(timeShiftDetectionEnabled);
         configResponse.setCheckModesInfo(checkModeInfoHelper.getWalletCheckModesInfo());
         configResponse.setLightCertDurationInHours(LIGHT_CERT_DURATION_IN_HOURS);
+        configResponse.setRefreshButtonDisabled(refreshButtonDisabled);
+        configResponse.setRefreshButtonInfo(refreshButtonInfoHelper.getInfo());
 
         if (clientAppVersion.isSmallerVersionThan(DEACTIVATE_PDF_BELOW_2_2_0)) {
             configResponse.setPdfGenerationActive(false);
@@ -166,7 +175,10 @@ public class WalletConfigController {
                             entry ->
                                     entry.setText(
                                             entry.getText()
-                                                    .replace("{LIGHT_CERT_VALIDITY_IN_H}", LIGHT_CERT_DURATION_IN_HOURS.toString())));
+                                                    .replace(
+                                                            "{LIGHT_CERT_VALIDITY_IN_H}",
+                                                            LIGHT_CERT_DURATION_IN_HOURS
+                                                                    .toString())));
         }
     }
 

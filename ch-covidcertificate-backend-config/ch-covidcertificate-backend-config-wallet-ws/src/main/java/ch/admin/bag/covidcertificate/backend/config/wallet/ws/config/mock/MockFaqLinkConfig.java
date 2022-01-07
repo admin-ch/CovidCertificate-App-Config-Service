@@ -3,6 +3,7 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config.mock;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.FaqEntry;
@@ -39,7 +40,9 @@ public class MockFaqLinkConfig {
             @Value("${ws.wallet.vaccination-hints.transfer.show:false}")
                     boolean showVaccinationHintTransfer,
             @Value("${ws.wallet.timeshiftDetection.enabled:true}")
-                    boolean timeShiftDetectionEnabled) {
+                    boolean timeShiftDetectionEnabled,
+            @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
+            RefreshButtonInfoHelper refreshButtonInfoHelper) {
         return new MockConfigController(
                 messages,
                 checkModeInfoHelper,
@@ -51,7 +54,9 @@ public class MockFaqLinkConfig {
                 showVaccinationHintHomescreen,
                 showVaccinationHintDetail,
                 showVaccinationHintTransfer,
-                timeShiftDetectionEnabled);
+                timeShiftDetectionEnabled,
+                refreshButtonDisabled,
+                refreshButtonInfoHelper);
     }
 
     public class MockConfigController extends WalletConfigController {
@@ -67,7 +72,9 @@ public class MockFaqLinkConfig {
                 boolean showVaccinationHintHomescreen,
                 boolean showVaccinationHintDetail,
                 boolean showVaccinationHintTransfer,
-                boolean timeShiftDetectionEnabled) {
+                boolean timeShiftDetectionEnabled,
+                boolean refreshButtonDisabled,
+                RefreshButtonInfoHelper refreshButtonInfoHelper) {
             super(
                     messages,
                     checkModeInfoHelper,
@@ -79,7 +86,9 @@ public class MockFaqLinkConfig {
                     showVaccinationHintHomescreen,
                     showVaccinationHintDetail,
                     showVaccinationHintTransfer,
-                    timeShiftDetectionEnabled);
+                    timeShiftDetectionEnabled,
+                    refreshButtonDisabled,
+                    refreshButtonInfoHelper);
         }
 
         @Override
