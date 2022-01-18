@@ -1,6 +1,7 @@
 package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config.mock;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.EolBannerInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
@@ -42,7 +43,8 @@ public class MockFaqLinkConfig {
             @Value("${ws.wallet.timeshiftDetection.enabled:true}")
                     boolean timeShiftDetectionEnabled,
             @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
-            RefreshButtonInfoHelper refreshButtonInfoHelper) {
+            RefreshButtonInfoHelper refreshButtonInfoHelper,
+            EolBannerInfoHelper eolBannerInfoHelper) {
         return new MockConfigController(
                 messages,
                 checkModeInfoHelper,
@@ -56,7 +58,8 @@ public class MockFaqLinkConfig {
                 showVaccinationHintTransfer,
                 timeShiftDetectionEnabled,
                 refreshButtonDisabled,
-                refreshButtonInfoHelper);
+                refreshButtonInfoHelper,
+                eolBannerInfoHelper);
     }
 
     public class MockConfigController extends WalletConfigController {
@@ -74,7 +77,8 @@ public class MockFaqLinkConfig {
                 boolean showVaccinationHintTransfer,
                 boolean timeShiftDetectionEnabled,
                 boolean refreshButtonDisabled,
-                RefreshButtonInfoHelper refreshButtonInfoHelper) {
+                RefreshButtonInfoHelper refreshButtonInfoHelper,
+                EolBannerInfoHelper eolBannerInfoHelper) {
             super(
                     messages,
                     checkModeInfoHelper,
@@ -88,7 +92,8 @@ public class MockFaqLinkConfig {
                     showVaccinationHintTransfer,
                     timeShiftDetectionEnabled,
                     refreshButtonDisabled,
-                    refreshButtonInfoHelper);
+                    refreshButtonInfoHelper,
+                    eolBannerInfoHelper);
         }
 
         @Override

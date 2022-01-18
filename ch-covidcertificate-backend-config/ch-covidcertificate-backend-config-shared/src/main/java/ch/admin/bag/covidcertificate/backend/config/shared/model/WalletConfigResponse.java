@@ -58,6 +58,11 @@ public class WalletConfigResponse extends ConfigResponse {
     @Documentation(description = "Holds info texts for refresh button disable by language")
     private Map<Language, RefreshButtonInfo> refreshButtonInfo = null;
 
+    @Documentation(
+            description =
+                    "Holds info texts for the eol banners by language and `displayRuleId`_`caseId`")
+    private Map<Language, Map<String, EolBannerInfo>> eolBannerInfo = null;
+
     public Map<Language, Faq> getTransferQuestions() {
         return transferQuestions;
     }
@@ -170,5 +175,13 @@ public class WalletConfigResponse extends ConfigResponse {
 
     public void setRefreshButtonInfo(Map<Language, RefreshButtonInfo> refreshButtonInfo) {
         this.refreshButtonInfo = refreshButtonInfo;
+    }
+
+    public Map<Language, Map<String, EolBannerInfo>> getEolBannerInfo() {
+        return eolBannerInfo;
+    }
+
+    public void setEolBannerInfo(Map<Language, Map<String, EolBannerInfo>> eolBannerInfo) {
+        this.eolBannerInfo = eolBannerInfo;
     }
 }
