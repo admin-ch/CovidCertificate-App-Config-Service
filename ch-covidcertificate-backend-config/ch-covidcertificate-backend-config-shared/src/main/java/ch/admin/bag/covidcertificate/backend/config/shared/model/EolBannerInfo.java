@@ -16,8 +16,9 @@ public class EolBannerInfo {
 
     // popup
     @NotNull private String popupTitle;
-    private String popupText;
+    private String popupText1;
     private String popupBoldText;
+    private String popupText2;
     private String popupLinkText;
     private String popupLinkUrl;
 
@@ -77,12 +78,12 @@ public class EolBannerInfo {
         this.popupTitle = popupTitle;
     }
 
-    public String getPopupText() {
-        return popupText;
+    public String getPopupText1() {
+        return popupText1;
     }
 
-    public void setPopupText(String popupText) {
-        this.popupText = popupText;
+    public void setPopupText1(String popupText1) {
+        this.popupText1 = popupText1;
     }
 
     public String getPopupBoldText() {
@@ -91,6 +92,14 @@ public class EolBannerInfo {
 
     public void setPopupBoldText(String popupBoldText) {
         this.popupBoldText = popupBoldText;
+    }
+
+    public String getPopupText2() {
+        return popupText2;
+    }
+
+    public void setPopupText2(String popupText2) {
+        this.popupText2 = popupText2;
     }
 
     public String getPopupLinkText() {

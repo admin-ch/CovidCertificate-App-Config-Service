@@ -47,13 +47,16 @@ public class EolBannerInfoHelper {
                 info.setPopupTitle(
                         msg.getMessage(
                                 WALLET_EOL_BANNER_INFO_PREFIX + poeditorId + "_popup_title", l));
-                info.setPopupText(
+                info.setPopupText1(
                         msg.getNullableMessage(
-                                WALLET_EOL_BANNER_INFO_PREFIX + poeditorId + "_popup_text", l));
+                                WALLET_EOL_BANNER_INFO_PREFIX + poeditorId + "_popup_text1", l));
                 info.setPopupBoldText(
                         msg.getNullableMessage(
                                 WALLET_EOL_BANNER_INFO_PREFIX + poeditorId + "_popup_bold_text",
                                 l));
+                info.setPopupText2(
+                        msg.getNullableMessage(
+                                WALLET_EOL_BANNER_INFO_PREFIX + poeditorId + "_popup_text2", l));
                 info.setPopupLinkText(
                         msg.getNullableMessage(
                                 WALLET_EOL_BANNER_INFO_PREFIX + poeditorId + "_popup_link_text",
