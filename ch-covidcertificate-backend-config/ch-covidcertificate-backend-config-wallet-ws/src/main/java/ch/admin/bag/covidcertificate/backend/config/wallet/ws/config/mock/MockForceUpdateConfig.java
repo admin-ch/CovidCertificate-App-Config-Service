@@ -1,6 +1,7 @@
 package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config.mock;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.EolBannerInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
@@ -44,7 +45,8 @@ public class MockForceUpdateConfig {
                     boolean showVaccinationHintTransfer,
             @Value("${ws.wallet.timeshiftDetection.enabled:true}") boolean timeshiftDetectionFlag,
             @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
-            RefreshButtonInfoHelper refreshButtonInfoHelper) {
+            RefreshButtonInfoHelper refreshButtonInfoHelper,
+            EolBannerInfoHelper eolBannerInfoHelper) {
         return new MockConfigController(
                 messages,
                 checkModeInfoHelper,
@@ -58,7 +60,8 @@ public class MockForceUpdateConfig {
                 showVaccinationHintTransfer,
                 timeshiftDetectionFlag,
                 refreshButtonDisabled,
-                refreshButtonInfoHelper);
+                refreshButtonInfoHelper,
+                eolBannerInfoHelper);
     }
 
     public class MockConfigController extends WalletConfigController {
@@ -76,7 +79,8 @@ public class MockForceUpdateConfig {
                 boolean showVaccinationHintTransfer,
                 boolean timeshiftDetectionFlag,
                 boolean refreshButtonDisabled,
-                RefreshButtonInfoHelper refreshButtonInfoHelper) {
+                RefreshButtonInfoHelper refreshButtonInfoHelper,
+                EolBannerInfoHelper eolBannerInfoHelper) {
             super(
                     messages,
                     checkModeInfoHelper,
@@ -90,7 +94,8 @@ public class MockForceUpdateConfig {
                     showVaccinationHintTransfer,
                     timeshiftDetectionFlag,
                     refreshButtonDisabled,
-                    refreshButtonInfoHelper);
+                    refreshButtonInfoHelper,
+                    eolBannerInfoHelper);
         }
 
         @Override

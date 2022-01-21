@@ -12,6 +12,7 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.EolBannerInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
@@ -43,6 +44,7 @@ public class WalletConfigController {
     protected final FaqHelper faqHelper;
     private final InfoBoxHelper infoBoxHelper;
     private final RefreshButtonInfoHelper refreshButtonInfoHelper;
+    private final EolBannerInfoHelper eolBannerInfoHelper;
 
     private static final Version FORCE_UPDATE_BELOW_1_2_0 = new Version("1.2.0");
     private static final Version INFOBOX_BELOW_2_7_0 = new Version("2.7.0");
@@ -77,7 +79,8 @@ public class WalletConfigController {
             boolean showVaccinationHintTransfer,
             boolean timeShiftDetectionEnabled,
             boolean refreshButtonDisabled,
-            RefreshButtonInfoHelper refreshButtonInfoHelper) {
+            RefreshButtonInfoHelper refreshButtonInfoHelper,
+            EolBannerInfoHelper eolBannerInfoHelper) {
         this.messages = messages;
         this.checkModeInfoHelper = checkModeInfoHelper;
         this.faqHelper = faqHelper;
@@ -91,6 +94,7 @@ public class WalletConfigController {
         this.timeShiftDetectionEnabled = timeShiftDetectionEnabled;
         this.refreshButtonDisabled = refreshButtonDisabled;
         this.refreshButtonInfoHelper = refreshButtonInfoHelper;
+        this.eolBannerInfoHelper = eolBannerInfoHelper;
     }
 
     @Documentation(
@@ -140,6 +144,7 @@ public class WalletConfigController {
         configResponse.setLightCertDurationInHours(LIGHT_CERT_DURATION_IN_HOURS);
         configResponse.setRefreshButtonDisabled(refreshButtonDisabled);
         configResponse.setRefreshButtonInfo(refreshButtonInfoHelper.getInfo());
+        configResponse.setEolBannerInfo(eolBannerInfoHelper.getInfo());
 
         if (clientAppVersion.isSmallerVersionThan(DEACTIVATE_PDF_BELOW_2_2_0)) {
             configResponse.setPdfGenerationActive(false);

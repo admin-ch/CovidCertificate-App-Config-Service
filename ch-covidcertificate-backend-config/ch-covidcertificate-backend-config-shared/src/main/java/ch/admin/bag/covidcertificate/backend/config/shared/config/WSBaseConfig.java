@@ -12,6 +12,7 @@ package ch.admin.bag.covidcertificate.backend.config.shared.config;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.EolBannerInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
@@ -74,6 +75,11 @@ public abstract class WSBaseConfig implements WebMvcConfigurer {
     @Bean
     public CheckModeInfoHelper checkModeInfoHelper(Messages messages) {
         return new CheckModeInfoHelper(messages);
+    }
+
+    @Bean
+    public EolBannerInfoHelper eolBannerInfoHelper(Messages messages) {
+        return new EolBannerInfoHelper(messages);
     }
 
     @Bean
