@@ -33,4 +33,24 @@ public class InfoBoxHelper {
         }
         return result;
     }
+
+    public Map<Language, InfoBox> getGenericInfoBox(boolean forAndroid) {
+        Map<Language, InfoBox> result = new EnumMap<>(Language.class);
+        for (Language language : Language.values()) {
+            Locale l = language.toLocale();
+            InfoBox infoBox = new InfoBox();
+            infoBox.setTitle(msg.getMessage("infobox_generic_title", l));
+            infoBox.setMsg(msg.getMessage("infobox_generic_text", l));
+            if (forAndroid) {
+                infoBox.setUrl(msg.getMessage("infobox_generic_url_android", l));
+            } else { // iOS
+                infoBox.setUrl(msg.getMessage("infobox_generic_url_ios", l));
+            }
+            infoBox.setUrlTitle(msg.getMessage("infobox_generic_button", l));
+            infoBox.setIsDismissible(false);
+            result.put(language, infoBox);
+        }
+        return result;
+    }
+
 }

@@ -156,9 +156,12 @@ public class WalletConfigController {
             configResponse.setForceUpdate(true);
         }
 
-        if (clientAppVersion.isSmallerVersionThan(INFOBOX_BELOW_2_7_0)) {
+        /*if (clientAppVersion.isSmallerVersionThan(INFOBOX_BELOW_2_7_0)) {
             configResponse.setInfoBox(infoBoxHelper.getUpdateInfoBox(clientAppVersion.isAndroid()));
-        }
+        }*/
+
+        configResponse.setInfoBox(infoBoxHelper.getGenericInfoBox(clientAppVersion.isAndroid()));
+
 
         replacePoeditorPlaceHolders(configResponse, clientAppVersion);
 
