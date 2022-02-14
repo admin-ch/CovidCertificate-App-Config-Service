@@ -124,8 +124,10 @@ public abstract class BaseControllerTest {
 
     @Test
     public void testForUpdateNote() throws Exception {
+        MockHttpServletResponse result;
+        ConfigResponse resp;
         // no update info box
-        MockHttpServletResponse result =
+        /*result =
                 mockMvc.perform(
                                 get(BASE_URL + "/config")
                                         .accept(acceptMediaType)
@@ -135,17 +137,17 @@ public abstract class BaseControllerTest {
                         .andExpect(status().is2xxSuccessful())
                         .andReturn()
                         .getResponse();
-        ConfigResponse resp =
+        resp =
                 testHelper.toConfigResponse(result, acceptMediaType, TestHelper.PATH_TO_CA_PEM);
-        ConfigAsserter.assertNoUpdate(resp);
+        ConfigAsserter.assertNoUpdate(resp);*/
 
-        // update info box (<2.7.0)
+        // info box for everyone
         result =
                 mockMvc.perform(
                                 get(BASE_URL + "/config")
                                         .accept(acceptMediaType)
                                         .param("osversion", "android9")
-                                        .param("appversion", "android-2.6.0")
+                                        .param("appversion", "android-3.5.0")
                                         .param("buildnr", "1622464850983"))
                         .andExpect(status().is2xxSuccessful())
                         .andReturn()
