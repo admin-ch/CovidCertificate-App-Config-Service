@@ -47,7 +47,7 @@ public class InfoBoxHelper {
                 infoBox.setUrl(msg.getMessage("infobox_generic_url_ios", l));
             }
             infoBox.setUrlTitle(msg.getMessage("infobox_generic_button", l));
-            infoBox.setIsDismissible(false);
+            infoBox.setIsDismissible(true);
             result.put(language, infoBox);
         }
         return result;
