@@ -21,7 +21,7 @@ public class VaccinationHintHelper {
 
     private static final String VACCINATION_HINT_PREFIX = "vaccination_hint_";
     private static final List<String> VACCINATION_HINT_ENTRIES =
-            List.of("1", "2", "3", "4", "5", "6", "7", "8", "9");
+            List.of( "2", "3", "4", "5", "6", "7", "8");
 
     private final Messages msg;
 

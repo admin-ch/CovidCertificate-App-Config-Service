@@ -369,7 +369,7 @@ public abstract class BaseControllerTest {
         assertEquals(Language.values().length, byLanguage.size());
         for (Entry<Language, List<VaccinationHint>> forLanguage : byLanguage.entrySet()) {
             List<VaccinationHint> hints = forLanguage.getValue();
-            assertEquals(9, hints.size());
+            assertEquals(7, hints.size());
             for (VaccinationHint hint : hints) {
                 assertTrue(validator.validate(hint).isEmpty());
             }
