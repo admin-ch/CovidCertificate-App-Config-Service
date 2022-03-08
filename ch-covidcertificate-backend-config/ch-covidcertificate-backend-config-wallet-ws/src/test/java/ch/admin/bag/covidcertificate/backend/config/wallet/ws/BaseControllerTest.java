@@ -27,12 +27,18 @@ import ch.admin.bag.covidcertificate.backend.config.shared.model.VaccinationBook
 import ch.admin.bag.covidcertificate.backend.config.shared.model.VaccinationBookingInfo;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.VaccinationHint;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
+import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import javax.servlet.Filter;
 import javax.validation.Validator;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +49,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles({"cloud-dev"})
+@ActiveProfiles({"cloud-dev", "actuator-security"})
 @TestPropertySource("classpath:application-local.properties")
 public abstract class BaseControllerTest {
     @Autowired protected Validator validator;
@@ -56,11 +63,24 @@ public abstract class BaseControllerTest {
     @Autowired protected WebApplicationContext webApplicationContext;
     protected TestHelper testHelper;
     protected MediaType acceptMediaType;
+    @Autowired protected Filter springSecurityFilterChain;
+
 
     protected static final String BASE_URL = "/app/wallet/v1";
 
     protected String json(Object o) throws IOException {
         return objectMapper.writeValueAsString(o);
+    }
+
+    @BeforeAll
+    public void setup(){
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).addFilter(springSecurityFilterChain).build();
+        this.objectMapper = new ObjectMapper(new JsonFactory());
+        this.objectMapper.registerModule(new JavaTimeModule());
+        this.objectMapper.registerModule(new JodaModule());
+        // this makes sure, that the objectmapper does not fail, when a filter is not provided.
+        this.objectMapper.setFilterProvider(new SimpleFilterProvider().setFailOnUnknownId(false));
+        this.testHelper = new TestHelper(objectMapper);
     }
 
     @Test
@@ -87,6 +107,29 @@ public abstract class BaseControllerTest {
             assertTrue(response.containsHeader(header));
             assertEquals(SECURITY_HEADERS.get(header), response.getHeader(header));
         }
+    }
+
+    @Test
+    public void testActuatorSecurity() throws Exception {
+        var response =
+                mockMvc.perform(get("/actuator/health"))
+                        .andExpect(status().is2xxSuccessful())
+                        .andReturn()
+                        .getResponse();
+        response =
+                mockMvc.perform(get("/actuator/loggers"))
+                        .andExpect(status().is(401))
+                        .andReturn()
+                        .getResponse();
+        response =
+                mockMvc.perform(
+                                get("/actuator/loggers")
+                                        .header(
+                                                "Authorization",
+                                                "Basic cHJvbWV0aGV1czpwcm9tZXRoZXVz"))
+                        .andExpect(status().isOk())
+                        .andReturn()
+                        .getResponse();
     }
 
     @Test

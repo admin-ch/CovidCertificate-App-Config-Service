@@ -27,21 +27,15 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @SpringBootTest(
         properties = {
             "ws.monitor.prometheus.user=prometheus",
-            "ws.monitor.prometheus.password=prometheus",
             "management.endpoints.enabled-by-default=true",
             "management.endpoints.web.exposure.include=*"
         })
 @TestInstance(Lifecycle.PER_CLASS)
 public class WalletControllerJsonTest extends BaseControllerTest {
     @BeforeAll
+    @Override
     public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-        this.objectMapper = new ObjectMapper(new JsonFactory());
-        this.objectMapper.registerModule(new JavaTimeModule());
-        this.objectMapper.registerModule(new JodaModule());
-        // this makes sure, that the objectmapper does not fail, when a filter is not provided.
-        this.objectMapper.setFilterProvider(new SimpleFilterProvider().setFailOnUnknownId(false));
-        this.testHelper = new TestHelper(objectMapper);
+        super.setup();
         this.acceptMediaType = MediaType.APPLICATION_JSON;
     }
 
