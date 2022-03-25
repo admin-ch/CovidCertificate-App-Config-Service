@@ -3,6 +3,7 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config.mock;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.EolBannerInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.ForeignRulesHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.MockHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
@@ -39,8 +40,10 @@ public class MockInfoBoxConfig {
                     boolean showVaccinationHintTransfer,
             @Value("${ws.wallet.timeshiftDetection.enabled:true}") boolean timeshiftDetectionFlag,
             @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
+            @Value("${ws.wallet.foreignRules.enabled}")boolean foreignRulesEnabled,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
-            EolBannerInfoHelper eolBannerInfoHelper) {
+            EolBannerInfoHelper eolBannerInfoHelper,
+            ForeignRulesHintHelper foreignRulesHintHelper) {
         return new MockConfigController(
                 messages,
                 checkModeInfoHelper,
@@ -54,8 +57,10 @@ public class MockInfoBoxConfig {
                 showVaccinationHintTransfer,
                 timeshiftDetectionFlag,
                 refreshButtonDisabled,
+                foreignRulesEnabled,
                 refreshButtonInfoHelper,
-                eolBannerInfoHelper);
+                eolBannerInfoHelper,
+                foreignRulesHintHelper);
     }
 
     public class MockConfigController extends WalletConfigController {
@@ -73,8 +78,10 @@ public class MockInfoBoxConfig {
                 boolean showVaccinationHintTransfer,
                 boolean timeshiftDetectionFlag,
                 boolean refreshButtonDisabled,
+                boolean foreignRulesEnabled,
                 RefreshButtonInfoHelper refreshButtonInfoHelper,
-                EolBannerInfoHelper eolBannerInfoHelper) {
+                EolBannerInfoHelper eolBannerInfoHelper,
+                ForeignRulesHintHelper foreignRulesHintHelper) {
             super(
                     messages,
                     checkModeInfoHelper,
@@ -88,8 +95,10 @@ public class MockInfoBoxConfig {
                     showVaccinationHintTransfer,
                     timeshiftDetectionFlag,
                     refreshButtonDisabled,
+                    foreignRulesEnabled,
                     refreshButtonInfoHelper,
-                    eolBannerInfoHelper);
+                    eolBannerInfoHelper,
+                    foreignRulesHintHelper);
         }
 
         @Override

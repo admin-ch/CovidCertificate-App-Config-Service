@@ -14,10 +14,12 @@ import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.EolBannerInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.ForeignRulesHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
+import ch.admin.bag.covidcertificate.backend.config.shared.model.ForeignRulesHint;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
@@ -57,10 +59,12 @@ public class WalletConfigController {
     private final boolean pdfGenerationActive;
 
     private final VaccinationHintHelper vaccinationHintHelper;
+    private final ForeignRulesHintHelper foreignRulesHintHelper;
     private final boolean showVaccinationHintHomescreen;
     private final boolean showVaccinationHintDetail;
     private final boolean showVaccinationHintTransfer;
     private final boolean refreshButtonDisabled;
+    private final boolean foreignRulesEnabled;
 
     private final boolean timeShiftDetectionEnabled;
 
@@ -79,8 +83,10 @@ public class WalletConfigController {
             boolean showVaccinationHintTransfer,
             boolean timeShiftDetectionEnabled,
             boolean refreshButtonDisabled,
+            boolean foreignRulesEnabled,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
-            EolBannerInfoHelper eolBannerInfoHelper) {
+            EolBannerInfoHelper eolBannerInfoHelper,
+            ForeignRulesHintHelper foreignRulesHintHelper) {
         this.messages = messages;
         this.checkModeInfoHelper = checkModeInfoHelper;
         this.faqHelper = faqHelper;
@@ -94,7 +100,9 @@ public class WalletConfigController {
         this.timeShiftDetectionEnabled = timeShiftDetectionEnabled;
         this.refreshButtonDisabled = refreshButtonDisabled;
         this.refreshButtonInfoHelper = refreshButtonInfoHelper;
+        this.foreignRulesEnabled = foreignRulesEnabled;
         this.eolBannerInfoHelper = eolBannerInfoHelper;
+        this.foreignRulesHintHelper = foreignRulesHintHelper;
     }
 
     @Documentation(
@@ -145,6 +153,10 @@ public class WalletConfigController {
         configResponse.setRefreshButtonDisabled(refreshButtonDisabled);
         configResponse.setRefreshButtonInfo(refreshButtonInfoHelper.getInfo());
         configResponse.setEolBannerInfo(eolBannerInfoHelper.getInfo());
+
+        configResponse.setForeignRulesHints(foreignRulesHintHelper.getForeignRulesHints());
+
+        configResponse.setForeignRulesCheckEnabled(foreignRulesEnabled);
 
         if (clientAppVersion.isSmallerVersionThan(DEACTIVATE_PDF_BELOW_2_2_0)) {
             configResponse.setPdfGenerationActive(false);
