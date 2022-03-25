@@ -13,6 +13,7 @@ package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.EolBannerInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.ForeignRulesHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
@@ -43,8 +44,10 @@ public abstract class WalletWsBaseConfig {
             @Value("${ws.wallet.timeshiftDetection.enabled:true}")
                     boolean timeshiftDetectionEnabled,
             @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
+            @Value("${ws.wallet.foreignRules.enabled:false}") boolean foreignRulesEnabled,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
-            EolBannerInfoHelper eolBannerInfoHelper) {
+            EolBannerInfoHelper eolBannerInfoHelper,
+            ForeignRulesHintHelper foreignRulesHintHelper) {
         return new WalletConfigController(
                 messages,
                 checkModeInfoHelper,
@@ -58,7 +61,9 @@ public abstract class WalletWsBaseConfig {
                 showVaccinationHintTransfer,
                 timeshiftDetectionEnabled,
                 refreshButtonDisabled,
+                foreignRulesEnabled,
                 refreshButtonInfoHelper,
-                eolBannerInfoHelper);
+                eolBannerInfoHelper,
+                foreignRulesHintHelper);
     }
 }
