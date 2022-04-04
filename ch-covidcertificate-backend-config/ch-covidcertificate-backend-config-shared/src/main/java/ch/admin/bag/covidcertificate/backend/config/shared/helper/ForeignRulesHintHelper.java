@@ -21,7 +21,10 @@ import java.util.Map;
 
 public class ForeignRulesHintHelper {
 
-    private static final String FOREIGN_RULES_HINTS_PREFIX = "foreign_rules_hints_";
+    private static final String FOREIGN_RULES_HINTS_PREFIX = "wallet_foreign_rules_check_hint_";
+    private static final int FOREIGN_RULES_HINT_NUMBER = 4;
+    private static final String ICON_PREFIX_ANDROID = "ic_travel_";
+    private static final String ICON_PREFIX_IOS = "ic-travel-";
 
     private final Messages msg;
 
@@ -33,12 +36,14 @@ public class ForeignRulesHintHelper {
     public Map<Language, List<ForeignRulesHint>> getForeignRulesHints() {
         Map<Language, List<ForeignRulesHint>> result = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
-            result.put(language, new ArrayList<>());
-            var hint = new ForeignRulesHint();
-            hint.setText("text here");
-            hint.setIconAndroid("android-icon");
-            hint.setIconIos("ios-icon");
-            result.get(language).add(hint);
+            for(int i = 1; i <= FOREIGN_RULES_HINT_NUMBER; i++){
+                result.put(language, new ArrayList<>());
+                var hint = new ForeignRulesHint();
+                hint.setText(msg.getMessage(String.format("%s%d", FOREIGN_RULES_HINTS_PREFIX, i)));
+                hint.setIconAndroid(String.format("%s%d", ICON_PREFIX_ANDROID, i));
+                hint.setIconIos(String.format("%s%d", ICON_PREFIX_IOS, i));
+                result.get(language).add(hint);
+            }
         }
         return result;
     }
@@ -46,7 +51,7 @@ public class ForeignRulesHintHelper {
     public Map<Language, String> getForeignRulesLinkText(){
         Map<Language, String> result = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
-            result.put(language, "Blubb");
+            result.put(language, "reopen.europa.eu");
         }
         return result;
     }
@@ -54,7 +59,7 @@ public class ForeignRulesHintHelper {
     public Map<Language, String> getForeignRulesLinkUrl(){
         Map<Language, String> result = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
-            result.put(language, "https://bag.admin.ch");
+            result.put(language, "https://reopen.europa.eu");
         }
         return result;
     }
