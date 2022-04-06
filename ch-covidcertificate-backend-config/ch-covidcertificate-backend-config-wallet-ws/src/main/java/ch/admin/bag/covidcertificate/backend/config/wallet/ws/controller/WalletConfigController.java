@@ -155,6 +155,8 @@ public class WalletConfigController {
         configResponse.setEolBannerInfo(eolBannerInfoHelper.getInfo());
 
         configResponse.setForeignRulesHints(foreignRulesHintHelper.getForeignRulesHints());
+        configResponse.setForeignRulesLinkText(foreignRulesHintHelper.getForeignRulesLinkText());
+        configResponse.setForeignRulesLinkUrl(foreignRulesHintHelper.getForeignRulesLinkUrl());
 
         configResponse.setForeignRulesCheckEnabled(foreignRulesEnabled);
 

@@ -38,7 +38,7 @@ public class ForeignRulesHintHelper {
             result.put(language, new ArrayList<>());
             for(int i = 0; i < FOREIGN_RULES_HINT_ICONS.length; i++){
                 var hint = new ForeignRulesHint();
-                hint.setText(msg.getMessage(String.format("%s%d", FOREIGN_RULES_HINTS_PREFIX, i+1)));
+                hint.setText(msg.getMessage(String.format("%s%d", FOREIGN_RULES_HINTS_PREFIX, i+1), language.toLocale()));
                 hint.setIconAndroid(FOREIGN_RULES_HINT_ICONS[i]);
                 hint.setIconIos(FOREIGN_RULES_HINT_ICONS[i].replace("_", "-"));
                 result.get(language).add(hint);
@@ -50,7 +50,7 @@ public class ForeignRulesHintHelper {
     public Map<Language, String> getForeignRulesLinkText(){
         Map<Language, String> result = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
-            result.put(language, "reopen.europa.eu");
+            result.put(language, msg.getMessage("wallet_foreign_rules_check_hints_more_info_link_text", language.toLocale()));
         }
         return result;
     }
@@ -58,7 +58,7 @@ public class ForeignRulesHintHelper {
     public Map<Language, String> getForeignRulesLinkUrl(){
         Map<Language, String> result = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
-            result.put(language, "https://reopen.europa.eu");
+            result.put(language, msg.getMessage("wallet_foreign_rules_check_hints_more_info_link_url", language.toLocale()));
         }
         return result;
     }
