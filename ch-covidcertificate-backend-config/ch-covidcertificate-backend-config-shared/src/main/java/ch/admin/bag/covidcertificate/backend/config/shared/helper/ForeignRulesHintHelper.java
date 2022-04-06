@@ -22,9 +22,8 @@ import java.util.Map;
 public class ForeignRulesHintHelper {
 
     private static final String FOREIGN_RULES_HINTS_PREFIX = "wallet_foreign_rules_check_hint_";
-    private static final int FOREIGN_RULES_HINT_NUMBER = 4;
-    private static final String ICON_PREFIX_ANDROID = "ic_travel_";
-    private static final String ICON_PREFIX_IOS = "ic-travel-";
+
+    private static final String[] FOREIGN_RULES_HINT_ICONS = { "ic_timelapse", "ic_travel", "ic_info_outline", "ic_question_outline"};
 
     private final Messages msg;
 
@@ -37,11 +36,11 @@ public class ForeignRulesHintHelper {
         Map<Language, List<ForeignRulesHint>> result = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
             result.put(language, new ArrayList<>());
-            for(int i = 1; i <= FOREIGN_RULES_HINT_NUMBER; i++){
+            for(int i = 0; i < FOREIGN_RULES_HINT_ICONS.length; i++){
                 var hint = new ForeignRulesHint();
-                hint.setText(msg.getMessage(String.format("%s%d", FOREIGN_RULES_HINTS_PREFIX, i)));
-                hint.setIconAndroid(String.format("%s%d", ICON_PREFIX_ANDROID, i));
-                hint.setIconIos(String.format("%s%d", ICON_PREFIX_IOS, i));
+                hint.setText(msg.getMessage(String.format("%s%d", FOREIGN_RULES_HINTS_PREFIX, i+1)));
+                hint.setIconAndroid(FOREIGN_RULES_HINT_ICONS[i]);
+                hint.setIconIos(FOREIGN_RULES_HINT_ICONS[i].replace("_", "-"));
                 result.get(language).add(hint);
             }
         }
