@@ -103,7 +103,8 @@ public abstract class WSBaseConfig implements WebMvcConfigurer {
         return new RefreshButtonInfoHelper(messages);
     }
 
-    @Bean public ForeignRulesHintHelper foreignRulesHintHelper(Messages messages){
+    @Bean
+    public ForeignRulesHintHelper foreignRulesHintHelper(Messages messages){
         return new ForeignRulesHintHelper(messages);
     }
 
