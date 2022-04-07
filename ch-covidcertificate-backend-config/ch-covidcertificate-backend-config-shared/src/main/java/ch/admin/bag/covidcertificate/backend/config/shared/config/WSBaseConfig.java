@@ -14,6 +14,7 @@ import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.EolBannerInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.ForeignRulesHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
@@ -100,6 +101,11 @@ public abstract class WSBaseConfig implements WebMvcConfigurer {
     @Bean
     public RefreshButtonInfoHelper refreshButtonInfoHelper(Messages messages) {
         return new RefreshButtonInfoHelper(messages);
+    }
+
+    @Bean
+    public ForeignRulesHintHelper foreignRulesHintHelper(Messages messages){
+        return new ForeignRulesHintHelper(messages);
     }
 
     @Bean

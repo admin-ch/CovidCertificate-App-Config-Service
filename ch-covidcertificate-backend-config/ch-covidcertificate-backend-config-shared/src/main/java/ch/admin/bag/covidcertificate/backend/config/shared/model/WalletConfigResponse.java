@@ -17,11 +17,23 @@ public class WalletConfigResponse extends ConfigResponse {
     private Boolean lightCertificateActive;
 
     @Documentation(
+            description = "feature flag for the travel check feature"
+    )
+    private Boolean isForeignRulesCheckEnabled;
+
+    @Documentation(
             description = "feature flag. when set to true the pdf generation feature is available")
     private Boolean pdfGenerationActive;
 
     @Documentation(description = "Holds vaccination hints by language")
-    private Map<Language, List<VaccinationHint>> vaccinationHints = null;
+    private Map<Language, List<VaccinationHint>>  vaccinationHints = null;
+
+    @Documentation(description = "Hint icons and texts for the travel (aka foreign rules) check")
+    private Map<Language, List<ForeignRulesHint>> foreignRulesHints;
+
+    private Map<Language, String> foreignRulesLinkText;
+
+    private Map<Language, String> foreignRulesLinkUrl;
 
     @Documentation(description = "Holds vaccination booking infos for cantons by language")
     private Map<Language, List<VaccinationBookingCanton>> vaccinationBookingCantons = null;
@@ -116,6 +128,33 @@ public class WalletConfigResponse extends ConfigResponse {
         return vaccinationBookingInfo;
     }
 
+    public Map<Language, List<ForeignRulesHint>> getForeignRulesHints() {
+        return foreignRulesHints;
+    }
+
+    public void setForeignRulesHints(
+            Map<Language, List<ForeignRulesHint>> foreignRulesHints) {
+        this.foreignRulesHints = foreignRulesHints;
+    }
+
+    public Map<Language, String> getForeignRulesLinkText() {
+        return foreignRulesLinkText;
+    }
+
+    public void setForeignRulesLinkText(
+            Map<Language, String> foreignRulesLinkText) {
+        this.foreignRulesLinkText = foreignRulesLinkText;
+    }
+
+    public Map<Language, String> getForeignRulesLinkUrl() {
+        return foreignRulesLinkUrl;
+    }
+
+    public void setForeignRulesLinkUrl(
+            Map<Language, String> foreignRulesLinkUrl) {
+        this.foreignRulesLinkUrl = foreignRulesLinkUrl;
+    }
+
     public void setVaccinationBookingInfo(
             Map<Language, VaccinationBookingInfo> vaccinationBookingInfo) {
         this.vaccinationBookingInfo = vaccinationBookingInfo;
@@ -183,5 +222,13 @@ public class WalletConfigResponse extends ConfigResponse {
 
     public void setEolBannerInfo(Map<Language, Map<String, EolBannerInfo>> eolBannerInfo) {
         this.eolBannerInfo = eolBannerInfo;
+    }
+
+    public Boolean getForeignRulesCheckEnabled() {
+        return isForeignRulesCheckEnabled;
+    }
+
+    public void setForeignRulesCheckEnabled(Boolean foreignRulesCheckEnabled) {
+        isForeignRulesCheckEnabled = foreignRulesCheckEnabled;
     }
 }
