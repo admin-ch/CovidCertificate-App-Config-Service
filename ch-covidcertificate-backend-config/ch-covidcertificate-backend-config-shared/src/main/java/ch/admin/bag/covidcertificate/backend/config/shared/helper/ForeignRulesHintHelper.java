@@ -23,7 +23,7 @@ public class ForeignRulesHintHelper {
 
     private static final String FOREIGN_RULES_HINTS_PREFIX = "wallet_foreign_rules_check_hint_";
 
-    private static final String[] FOREIGN_RULES_HINT_ICONS = { "ic_timelapse", "ic_travel", "ic_info_outline", "ic_question_outline"};
+    private static final String[] FOREIGN_RULES_HINT_ICONS = { "ic_info_outline", "ic_timelapse", "ic_travel",  "ic_question_outline"};
 
     private final Messages msg;
 
