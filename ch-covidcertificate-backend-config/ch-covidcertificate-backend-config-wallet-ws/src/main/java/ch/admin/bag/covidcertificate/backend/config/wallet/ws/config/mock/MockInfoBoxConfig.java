@@ -41,6 +41,7 @@ public class MockInfoBoxConfig {
             @Value("${ws.wallet.timeshiftDetection.enabled:true}") boolean timeshiftDetectionFlag,
             @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
             @Value("${ws.wallet.foreignRules.enabled}")boolean foreignRulesEnabled,
+            @Value("${ws.wallet.ratConversion.enabled}")boolean ratConversionEnabled,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
             EolBannerInfoHelper eolBannerInfoHelper,
             ForeignRulesHintHelper foreignRulesHintHelper) {
@@ -58,6 +59,7 @@ public class MockInfoBoxConfig {
                 timeshiftDetectionFlag,
                 refreshButtonDisabled,
                 foreignRulesEnabled,
+                ratConversionEnabled,
                 refreshButtonInfoHelper,
                 eolBannerInfoHelper,
                 foreignRulesHintHelper);
@@ -79,6 +81,7 @@ public class MockInfoBoxConfig {
                 boolean timeshiftDetectionFlag,
                 boolean refreshButtonDisabled,
                 boolean foreignRulesEnabled,
+                boolean ratConversionEnabled,
                 RefreshButtonInfoHelper refreshButtonInfoHelper,
                 EolBannerInfoHelper eolBannerInfoHelper,
                 ForeignRulesHintHelper foreignRulesHintHelper) {
@@ -96,6 +99,7 @@ public class MockInfoBoxConfig {
                     timeshiftDetectionFlag,
                     refreshButtonDisabled,
                     foreignRulesEnabled,
+                    ratConversionEnabled,
                     refreshButtonInfoHelper,
                     eolBannerInfoHelper,
                     foreignRulesHintHelper);

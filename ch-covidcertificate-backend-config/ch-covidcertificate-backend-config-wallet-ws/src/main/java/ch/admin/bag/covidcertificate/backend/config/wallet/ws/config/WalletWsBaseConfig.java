@@ -45,6 +45,7 @@ public abstract class WalletWsBaseConfig {
                     boolean timeshiftDetectionEnabled,
             @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
             @Value("${ws.wallet.foreignRules.enabled:false}") boolean foreignRulesEnabled,
+            @Value("${ws.wallet.ratConversion.enabled}")boolean ratConversionEnabled,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
             EolBannerInfoHelper eolBannerInfoHelper,
             ForeignRulesHintHelper foreignRulesHintHelper) {
@@ -62,6 +63,7 @@ public abstract class WalletWsBaseConfig {
                 timeshiftDetectionEnabled,
                 refreshButtonDisabled,
                 foreignRulesEnabled,
+                ratConversionEnabled,
                 refreshButtonInfoHelper,
                 eolBannerInfoHelper,
                 foreignRulesHintHelper);
