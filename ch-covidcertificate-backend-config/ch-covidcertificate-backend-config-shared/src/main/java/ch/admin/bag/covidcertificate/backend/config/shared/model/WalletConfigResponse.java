@@ -79,6 +79,32 @@ public class WalletConfigResponse extends ConfigResponse {
         return transferQuestions;
     }
 
+    @Documentation(
+            description = "feature flag to show the link to the RAT recovery cert conversion form"
+    )
+    private Boolean showRatConversionForm;
+
+    @Documentation(
+            description = "URL to the RAT recovery conversion form"
+    )
+    private String ratConversionFormUrl;
+
+    public String getRatConversionFormUrl() {
+        return ratConversionFormUrl;
+    }
+
+    public void setRatConversionFormUrl(String ratConversionFormUrl) {
+        this.ratConversionFormUrl = ratConversionFormUrl;
+    }
+
+    public Boolean getShowRatConversionForm() {
+        return showRatConversionForm;
+    }
+
+    public void setShowRatConversionForm(Boolean showRatConversionForm) {
+        this.showRatConversionForm = showRatConversionForm;
+    }
+
     public void setTransferQuestions(Map<Language, Faq> transferQuestions) {
         this.transferQuestions = transferQuestions;
     }

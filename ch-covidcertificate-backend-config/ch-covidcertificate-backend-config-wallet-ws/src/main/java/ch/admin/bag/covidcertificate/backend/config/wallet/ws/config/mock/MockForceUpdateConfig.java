@@ -47,6 +47,7 @@ public class MockForceUpdateConfig {
             @Value("${ws.wallet.timeshiftDetection.enabled:true}") boolean timeshiftDetectionFlag,
             @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
             @Value("${ws.wallet.foreignRules.enabled}") boolean foreignRulesEnabled,
+            @Value("${ws.wallet.ratConversion.enabled}")boolean ratConversionEnabled,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
             EolBannerInfoHelper eolBannerInfoHelper,
             ForeignRulesHintHelper foreignRulesHintHelper) {
@@ -64,6 +65,7 @@ public class MockForceUpdateConfig {
                 timeshiftDetectionFlag,
                 refreshButtonDisabled,
                 foreignRulesEnabled,
+                ratConversionEnabled,
                 refreshButtonInfoHelper,
                 eolBannerInfoHelper,
                 foreignRulesHintHelper);
@@ -85,6 +87,7 @@ public class MockForceUpdateConfig {
                 boolean timeshiftDetectionFlag,
                 boolean refreshButtonDisabled,
                 boolean foreignRulesEnabled,
+                boolean ratConversionEnabled,
                 RefreshButtonInfoHelper refreshButtonInfoHelper,
                 EolBannerInfoHelper eolBannerInfoHelper,
                 ForeignRulesHintHelper foreignRulesHintHelper) {
@@ -102,6 +105,7 @@ public class MockForceUpdateConfig {
                     timeshiftDetectionFlag,
                     refreshButtonDisabled,
                     foreignRulesEnabled,
+                    ratConversionEnabled,
                     refreshButtonInfoHelper,
                     eolBannerInfoHelper,
                     foreignRulesHintHelper);
