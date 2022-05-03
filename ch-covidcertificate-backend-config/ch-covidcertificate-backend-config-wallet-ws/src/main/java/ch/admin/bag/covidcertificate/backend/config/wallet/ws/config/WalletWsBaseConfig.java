@@ -46,6 +46,7 @@ public abstract class WalletWsBaseConfig {
             @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
             @Value("${ws.wallet.foreignRules.enabled:false}") boolean foreignRulesEnabled,
             @Value("${ws.wallet.ratConversion.enabled}")boolean ratConversionEnabled,
+            @Value("${ws.wallet.ratConversion.url}")String ratFormUrl,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
             EolBannerInfoHelper eolBannerInfoHelper,
             ForeignRulesHintHelper foreignRulesHintHelper) {
@@ -64,6 +65,7 @@ public abstract class WalletWsBaseConfig {
                 refreshButtonDisabled,
                 foreignRulesEnabled,
                 ratConversionEnabled,
+                ratFormUrl,
                 refreshButtonInfoHelper,
                 eolBannerInfoHelper,
                 foreignRulesHintHelper);

@@ -66,6 +66,7 @@ public class WalletConfigController {
     private final boolean refreshButtonDisabled;
     private final boolean foreignRulesEnabled;
     private final boolean ratConversionEnabled;
+    private final String ratFormUrl;
 
     private final boolean timeShiftDetectionEnabled;
 
@@ -86,6 +87,7 @@ public class WalletConfigController {
             boolean refreshButtonDisabled,
             boolean foreignRulesEnabled,
             boolean ratConversionEnabled,
+            String ratFormUrl,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
             EolBannerInfoHelper eolBannerInfoHelper,
             ForeignRulesHintHelper foreignRulesHintHelper) {
@@ -104,6 +106,7 @@ public class WalletConfigController {
         this.refreshButtonInfoHelper = refreshButtonInfoHelper;
         this.foreignRulesEnabled = foreignRulesEnabled;
         this.ratConversionEnabled = ratConversionEnabled;
+        this.ratFormUrl = ratFormUrl;
         this.eolBannerInfoHelper = eolBannerInfoHelper;
         this.foreignRulesHintHelper = foreignRulesHintHelper;
     }
@@ -163,7 +166,7 @@ public class WalletConfigController {
 
         configResponse.setForeignRulesCheckEnabled(foreignRulesEnabled);
 
-        configResponse.setRatConversionFormUrl(messages.getMessage("wallet_rat_recovery_conversion_url"));
+        configResponse.setRatConversionFormUrl(ratFormUrl);
         configResponse.setShowRatConversionForm(ratConversionEnabled);
 
         if (clientAppVersion.isSmallerVersionThan(DEACTIVATE_PDF_BELOW_2_2_0)) {

@@ -48,6 +48,7 @@ public class MockForceUpdateConfig {
             @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
             @Value("${ws.wallet.foreignRules.enabled}") boolean foreignRulesEnabled,
             @Value("${ws.wallet.ratConversion.enabled}")boolean ratConversionEnabled,
+            @Value("${ws.wallet.ratConversion.url}")String ratFormUrl,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
             EolBannerInfoHelper eolBannerInfoHelper,
             ForeignRulesHintHelper foreignRulesHintHelper) {
@@ -66,6 +67,7 @@ public class MockForceUpdateConfig {
                 refreshButtonDisabled,
                 foreignRulesEnabled,
                 ratConversionEnabled,
+                ratFormUrl,
                 refreshButtonInfoHelper,
                 eolBannerInfoHelper,
                 foreignRulesHintHelper);
@@ -88,6 +90,7 @@ public class MockForceUpdateConfig {
                 boolean refreshButtonDisabled,
                 boolean foreignRulesEnabled,
                 boolean ratConversionEnabled,
+                String ratFormUrl,
                 RefreshButtonInfoHelper refreshButtonInfoHelper,
                 EolBannerInfoHelper eolBannerInfoHelper,
                 ForeignRulesHintHelper foreignRulesHintHelper) {
@@ -106,6 +109,7 @@ public class MockForceUpdateConfig {
                     refreshButtonDisabled,
                     foreignRulesEnabled,
                     ratConversionEnabled,
+                    ratFormUrl,
                     refreshButtonInfoHelper,
                     eolBannerInfoHelper,
                     foreignRulesHintHelper);
