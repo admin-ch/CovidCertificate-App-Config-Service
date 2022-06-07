@@ -45,7 +45,7 @@ public class MockFaqLinkConfig {
             @Value("${ws.wallet.timeshiftDetection.enabled:true}")
                     boolean timeShiftDetectionEnabled,
             @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
-            @Value("${ws.wallet.foreignRules.enabled}") boolean foreignRulesEnabled,
+            @Value("${ws.wallet.foreignRules.enabled:false}") boolean foreignRulesEnabled,
             @Value("${ws.wallet.ratConversion.enabled}") boolean ratConversionEnabled,
             @Value("${ws.wallet.ratConversion.url}") String ratFormUrl,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
