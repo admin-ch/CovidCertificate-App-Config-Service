@@ -19,7 +19,13 @@ public enum Icon {
     TEST_CERT("ic-t", "ic_t"),
 
     CERT_LIGHT_YES("ic-qr-certificate-light", "ic_qr_certificate_light"),
-    CERT_LIGHT_NO("ic-qr-certificate-light-no", "ic_qr_certificate_light_no");
+    CERT_LIGHT_NO("ic-qr-certificate-light-no", "ic_qr_certificate_light_no"),
+
+    CLOCK_X("ic-timeerror", "ic_timeerror"),
+    QR_CERT("ic-qr-certificate", "ic_qr_certificate"),
+    CLOUD("ic-online", "ic_online"),
+    GLOBE("ic-travel", "ic_travel"),
+    PDF("ic-pdf", "ic_pdf");
 
     private String ios;
     private String android;

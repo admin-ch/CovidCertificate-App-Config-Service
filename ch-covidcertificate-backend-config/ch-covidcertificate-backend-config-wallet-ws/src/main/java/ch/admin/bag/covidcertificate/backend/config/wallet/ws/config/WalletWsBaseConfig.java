@@ -10,6 +10,7 @@
 
 package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CertRenewalInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.EolBannerInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
@@ -45,11 +46,12 @@ public abstract class WalletWsBaseConfig {
                     boolean timeshiftDetectionEnabled,
             @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
             @Value("${ws.wallet.foreignRules.enabled:false}") boolean foreignRulesEnabled,
-            @Value("${ws.wallet.ratConversion.enabled}")boolean ratConversionEnabled,
-            @Value("${ws.wallet.ratConversion.url}")String ratFormUrl,
+            @Value("${ws.wallet.ratConversion.enabled}") boolean ratConversionEnabled,
+            @Value("${ws.wallet.ratConversion.url}") String ratFormUrl,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
             EolBannerInfoHelper eolBannerInfoHelper,
-            ForeignRulesHintHelper foreignRulesHintHelper) {
+            ForeignRulesHintHelper foreignRulesHintHelper,
+            CertRenewalInfoHelper certRenewalInfoHelper) {
         return new WalletConfigController(
                 messages,
                 checkModeInfoHelper,
@@ -68,6 +70,7 @@ public abstract class WalletWsBaseConfig {
                 ratFormUrl,
                 refreshButtonInfoHelper,
                 eolBannerInfoHelper,
-                foreignRulesHintHelper);
+                foreignRulesHintHelper,
+                certRenewalInfoHelper);
     }
 }

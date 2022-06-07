@@ -1,3 +1,3 @@
 package ch.admin.bag.covidcertificate.backend.config.shared.model;
 
-public class VerifierModeInfoEntry extends IconWithText {}
+public class CertRenewalInfoEntry extends IconWithText {}

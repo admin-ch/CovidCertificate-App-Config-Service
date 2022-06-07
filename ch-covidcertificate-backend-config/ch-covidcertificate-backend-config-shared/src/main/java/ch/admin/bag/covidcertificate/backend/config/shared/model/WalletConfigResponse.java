@@ -16,9 +16,7 @@ public class WalletConfigResponse extends ConfigResponse {
                     "feature flag. when set to true the light certificate feature is available")
     private Boolean lightCertificateActive;
 
-    @Documentation(
-            description = "feature flag for the travel check feature"
-    )
+    @Documentation(description = "feature flag for the travel check feature")
     private Boolean isForeignRulesCheckEnabled;
 
     @Documentation(
@@ -26,7 +24,7 @@ public class WalletConfigResponse extends ConfigResponse {
     private Boolean pdfGenerationActive;
 
     @Documentation(description = "Holds vaccination hints by language")
-    private Map<Language, List<VaccinationHint>>  vaccinationHints = null;
+    private Map<Language, List<VaccinationHint>> vaccinationHints = null;
 
     @Documentation(description = "Hint icons and texts for the travel (aka foreign rules) check")
     private Map<Language, List<ForeignRulesHint>> foreignRulesHints;
@@ -80,14 +78,14 @@ public class WalletConfigResponse extends ConfigResponse {
     }
 
     @Documentation(
-            description = "feature flag to show the link to the RAT recovery cert conversion form"
-    )
+            description = "feature flag to show the link to the RAT recovery cert conversion form")
     private Boolean showRatConversionForm;
 
-    @Documentation(
-            description = "URL to the RAT recovery conversion form"
-    )
+    @Documentation(description = "URL to the RAT recovery conversion form")
     private String ratConversionFormUrl;
+
+    @Documentation(description = "Holds info texts for certificate renewal by language and type")
+    private Map<Language, Map<CertRenewalInfoType, CertRenewalInfos>> certRenewalInfo;
 
     public String getRatConversionFormUrl() {
         return ratConversionFormUrl;
@@ -158,8 +156,7 @@ public class WalletConfigResponse extends ConfigResponse {
         return foreignRulesHints;
     }
 
-    public void setForeignRulesHints(
-            Map<Language, List<ForeignRulesHint>> foreignRulesHints) {
+    public void setForeignRulesHints(Map<Language, List<ForeignRulesHint>> foreignRulesHints) {
         this.foreignRulesHints = foreignRulesHints;
     }
 
@@ -167,8 +164,7 @@ public class WalletConfigResponse extends ConfigResponse {
         return foreignRulesLinkText;
     }
 
-    public void setForeignRulesLinkText(
-            Map<Language, String> foreignRulesLinkText) {
+    public void setForeignRulesLinkText(Map<Language, String> foreignRulesLinkText) {
         this.foreignRulesLinkText = foreignRulesLinkText;
     }
 
@@ -176,8 +172,7 @@ public class WalletConfigResponse extends ConfigResponse {
         return foreignRulesLinkUrl;
     }
 
-    public void setForeignRulesLinkUrl(
-            Map<Language, String> foreignRulesLinkUrl) {
+    public void setForeignRulesLinkUrl(Map<Language, String> foreignRulesLinkUrl) {
         this.foreignRulesLinkUrl = foreignRulesLinkUrl;
     }
 
@@ -256,5 +251,14 @@ public class WalletConfigResponse extends ConfigResponse {
 
     public void setForeignRulesCheckEnabled(Boolean foreignRulesCheckEnabled) {
         isForeignRulesCheckEnabled = foreignRulesCheckEnabled;
+    }
+
+    public Map<Language, Map<CertRenewalInfoType, CertRenewalInfos>> getCertRenewalInfo() {
+        return certRenewalInfo;
+    }
+
+    public void setCertRenewalInfo(
+            Map<Language, Map<CertRenewalInfoType, CertRenewalInfos>> certRenewalInfo) {
+        this.certRenewalInfo = certRenewalInfo;
     }
 }
