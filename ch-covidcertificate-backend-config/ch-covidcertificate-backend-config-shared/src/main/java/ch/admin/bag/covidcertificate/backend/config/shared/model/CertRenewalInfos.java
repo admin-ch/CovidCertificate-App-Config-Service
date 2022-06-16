@@ -8,6 +8,8 @@ public class CertRenewalInfos {
 
     @NotNull private String heading;
     @NotNull private final List<CertRenewalInfoEntry> infos = new ArrayList<>();
+    @NotNull private String faqLinkText;
+    @NotNull private String faqLinkUrl;
 
     public String getHeading() {
         return heading;
@@ -23,5 +25,21 @@ public class CertRenewalInfos {
 
     public void addInfo(CertRenewalInfoEntry infoEntry) {
         this.infos.add(infoEntry);
+    }
+
+    public String getFaqLinkText() {
+        return faqLinkText;
+    }
+
+    public void setFaqLinkText(String faqLinkText) {
+        this.faqLinkText = faqLinkText;
+    }
+
+    public String getFaqLinkUrl() {
+        return faqLinkUrl;
+    }
+
+    public void setFaqLinkUrl(String faqLinkUrl) {
+        this.faqLinkUrl = faqLinkUrl;
     }
 }
