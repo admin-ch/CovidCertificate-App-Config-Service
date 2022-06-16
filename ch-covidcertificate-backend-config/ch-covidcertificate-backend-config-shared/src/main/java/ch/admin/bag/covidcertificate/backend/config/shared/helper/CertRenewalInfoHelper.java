@@ -39,8 +39,8 @@ public class CertRenewalInfoHelper {
                                         type.getPoeditorIdentifier(),
                                         "heading"),
                                 l));
-                infos.setFaqLinkText(msg.getMessage("wallet_certificate_renewal_faq_link_text"));
-                infos.setFaqLinkUrl(msg.getMessage("wallet_certificate_renewal_faq_link_url"));
+                infos.setFaqLinkText(msg.getMessage("wallet_certificate_renewal_faq_link_text", l));
+                infos.setFaqLinkUrl(msg.getMessage("wallet_certificate_renewal_faq_link_url", l));
 
                 for (EntryIconConfig entryIconConfig : type.getConfig()) {
                     final CertRenewalInfoEntry info = new CertRenewalInfoEntry();
