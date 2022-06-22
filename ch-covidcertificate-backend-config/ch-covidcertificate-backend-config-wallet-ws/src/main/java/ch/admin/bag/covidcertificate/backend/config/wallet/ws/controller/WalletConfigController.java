@@ -11,6 +11,7 @@
 package ch.admin.bag.covidcertificate.backend.config.wallet.ws.controller;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CertRenewalInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.EolBannerInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
@@ -19,7 +20,6 @@ import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.RefreshButtonInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.VaccinationHintHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
-import ch.admin.bag.covidcertificate.backend.config.shared.model.ForeignRulesHint;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.WalletConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.shared.semver.Version;
@@ -60,6 +60,7 @@ public class WalletConfigController {
 
     private final VaccinationHintHelper vaccinationHintHelper;
     private final ForeignRulesHintHelper foreignRulesHintHelper;
+    private final CertRenewalInfoHelper certRenewalInfoHelper;
     private final boolean showVaccinationHintHomescreen;
     private final boolean showVaccinationHintDetail;
     private final boolean showVaccinationHintTransfer;
@@ -90,7 +91,8 @@ public class WalletConfigController {
             String ratFormUrl,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
             EolBannerInfoHelper eolBannerInfoHelper,
-            ForeignRulesHintHelper foreignRulesHintHelper) {
+            ForeignRulesHintHelper foreignRulesHintHelper,
+            CertRenewalInfoHelper certRenewalInfoHelper) {
         this.messages = messages;
         this.checkModeInfoHelper = checkModeInfoHelper;
         this.faqHelper = faqHelper;
@@ -109,6 +111,7 @@ public class WalletConfigController {
         this.ratFormUrl = ratFormUrl;
         this.eolBannerInfoHelper = eolBannerInfoHelper;
         this.foreignRulesHintHelper = foreignRulesHintHelper;
+        this.certRenewalInfoHelper = certRenewalInfoHelper;
     }
 
     @Documentation(
@@ -169,6 +172,8 @@ public class WalletConfigController {
         configResponse.setRatConversionFormUrl(ratFormUrl);
         configResponse.setShowRatConversionForm(ratConversionEnabled);
 
+        configResponse.setCertRenewalInfo(certRenewalInfoHelper.getInfo());
+
         if (clientAppVersion.isSmallerVersionThan(DEACTIVATE_PDF_BELOW_2_2_0)) {
             configResponse.setPdfGenerationActive(false);
         } else {
@@ -184,7 +189,6 @@ public class WalletConfigController {
         }*/
 
         configResponse.setInfoBox(infoBoxHelper.getGenericInfoBox(clientAppVersion.isAndroid()));
-
 
         replacePoeditorPlaceHolders(configResponse, clientAppVersion);
 

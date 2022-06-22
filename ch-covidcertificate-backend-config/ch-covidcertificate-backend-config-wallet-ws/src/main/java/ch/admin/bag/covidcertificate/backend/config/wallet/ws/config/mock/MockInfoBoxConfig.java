@@ -1,5 +1,6 @@
 package ch.admin.bag.covidcertificate.backend.config.wallet.ws.config.mock;
 
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CertRenewalInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.EolBannerInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
@@ -40,12 +41,13 @@ public class MockInfoBoxConfig {
                     boolean showVaccinationHintTransfer,
             @Value("${ws.wallet.timeshiftDetection.enabled:true}") boolean timeshiftDetectionFlag,
             @Value("${ws.wallet.refreshButton.disabled}") boolean refreshButtonDisabled,
-            @Value("${ws.wallet.foreignRules.enabled}")boolean foreignRulesEnabled,
-            @Value("${ws.wallet.ratConversion.enabled}")boolean ratConversionEnabled,
-            @Value("${ws.wallet.ratConversion.url}")String ratFormUrl,
+            @Value("${ws.wallet.foreignRules.enabled:false}") boolean foreignRulesEnabled,
+            @Value("${ws.wallet.ratConversion.enabled}") boolean ratConversionEnabled,
+            @Value("${ws.wallet.ratConversion.url}") String ratFormUrl,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
             EolBannerInfoHelper eolBannerInfoHelper,
-            ForeignRulesHintHelper foreignRulesHintHelper) {
+            ForeignRulesHintHelper foreignRulesHintHelper,
+            CertRenewalInfoHelper certRenewalInfoHelper) {
         return new MockConfigController(
                 messages,
                 checkModeInfoHelper,
@@ -64,7 +66,8 @@ public class MockInfoBoxConfig {
                 ratFormUrl,
                 refreshButtonInfoHelper,
                 eolBannerInfoHelper,
-                foreignRulesHintHelper);
+                foreignRulesHintHelper,
+                certRenewalInfoHelper);
     }
 
     public class MockConfigController extends WalletConfigController {
@@ -87,7 +90,8 @@ public class MockInfoBoxConfig {
                 String ratFormUrl,
                 RefreshButtonInfoHelper refreshButtonInfoHelper,
                 EolBannerInfoHelper eolBannerInfoHelper,
-                ForeignRulesHintHelper foreignRulesHintHelper) {
+                ForeignRulesHintHelper foreignRulesHintHelper,
+                CertRenewalInfoHelper certRenewalInfoHelper) {
             super(
                     messages,
                     checkModeInfoHelper,
@@ -106,7 +110,8 @@ public class MockInfoBoxConfig {
                     ratFormUrl,
                     refreshButtonInfoHelper,
                     eolBannerInfoHelper,
-                    foreignRulesHintHelper);
+                    foreignRulesHintHelper,
+                    certRenewalInfoHelper);
         }
 
         @Override
