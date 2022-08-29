@@ -88,7 +88,7 @@ public class WalletConfigResponse extends ConfigResponse {
     private Map<Language, Map<CertRenewalInfoType, CertRenewalInfos>> certRenewalInfo;
 
     @Documentation(description = "True means only start of cert validity is shown, not the end")
-    private boolean showValiditySince;
+    private boolean showValidityState;
 
     public String getRatConversionFormUrl() {
         return ratConversionFormUrl;
@@ -265,11 +265,11 @@ public class WalletConfigResponse extends ConfigResponse {
         this.certRenewalInfo = certRenewalInfo;
     }
 
-    public void setShowValiditySince(boolean showValiditySince) {
-        this.showValiditySince = showValiditySince;
+    public void setShowValidityState(boolean showValidityState) {
+        this.showValidityState = showValidityState;
     }
 
-    public boolean getShowValiditySince(){
-        return showValiditySince;
+    public boolean getShowValidityState(){
+        return showValidityState;
     }
 }

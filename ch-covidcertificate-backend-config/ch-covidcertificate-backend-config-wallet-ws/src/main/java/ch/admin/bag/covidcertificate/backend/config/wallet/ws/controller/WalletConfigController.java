@@ -68,7 +68,7 @@ public class WalletConfigController {
     private final boolean foreignRulesEnabled;
     private final boolean ratConversionEnabled;
     private final String ratFormUrl;
-    private final boolean showValiditySince;
+    private final boolean showValidityState;
 
     private final boolean timeShiftDetectionEnabled;
 
@@ -90,7 +90,7 @@ public class WalletConfigController {
             boolean foreignRulesEnabled,
             boolean ratConversionEnabled,
             String ratFormUrl,
-            boolean showValiditySince,
+            boolean showValidityState,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
             EolBannerInfoHelper eolBannerInfoHelper,
             ForeignRulesHintHelper foreignRulesHintHelper,
@@ -111,7 +111,7 @@ public class WalletConfigController {
         this.foreignRulesEnabled = foreignRulesEnabled;
         this.ratConversionEnabled = ratConversionEnabled;
         this.ratFormUrl = ratFormUrl;
-        this.showValiditySince = showValiditySince;
+        this.showValidityState = showValidityState;
         this.eolBannerInfoHelper = eolBannerInfoHelper;
         this.foreignRulesHintHelper = foreignRulesHintHelper;
         this.certRenewalInfoHelper = certRenewalInfoHelper;
@@ -175,7 +175,7 @@ public class WalletConfigController {
         configResponse.setRatConversionFormUrl(ratFormUrl);
         configResponse.setShowRatConversionForm(ratConversionEnabled);
 
-        configResponse.setShowValiditySince(showValiditySince);
+        configResponse.setShowValidityState(showValidityState);
 
         configResponse.setCertRenewalInfo(certRenewalInfoHelper.getInfo());
 
