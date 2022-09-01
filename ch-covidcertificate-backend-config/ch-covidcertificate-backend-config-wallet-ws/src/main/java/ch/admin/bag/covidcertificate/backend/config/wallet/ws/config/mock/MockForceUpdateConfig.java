@@ -50,7 +50,7 @@ public class MockForceUpdateConfig {
             @Value("${ws.wallet.foreignRules.enabled:false}") boolean foreignRulesEnabled,
             @Value("${ws.wallet.ratConversion.enabled}") boolean ratConversionEnabled,
             @Value("${ws.wallet.ratConversion.url}") String ratFormUrl,
-            @Value("${ws.wallet.ratConversion.url}") boolean showValidityState,
+            @Value("${ws.wallet.showValidityState}") boolean showValidityState,
             RefreshButtonInfoHelper refreshButtonInfoHelper,
             EolBannerInfoHelper eolBannerInfoHelper,
             ForeignRulesHintHelper foreignRulesHintHelper,
