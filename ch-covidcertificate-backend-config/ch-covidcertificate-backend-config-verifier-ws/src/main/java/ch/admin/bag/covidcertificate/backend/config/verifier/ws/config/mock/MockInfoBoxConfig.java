@@ -1,6 +1,7 @@
 package ch.admin.bag.covidcertificate.backend.config.verifier.ws.config.mock;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CovidCertNewsHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.MockHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.VerifierConfigResponse;
@@ -23,10 +24,13 @@ public class MockInfoBoxConfig {
             Messages messages,
             CheckModeInfoHelper checkModeInfoHelper,
             FaqHelper faqHelper,
+            CovidCertNewsHelper covidCertNewsHelper,
             @Value("${ws.verifier.timeshiftDetection.enabled:false}")
-                    boolean timeshiftDetectionEnabled) {
+                    boolean timeshiftDetectionEnabled,
+            @Value("${ws.verifier.checkModeReselectionAfterHours:48}")
+            int checkModeReselectionAfterHours) {
         return new MockConfigController(
-                messages, checkModeInfoHelper, faqHelper, timeshiftDetectionEnabled);
+                messages, checkModeInfoHelper, faqHelper, covidCertNewsHelper, timeshiftDetectionEnabled , checkModeReselectionAfterHours);
     }
 
     public class MockConfigController extends VerifierConfigController {
@@ -35,8 +39,10 @@ public class MockInfoBoxConfig {
                 Messages messages,
                 CheckModeInfoHelper checkModeInfoHelper,
                 FaqHelper faqHelper,
-                boolean timeshiftDetectionEnabled) {
-            super(messages, checkModeInfoHelper, faqHelper, timeshiftDetectionEnabled);
+                CovidCertNewsHelper covidCertNewsHelper,
+                boolean timeshiftDetectionEnabled,
+                int checkModeReselectionAfterHours) {
+            super(messages, checkModeInfoHelper, faqHelper, covidCertNewsHelper, timeshiftDetectionEnabled, checkModeReselectionAfterHours);
         }
 
         @Override

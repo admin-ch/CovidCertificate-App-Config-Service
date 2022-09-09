@@ -12,6 +12,7 @@ package ch.admin.bag.covidcertificate.backend.config.verifier.ws.controller;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CovidCertNewsHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.VerifierConfigResponse;
@@ -41,17 +42,23 @@ public class VerifierConfigController {
 
     private static final Logger logger = LoggerFactory.getLogger(VerifierConfigController.class);
 
+    private final CovidCertNewsHelper covidCertNewsHelper;
     private final boolean timeshiftDetectionEnabled;
+    private final int checkModeReselectAfterHours;
 
     public VerifierConfigController(
             Messages messages,
             CheckModeInfoHelper checkModeInfoHelper,
             FaqHelper faqHelper,
-            boolean timeshiftDetectionEnabled) {
+            CovidCertNewsHelper covidCertNewsHelper,
+            boolean timeshiftDetectionEnabled,
+            int checkModeReselectAfterHours) {
         this.messages = messages;
         this.checkModeInfoHelper = checkModeInfoHelper;
         this.faqHelper = faqHelper;
+        this.covidCertNewsHelper = covidCertNewsHelper;
         this.timeshiftDetectionEnabled = timeshiftDetectionEnabled;
+        this.checkModeReselectAfterHours = checkModeReselectAfterHours;
     }
 
     @Documentation(
@@ -82,9 +89,10 @@ public class VerifierConfigController {
         var configResponse = new VerifierConfigResponse();
         configResponse.setWorks(faqHelper.getVerifierFaqWorks());
         configResponse.setCheckModesInfos(checkModeInfoHelper.getVerifierCheckModesInfos());
-        configResponse.setCheckModeReselectAfterHours(48);
+        configResponse.setCheckModeReselectAfterHours(checkModeReselectAfterHours);
         configResponse.setTimeshiftDetectionEnabled(timeshiftDetectionEnabled);
-
+        configResponse.setCovidCertificateNewsText(covidCertNewsHelper.getNewsText());
+        configResponse.setInfoCovidCertificateNews(covidCertNewsHelper.getNews());
         Version clientAppVersion = new Version(appversion);
         if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)) {
             configResponse.setForceUpdate(true);

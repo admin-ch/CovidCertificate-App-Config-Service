@@ -11,6 +11,7 @@
 package ch.admin.bag.covidcertificate.backend.config.verifier.ws.config;
 
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CovidCertNewsHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.verifier.ws.controller.VerifierConfigController;
@@ -25,10 +26,13 @@ public abstract class VerifierWsBaseConfig {
     public VerifierConfigController verifierConfigController(
             Messages messages,
             CheckModeInfoHelper checkModeInfoHelper,
+            CovidCertNewsHelper covidCertNewsHelper,
             FaqHelper faqHelper,
             @Value("${ws.verifier.timeshiftDetection.enabled:false}")
-                    boolean timeShiftDetectionEnabled) {
+                    boolean timeShiftDetectionEnabled,
+            @Value("${ws.verifier.checkModeReselectionAfterHours:48}")
+                    int checkModeReselectionAfterHours) {
         return new VerifierConfigController(
-                messages, checkModeInfoHelper, faqHelper, timeShiftDetectionEnabled);
+                messages, checkModeInfoHelper, faqHelper, covidCertNewsHelper, timeShiftDetectionEnabled, checkModeReselectionAfterHours);
     }
 }
