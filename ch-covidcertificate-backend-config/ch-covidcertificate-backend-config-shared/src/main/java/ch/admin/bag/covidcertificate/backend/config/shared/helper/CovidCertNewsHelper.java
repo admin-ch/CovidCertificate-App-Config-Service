@@ -30,7 +30,7 @@ public class CovidCertNewsHelper {
             result.get(language).setNewsItems(new ArrayList<>());
             for(int i = 0; i < NEWS_ITEM_ICONS.length; i++){
                 var newsItem = new CovidCertificateNewsItem();
-                newsItem.setText(msg.getMessage(String.format("%s%s%d", NEWS_PREFIX, "item_", i+1), language.toLocale()));
+                newsItem.setText(msg.getMessage(String.format("%s%s%d", NEWS_PREFIX, "item", i+1), language.toLocale()));
                 newsItem.setIconAndroid(NEWS_ITEM_ICONS[i]);
                 newsItem.setIconIos(NEWS_ITEM_ICONS[i].replace("_", "-"));
                 result.get(language).getNewsItems().add(newsItem);
