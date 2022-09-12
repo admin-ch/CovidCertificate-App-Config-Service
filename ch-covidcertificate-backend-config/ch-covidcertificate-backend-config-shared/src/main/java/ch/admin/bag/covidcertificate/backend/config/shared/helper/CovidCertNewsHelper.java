@@ -14,7 +14,7 @@ public class CovidCertNewsHelper {
 
     private static final String NEWS_PREFIX = "covid_certificate_news_";
 
-    private static final String[] NEWS_ITEM_ICONS = { "ic_info_outline", "ic_timelapse", "ic_travel",  "ic_question_outline"};
+    private static final String[] NEWS_ITEM_ICONS = {"ic_bund_small","ic_timelapse_blue", "ic_phone", "ic_travel"};
 
     private final Messages msg;
 
