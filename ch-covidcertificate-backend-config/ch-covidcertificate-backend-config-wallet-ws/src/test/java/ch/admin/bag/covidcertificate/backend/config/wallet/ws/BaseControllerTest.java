@@ -326,7 +326,7 @@ public abstract class BaseControllerTest {
 
         // true for those faq entries where a link is set
         List<Boolean> isLinkSetList =
-                List.of(false, false, false, true, false, false, false, false);
+                List.of(false, true, false, true, false, false, false, false);
         assertEquals(faqEntryCount, isLinkSetList.size());
 
         ConfigAsserter.assertFaq(
@@ -359,7 +359,7 @@ public abstract class BaseControllerTest {
                         "How can I add a COVID certificate to the app?",
                         "Can several COVID certificates be added?",
                         "What is a transfer code?",
-                        "How can I see if my COVID certificate is valid?",
+                        "Where can I see if my COVID certificate is valid?",
                         "Can I use the app offline?",
                         "How is my data protected?",
                         "What data is contained in the QR code?",
