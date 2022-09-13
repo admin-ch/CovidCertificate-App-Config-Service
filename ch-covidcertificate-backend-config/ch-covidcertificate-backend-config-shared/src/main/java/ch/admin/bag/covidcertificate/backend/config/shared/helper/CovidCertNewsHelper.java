@@ -27,6 +27,7 @@ public class CovidCertNewsHelper {
         Map<Language, InfoCovidCertificateNews> result = new EnumMap<>(Language.class);
         for (Language language : Language.values()) {
             result.put(language, new InfoCovidCertificateNews());
+            result.get(language).setTitle(msg.getMessage("covid_certificate_news_title", language.toLocale()));
             result.get(language).setNewsItems(new ArrayList<>());
             for(int i = 0; i < NEWS_ITEM_ICONS.length; i++){
                 var newsItem = new CovidCertificateNewsItem();
