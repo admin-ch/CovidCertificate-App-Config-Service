@@ -309,7 +309,7 @@ public abstract class BaseControllerTest {
                         Language.RM,
                         "Tge è il certificat COVID?");
 
-        final int faqEntryCount = 8;
+        final int faqEntryCount = 9;
 
         // test english faq entry titles. this also verifies the correct entry order
         List<String> expectedFaqEntryTitlesEn =
@@ -318,6 +318,7 @@ public abstract class BaseControllerTest {
                         "How do I get a COVID certificate after I have recovered from COVID-19?",
                         "How can I present a COVID certificate?",
                         "How long is the COVID certificate valid?",
+                        "When abroad, it is the validity rules of the country in question that apply, both for entering the country and within the country itself. The rules applicable to the use of the certificate within the destination country may differ from those that apply upon entry. These rules can change at short notice. Shortly before departing you should therefore check the authorities’ website for your transit or destination country to see whether rules relating to COVID-19 are still in force and, if so, which ones.  ",
                         "Where is my data stored?",
                         "How are misuse and forgery prevented?",
                         "What happens if I lose my COVID certificate?",
@@ -326,7 +327,7 @@ public abstract class BaseControllerTest {
 
         // true for those faq entries where a link is set
         List<Boolean> isLinkSetList =
-                List.of(false, true, false, true, false, false, false, false);
+                List.of(false, true, false, true, false, false, false, false, false);
         assertEquals(faqEntryCount, isLinkSetList.size());
 
         ConfigAsserter.assertFaq(
