@@ -13,6 +13,7 @@ package ch.admin.bag.covidcertificate.backend.config.shared.config;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CertRenewalInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.CovidCertNewsHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.EolBannerInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.ForeignRulesHintHelper;
@@ -77,6 +78,11 @@ public abstract class WSBaseConfig implements WebMvcConfigurer {
     @Bean
     public CheckModeInfoHelper checkModeInfoHelper(Messages messages) {
         return new CheckModeInfoHelper(messages);
+    }
+
+    @Bean
+    public CovidCertNewsHelper covidCertNewsHelper(Messages messages) {
+        return new CovidCertNewsHelper(messages);
     }
 
     @Bean

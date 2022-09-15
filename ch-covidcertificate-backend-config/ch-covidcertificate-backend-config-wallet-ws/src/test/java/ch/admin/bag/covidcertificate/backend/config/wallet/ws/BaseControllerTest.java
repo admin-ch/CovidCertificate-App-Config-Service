@@ -309,7 +309,7 @@ public abstract class BaseControllerTest {
                         Language.RM,
                         "Tge è il certificat COVID?");
 
-        final int faqEntryCount = 8;
+        final int faqEntryCount = 9;
 
         // test english faq entry titles. this also verifies the correct entry order
         List<String> expectedFaqEntryTitlesEn =
@@ -318,6 +318,7 @@ public abstract class BaseControllerTest {
                         "How do I get a COVID certificate after I have recovered from COVID-19?",
                         "How can I present a COVID certificate?",
                         "How long is the COVID certificate valid?",
+                        "I am travelling abroad and need a COVID certificate to enter the country. What must I bear in mind?",
                         "Where is my data stored?",
                         "How are misuse and forgery prevented?",
                         "What happens if I lose my COVID certificate?",
@@ -326,7 +327,7 @@ public abstract class BaseControllerTest {
 
         // true for those faq entries where a link is set
         List<Boolean> isLinkSetList =
-                List.of(false, false, false, true, false, false, false, false);
+                List.of(false, true, false, true, false, false, false, false, false);
         assertEquals(faqEntryCount, isLinkSetList.size());
 
         ConfigAsserter.assertFaq(
@@ -359,7 +360,7 @@ public abstract class BaseControllerTest {
                         "How can I add a COVID certificate to the app?",
                         "Can several COVID certificates be added?",
                         "What is a transfer code?",
-                        "How can I see if my COVID certificate is valid?",
+                        "Where can I see if my COVID certificate is valid?",
                         "Can I use the app offline?",
                         "How is my data protected?",
                         "What data is contained in the QR code?",
