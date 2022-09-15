@@ -318,7 +318,7 @@ public abstract class BaseControllerTest {
                         "How do I get a COVID certificate after I have recovered from COVID-19?",
                         "How can I present a COVID certificate?",
                         "How long is the COVID certificate valid?",
-                        "When abroad, it is the validity rules of the country in question that apply, both for entering the country and within the country itself. The rules applicable to the use of the certificate within the destination country may differ from those that apply upon entry. These rules can change at short notice. Shortly before departing you should therefore check the authorities’ website for your transit or destination country to see whether rules relating to COVID-19 are still in force and, if so, which ones.  ",
+                        "I am travelling abroad and need a COVID certificate to enter the country. What must I bear in mind?",
                         "Where is my data stored?",
                         "How are misuse and forgery prevented?",
                         "What happens if I lose my COVID certificate?",
