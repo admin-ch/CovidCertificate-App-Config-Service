@@ -309,7 +309,7 @@ public abstract class BaseControllerTest {
                         Language.RM,
                         "Tge è il certificat COVID?");
 
-        final int faqEntryCount = 8;
+        final int faqEntryCount = 9;
 
         // test english faq entry titles. this also verifies the correct entry order
         List<String> expectedFaqEntryTitlesEn =
