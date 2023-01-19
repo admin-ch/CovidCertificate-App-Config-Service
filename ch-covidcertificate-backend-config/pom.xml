@@ -25,8 +25,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <spring-boot-version>2.7.6</spring-boot-version>
-        <spring-cloud-sleuth-version>3.1.5</spring-cloud-sleuth-version>
+        <spring-boot-version>2.7.8</spring-boot-version>
+        <spring-cloud-sleuth-version>3.1.6</spring-cloud-sleuth-version>
         <jackson-version>2.11.1</jackson-version>
         <jsonwebtoken-version>0.11.5</jsonwebtoken-version>
         <testcontainers-version>1.15.2</testcontainers-version>
@@ -104,7 +104,7 @@
         <dependency>
             <groupId>ch.admin.bag.covidcertificate</groupId>
             <artifactId>cc-backend-logging</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.5</version>
         </dependency>
 
         <!-- LogBack dependencies -->
