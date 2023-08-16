@@ -54,13 +54,15 @@ public class VerifierConfigController {
             FaqHelper faqHelper,
             CovidCertNewsHelper covidCertNewsHelper,
             boolean timeshiftDetectionEnabled,
-            int checkModeReselectAfterHours) {
+            int checkModeReselectAfterHours,
+            InfoBoxHelper infoBoxHelper) {
         this.messages = messages;
         this.checkModeInfoHelper = checkModeInfoHelper;
         this.faqHelper = faqHelper;
         this.covidCertNewsHelper = covidCertNewsHelper;
         this.timeshiftDetectionEnabled = timeshiftDetectionEnabled;
         this.checkModeReselectAfterHours = checkModeReselectAfterHours;
+        this.infoBoxHelper = infoBoxHelper;
     }
 
     @Documentation(
