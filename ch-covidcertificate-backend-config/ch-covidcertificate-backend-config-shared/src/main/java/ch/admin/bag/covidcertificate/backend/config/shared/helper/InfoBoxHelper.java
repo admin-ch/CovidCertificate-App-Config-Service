@@ -53,4 +53,16 @@ public class InfoBoxHelper {
         return result;
     }
 
+    public Map<Language, InfoBox> getVerifierInfoBox(boolean forAndroid) {
+        Map<Language, InfoBox> result = new EnumMap<>(Language.class);
+        for (Language language : Language.values()) {
+            Locale l = language.toLocale();
+            InfoBox infoBox = new InfoBox();
+            infoBox.setTitle(msg.getMessage("infobox_verifier_title", l));
+            infoBox.setMsg(msg.getMessage("infobox_verifier_text", l));
+            infoBox.setIsDismissible(true);
+            result.put(language, infoBox);
+        }
+        return result;
+    }
 }

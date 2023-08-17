@@ -14,6 +14,7 @@ import ch.admin.bag.covidcertificate.backend.config.shared.helper.CacheUtil;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CovidCertNewsHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.Faq;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.VerifierConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
@@ -45,6 +46,7 @@ public class VerifierConfigController {
     private final CovidCertNewsHelper covidCertNewsHelper;
     private final boolean timeshiftDetectionEnabled;
     private final int checkModeReselectAfterHours;
+    private final InfoBoxHelper infoBoxHelper;
 
     public VerifierConfigController(
             Messages messages,
@@ -52,13 +54,15 @@ public class VerifierConfigController {
             FaqHelper faqHelper,
             CovidCertNewsHelper covidCertNewsHelper,
             boolean timeshiftDetectionEnabled,
-            int checkModeReselectAfterHours) {
+            int checkModeReselectAfterHours,
+            InfoBoxHelper infoBoxHelper) {
         this.messages = messages;
         this.checkModeInfoHelper = checkModeInfoHelper;
         this.faqHelper = faqHelper;
         this.covidCertNewsHelper = covidCertNewsHelper;
         this.timeshiftDetectionEnabled = timeshiftDetectionEnabled;
         this.checkModeReselectAfterHours = checkModeReselectAfterHours;
+        this.infoBoxHelper = infoBoxHelper;
     }
 
     @Documentation(
@@ -94,6 +98,7 @@ public class VerifierConfigController {
         configResponse.setCovidCertificateNewsText(covidCertNewsHelper.getNewsText());
         configResponse.setInfoCovidCertificateNews(covidCertNewsHelper.getNews());
         Version clientAppVersion = new Version(appversion);
+        configResponse.setInfoBox(infoBoxHelper.getVerifierInfoBox(clientAppVersion.isAndroid()));
         if (clientAppVersion.isSmallerVersionThan(FORCE_UPDATE_BELOW_1_2_0)) {
             configResponse.setForceUpdate(true);
         }

@@ -13,6 +13,7 @@ package ch.admin.bag.covidcertificate.backend.config.verifier.ws.config;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CovidCertNewsHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
 import ch.admin.bag.covidcertificate.backend.config.verifier.ws.controller.VerifierConfigController;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,8 +32,9 @@ public abstract class VerifierWsBaseConfig {
             @Value("${ws.verifier.timeshiftDetection.enabled:false}")
                     boolean timeShiftDetectionEnabled,
             @Value("${ws.verifier.checkModeReselectionAfterHours:48}")
-                    int checkModeReselectionAfterHours) {
+                    int checkModeReselectionAfterHours,
+                    InfoBoxHelper infoBoxHelper) {
         return new VerifierConfigController(
-                messages, checkModeInfoHelper, faqHelper, covidCertNewsHelper, timeShiftDetectionEnabled, checkModeReselectionAfterHours);
+                messages, checkModeInfoHelper, faqHelper, covidCertNewsHelper, timeShiftDetectionEnabled, checkModeReselectionAfterHours, infoBoxHelper);
     }
 }

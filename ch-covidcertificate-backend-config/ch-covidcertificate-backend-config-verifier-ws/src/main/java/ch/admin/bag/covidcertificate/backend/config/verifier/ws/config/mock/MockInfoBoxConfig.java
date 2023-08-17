@@ -3,6 +3,7 @@ package ch.admin.bag.covidcertificate.backend.config.verifier.ws.config.mock;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CheckModeInfoHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.CovidCertNewsHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.FaqHelper;
+import ch.admin.bag.covidcertificate.backend.config.shared.helper.InfoBoxHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.helper.MockHelper;
 import ch.admin.bag.covidcertificate.backend.config.shared.model.VerifierConfigResponse;
 import ch.admin.bag.covidcertificate.backend.config.shared.poeditor.Messages;
@@ -28,9 +29,10 @@ public class MockInfoBoxConfig {
             @Value("${ws.verifier.timeshiftDetection.enabled:false}")
                     boolean timeshiftDetectionEnabled,
             @Value("${ws.verifier.checkModeReselectionAfterHours:48}")
-            int checkModeReselectionAfterHours) {
+            int checkModeReselectionAfterHours,
+            InfoBoxHelper infoBoxHelper) {
         return new MockConfigController(
-                messages, checkModeInfoHelper, faqHelper, covidCertNewsHelper, timeshiftDetectionEnabled , checkModeReselectionAfterHours);
+                messages, checkModeInfoHelper, faqHelper, covidCertNewsHelper, timeshiftDetectionEnabled , checkModeReselectionAfterHours, infoBoxHelper);
     }
 
     public class MockConfigController extends VerifierConfigController {
@@ -41,8 +43,9 @@ public class MockInfoBoxConfig {
                 FaqHelper faqHelper,
                 CovidCertNewsHelper covidCertNewsHelper,
                 boolean timeshiftDetectionEnabled,
-                int checkModeReselectionAfterHours) {
-            super(messages, checkModeInfoHelper, faqHelper, covidCertNewsHelper, timeshiftDetectionEnabled, checkModeReselectionAfterHours);
+                int checkModeReselectionAfterHours,
+                InfoBoxHelper infoboxHelper) {
+            super(messages, checkModeInfoHelper, faqHelper, covidCertNewsHelper, timeshiftDetectionEnabled, checkModeReselectionAfterHours, infoboxHelper);
         }
 
         @Override
