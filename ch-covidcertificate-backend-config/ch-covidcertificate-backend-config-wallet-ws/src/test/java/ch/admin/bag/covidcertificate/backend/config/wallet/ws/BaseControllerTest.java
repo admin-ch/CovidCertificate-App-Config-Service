@@ -309,25 +309,17 @@ public abstract class BaseControllerTest {
                         Language.RM,
                         "Tge è il certificat COVID?");
 
-        final int faqEntryCount = 9;
+        final int faqEntryCount = 1;
 
         // test english faq entry titles. this also verifies the correct entry order
         List<String> expectedFaqEntryTitlesEn =
                 List.of(
-                        "When and where can I get a COVID certificate?",
-                        "How do I get a COVID certificate after I have recovered from COVID-19?",
-                        "How can I present a COVID certificate?",
-                        "How long is the COVID certificate valid?",
-                        "I am travelling abroad and need a COVID certificate to enter the country. What must I bear in mind?",
-                        "Where is my data stored?",
-                        "How are misuse and forgery prevented?",
-                        "What happens if I lose my COVID certificate?",
-                        "What is the 'certificate light'");
+                        "The Swiss COVID certificate system was discontinued on 1 September 2023 – what’s going to happen to the COVID certificates?");
         assertEquals(faqEntryCount, expectedFaqEntryTitlesEn.size());
 
         // true for those faq entries where a link is set
         List<Boolean> isLinkSetList =
-                List.of(false, true, false, true, false, false, false, false, false);
+                List.of(true);
         assertEquals(faqEntryCount, isLinkSetList.size());
 
         ConfigAsserter.assertFaq(
@@ -352,25 +344,17 @@ public abstract class BaseControllerTest {
                         Language.RM,
                         "Co funcziuna \nl'app?");
 
-        final int faqEntryCount = 9;
+        final int faqEntryCount = 1;
 
         // test english faq entry titles. this also verifies the correct entry order
         List<String> expectedFaqEntryTitlesEn =
                 List.of(
-                        "How can I add a COVID certificate to the app?",
-                        "Can several COVID certificates be added?",
-                        "What is a transfer code?",
-                        "Where can I see if my COVID certificate is valid?",
-                        "Can I use the app offline?",
-                        "How is my data protected?",
-                        "What data is contained in the QR code?",
-                        "I only have my COVID certificate electronically in the app. How can I get the certificate as a PDF or on paper?",
-                        "What do I need to do if I delete the COVID certificate or the app?");
+                        "The Swiss COVID certificate system was discontinued on 1 September 2023 – what’s going to happen to the COVID certificate app?");
         assertEquals(faqEntryCount, expectedFaqEntryTitlesEn.size());
 
         // true for those faq entries where a link is set
         List<Boolean> isLinkSetList =
-                List.of(false, false, false, false, false, false, false, false, false);
+                List.of(true);
         assertEquals(faqEntryCount, isLinkSetList.size());
 
         ConfigAsserter.assertFaq(
